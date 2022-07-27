@@ -1,0 +1,30 @@
+<mat-toolbar class="mat-elevation-z2">
+
+    <!-- Left Side -->
+    <button mat-icon-button *ngIf="currentUser">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <button mat-button [routerLink]="currentUser ? '/Managements/Intro' : '/Home'">
+        <!-- <img class="step-image" src="assets/images/logos/logo.png" alt="logo-image"> -->
+    </button>
+    <!-- /Left Side -->
+
+    <!-- Divider -->
+    <span class="example-spacer"></span>
+    <!-- /Divider -->
+
+    <!-- Right Side -->
+    <button mat-button routerLink="/Login/Signin" *ngIf="!currentUser">
+        <mat-icon>account_circle</mat-icon>
+        <span style="padding-left: 8px;">Iniciar Sesión</span>
+    </button>
+    <button mat-button (click)="signOut()" *ngIf="currentUser">
+        <mat-icon>exit_to_app</mat-icon>
+        <span style="padding-left: 8px;">Cerrar Sesión</span>
+    </button>
+    <button mat-button routerLink="/Login/Signup" *ngIf="!currentUser">
+        <span style="padding-left: 8px;">Solicitar registro</span>
+    </button>
+    <!-- /Right Side -->
+
+</mat-toolbar>

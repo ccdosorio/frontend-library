@@ -1,8 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { APP_CONFIG } from "@services";
+import { appConfig } from "./config";
+import { LayoutModule } from './layout/layout.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -10,9 +16,14 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRouting,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
+    LayoutModule
   ],
-  providers: [],
+  providers: [
+    { provide: APP_CONFIG, useValue: appConfig },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
