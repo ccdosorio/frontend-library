@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { LoginRouting } from './login.routing';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { CoreModule } from 'core/core.module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { SignupComponent } from './components/signup/signup.component';
   ],
   imports: [
     CommonModule,
+    CoreModule,
     LoginRouting
   ]
 })
