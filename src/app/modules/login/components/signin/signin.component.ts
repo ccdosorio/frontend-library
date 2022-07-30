@@ -37,16 +37,13 @@ export class SigninComponent implements OnInit {
     console.log('login');
     console.log(this.formLogin.value);
     
-
-    /** spinner starts on init */
     this.spinner.show();
 
     this.router.navigate(['/Managements'])
 
     setTimeout(() => {
-      /** spinner ends after 5 seconds */
       this.spinner.hide();
-    }, 5000);
+    }, 2000);
 
   }
 

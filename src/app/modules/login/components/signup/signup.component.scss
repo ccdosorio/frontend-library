@@ -1,0 +1,19 @@
+@import "src/colors";
+
+.content {
+    background-color: $white;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+span {
+    font-weight: bold;
+    color: darkcyan;
+}
+
+h2 {
+    font-size: 30px;
+}
