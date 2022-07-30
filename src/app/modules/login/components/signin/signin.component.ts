@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { NgxSpinnerService } from "ngx-spinner";
@@ -12,10 +13,16 @@ import { AppConfigService } from '@services';
 })
 export class SigninComponent implements OnInit {
 
+  formLogin: FormGroup = this.fb.group({
+    email: ['', [ Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$') ]],
+    password: ['', [ Validators.required ]]
+  });
+
   constructor(
     private appConfigService: AppConfigService,
     private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private fb: FormBuilder
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -28,6 +35,8 @@ export class SigninComponent implements OnInit {
 
   login(): void {
     console.log('login');
+    console.log(this.formLogin.value);
+    
 
     /** spinner starts on init */
     this.spinner.show();
@@ -38,7 +47,7 @@ export class SigninComponent implements OnInit {
       /** spinner ends after 5 seconds */
       this.spinner.hide();
     }, 5000);
-    
+
   }
 
   ngOnInit(): void {
