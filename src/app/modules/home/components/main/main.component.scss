@@ -1,0 +1,15 @@
+@import "src/colors";
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 60px;
+}
+
+p {
+    font-size: 20px;
+}
+
+.title-home {
+    font-weight: bold; 
+    color: $indigo;
+}
