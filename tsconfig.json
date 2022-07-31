@@ -25,7 +25,8 @@
     "paths": {
       "@models": ["utils/models"],
       "@services": ["utils/services"],
-      "@shared": ["shared"]
+      "@shared": ["shared"],
+      "@navigations": ["app/navigations"]
     }
   },
   "angularCompilerOptions": {

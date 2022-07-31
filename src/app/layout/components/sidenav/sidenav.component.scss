@@ -1,0 +1,30 @@
+@import "src/colors";
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.mat-toolbar {
+    top: 0;
+    height: 50px;
+    background-color: white;
+    color: $dark_gray;
+    border-bottom: solid 1px $ligth_gray;
+}
+
+.sidenav-router {
+    padding-top: 20px;
+    height: calc(100% - 50px);
+    background-color: $white;
+}
+
+.mat-list-item {
+    padding: 8px 0;
+    display: flex;
+    width: auto;
+    .routeIcon {
+      margin-right: 40px;
+      color: $indigo;
+    }
+  }
+  

@@ -5,19 +5,18 @@ import { RouterModule } from '@angular/router';
 import { GenericContainerComponent } from './components/generic-container/generic-container.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { AngularMaterialModule } from 'core/angular-material/angular-material.module';
-
+import { CoreModule } from 'core/core.module';
 
 @NgModule({
   declarations: [
     GenericContainerComponent,
     SidenavComponent,
-    ToolbarComponent
+    ToolbarComponent,
   ],
   imports: [
     CommonModule,
     RouterModule,
-    AngularMaterialModule
+    CoreModule
   ],
   exports: [
     GenericContainerComponent,

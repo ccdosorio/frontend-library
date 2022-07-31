@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
@@ -7,13 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  currentUser: boolean = false;
-
-  constructor() { }
-
-  signOut(): void {
-    
-  }
+  constructor( ) { }
 
   ngOnInit(): void {
   }

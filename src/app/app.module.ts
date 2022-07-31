@@ -5,10 +5,11 @@ import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { APP_CONFIG } from "@services";
+import { ADMIN_NAVIGATION, APP_CONFIG, USER_NAVIGATION } from "@services";
 import { appConfig } from "./config";
 import { LayoutModule } from './layout/layout.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { AdminNavigation, UserNavigation } from './navigations';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   ],
   providers: [
     { provide: APP_CONFIG, useValue: appConfig },
+    { provide: ADMIN_NAVIGATION, useValue: AdminNavigation },
+    { provide: USER_NAVIGATION, useValue: UserNavigation },
   ],
   bootstrap: [AppComponent]
 })
