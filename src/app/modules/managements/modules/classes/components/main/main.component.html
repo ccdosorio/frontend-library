@@ -1,0 +1,15 @@
+<div class="container">
+    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column">
+        <div fxFlex="50" fxLayout="column" fxLayout.xs="column">
+            <h1>Clases</h1>
+        </div>
+        <div fxFlex="50" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="end end">
+            <app-button-custom [action]="actionButton" (actionButton)="addClass()"></app-button-custom>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column" class="py-3">
+        <div fxFlex="100" fxLayout="column" fxLayout.xs="column" fxLayoutGap="40px">
+            <app-card-class></app-card-class>
+        </div>
+    </div>
+</div>

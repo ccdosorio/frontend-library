@@ -3,7 +3,7 @@ export const AdminNavigation: any[] = [
         displayName: 'Clases',
         iconName: 'school',
         image: 'assets/images/search-5.svg',
-        route: 'Managements/Intro/Main'
+        route: 'Managements/Classes/Main'
     },
     {
         displayName: 'Libros',

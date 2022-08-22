@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Navigation } from '@models';
-import { SidenavService } from '@services';
+import { AuthenticationService, SidenavService } from '@services';
 
 @Component({
   selector: 'app-sidenav',
@@ -13,10 +13,13 @@ export class SidenavComponent implements OnInit {
   navigation: Navigation[] = [];
   
   constructor( 
-    private _sidenavService: SidenavService
+    private _sidenavService: SidenavService,
+    public authenticationService: AuthenticationService
   ) { }
 
-  signOut(): void { }
+  signOut(): void {
+    this.authenticationService.SignOut();
+   }
 
   ngOnInit(): void { 
     this._sidenavService.getConfigAdmin

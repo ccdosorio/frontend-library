@@ -1,0 +1,18 @@
+@import "src/colors";
+
+h1 {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 40px;
+}
+
+button {
+    background-color: $indigo;
+    color: $white;
+    width: 20%;
+}
+
+@media (max-width: 961px) {
+    button  {
+        width: 30%;
+    }
+}

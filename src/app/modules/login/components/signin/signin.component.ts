@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
-import { NgxSpinnerService } from "ngx-spinner";
-
-import { AppConfigService } from '@services';
+import { AppConfigService, AuthenticationService } from '@services';
 
 @Component({
   selector: 'app-signin',
@@ -14,15 +11,14 @@ import { AppConfigService } from '@services';
 export class SigninComponent implements OnInit {
 
   formLogin: FormGroup = this.fb.group({
-    email: ['', [ Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$') ]],
-    password: ['', [ Validators.required ]]
+    email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+    password: ['', [Validators.required]]
   });
 
   constructor(
     private appConfigService: AppConfigService,
-    private router: Router,
-    private spinner: NgxSpinnerService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public authenticationService: AuthenticationService
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -34,17 +30,8 @@ export class SigninComponent implements OnInit {
   }
 
   login(): void {
-    console.log('login');
-    console.log(this.formLogin.value);
-    
-    this.spinner.show();
-
-    this.router.navigate(['/Managements'])
-
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 2000);
-
+    const { email, password } = this.formLogin.value;
+    this.authenticationService.SignIn(email, password);
   }
 
   ngOnInit(): void {

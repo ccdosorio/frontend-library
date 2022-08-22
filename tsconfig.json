@@ -26,7 +26,9 @@
       "@models": ["utils/models"],
       "@services": ["utils/services"],
       "@shared": ["shared"],
-      "@navigations": ["app/navigations"]
+      "@navigations": ["app/navigations"],
+      "@functions": ["utils/functions"],
+      "@security": ["core/security"]
     }
   },
   "angularCompilerOptions": {

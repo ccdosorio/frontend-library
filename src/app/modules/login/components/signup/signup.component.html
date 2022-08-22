@@ -8,21 +8,13 @@
             <p class="text-muted">Bienvenido a nuestra biblioteca virtual</p>
         </div>
         <mat-card>
-            <form name="formRegister" (ngSubmit)="register()" [formGroup]="formRegister">
+            <form name="formRegister" [formGroup]="formRegister">
                 <mat-form-field appearance="outline">
-                    <mat-label><label for="name">Nombres</label></mat-label>
+                    <mat-label><label for="name">Nombre Completo</label></mat-label>
                     <input id="name" matInput autocomplete="off" formControlName="name" />
                     <mat-icon matSuffix class="secondary-text">badge</mat-icon>
                     <mat-error *ngIf="formRegister.get('name')!.hasError('required')">
                         Se require de un nombre.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label><label for="surname">Apellidos</label></mat-label>
-                    <input id="surname" matInput autocomplete="off" formControlName="surname" />
-                    <mat-icon matSuffix class="secondary-text">badge</mat-icon>
-                    <mat-error *ngIf="formRegister.get('surname')!.hasError('required')">
-                        Se require de los apellidos.
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
@@ -53,21 +45,13 @@
                         Se requiere de la confirmación de la contraseña.
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label>Rol</mat-label>
-                    <mat-select formControlName="rol">
-                        <mat-option value="1">Profesor</mat-option>
-                        <mat-option value="2">Estudiante</mat-option>
-                    </mat-select>
-                    <mat-icon matSuffix class="secondary-text">person</mat-icon>
-                    <mat-error *ngIf="formRegister.get('rol')!.hasError('required')">
-                        Se requiere de un rol
-                    </mat-error>
-                </mat-form-field>
                 <div fxLayout="column" fxLayoutAlign="center" class="form-vertical-buttons">
                     <button type="submit" mat-raised-button color="primary" aria-label="Registrarte"
-                        [disabled]="formRegister.invalid">
+                        (click)="register()" [disabled]="formRegister.invalid">
                         Registrarte
+                    </button>
+                    <button mat-raised-button color="warn" (click)="authenticationService.GoogleAuth()">
+                        Continuar con Google
                     </button>
                     <button mat-raised-button color="primary" routerLink="/Home">
                         Regresar

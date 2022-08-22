@@ -1,0 +1,14 @@
+<div fxLayout="column" fxLayoutAlign="center center" fxFill>
+    <img src="assets/images/error-404.svg" alt="home">
+    <h1>Gracias por registrarte.</h1>
+    <p *ngIf="authenticationService.userData as user" class="text-muted">Hemos enviado un correo electrónico de
+        confirmación a <strong>{{user.email}}</strong>.</p>
+    <p class="text-muted">Por favor revise su correo electrónico y haga clic en el enlace para verificar su dirección de
+        correo electrónico.</p>
+    <button type="buttom" mat-raised-button color="primary" aria-label="Reenviar" (click)="authenticationService.SendVerificationMail()">
+        Reenviar correo electrónico de verificación
+    </button>
+    <div fxLayout="row" fxLayoutAlign="center center" class="py-3">
+        <a routerLink="/Login/Signin" class="text-muted">¿Quieres volver? <span>Iniciar Sesión</span></a>
+    </div>
+</div>

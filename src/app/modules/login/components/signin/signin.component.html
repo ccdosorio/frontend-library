@@ -2,7 +2,7 @@
     <h2>Iniciar Sesión</h2>
     <p class="text-muted">Bienvenido a nuestra biblioteca virtual</p>
     <mat-card>
-        <form name="loginForm" (ngSubmit)="login()" [formGroup]="formLogin">
+        <form name="loginForm" [formGroup]="formLogin">
             <mat-form-field appearance="outline">
                 <mat-label><label for="email">Correo electrónico</label></mat-label>
                 <input id="email" matInput autocomplete="off" formControlName="email" />
@@ -23,8 +23,12 @@
                 </mat-error>
             </mat-form-field>
             <div fxLayout="column" fxLayoutAlign="center" class="form-vertical-buttons">
-                <button type="submit" mat-raised-button color="primary" aria-label="Ingresar" [disabled]="formLogin.invalid">
+                <button type="submit" mat-raised-button color="primary" aria-label="Ingresar" (click)="login()"
+                    [disabled]="formLogin.invalid">
                     Ingresar
+                </button>
+                <button mat-raised-button color="warn" (click)="authenticationService.GoogleAuth()">
+                    Iniciar sesión con Google
                 </button>
                 <button mat-raised-button color="primary" routerLink="/Home">
                     Regresar

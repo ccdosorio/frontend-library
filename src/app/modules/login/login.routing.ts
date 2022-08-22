@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SigninComponent } from "./components/signin/signin.component";
 import { SignupComponent } from "./components/signup/signup.component";
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'Signin' },
   { path: 'Signin', component: SigninComponent },
   { path: 'Signup', component: SignupComponent },
+  { path: 'VerifyEmail', component: VerifyEmailComponent },
   { path: '**', redirectTo: '/NotFound/Main' }
 ];
 
