@@ -28,7 +28,8 @@
       "@shared": ["shared"],
       "@navigations": ["app/navigations"],
       "@functions": ["utils/functions"],
-      "@security": ["core/security"]
+      "@security": ["core/security"],
+      "@helpers": ["utils/helpers"]
     }
   },
   "angularCompilerOptions": {

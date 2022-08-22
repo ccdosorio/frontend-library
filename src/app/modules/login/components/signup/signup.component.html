@@ -1,4 +1,3 @@
-<br /><br /><br /><br /><br /><br /><br />
 <div fxLayout="row" fxFill fxLayoutAlign="center center">
     <div fxFlex="30">
         <div fxLayout="row" fxFill fxLayoutAlign="center center">
@@ -35,6 +34,9 @@
                     <mat-error *ngIf="formRegister.get('password')!.hasError('required')">
                         Se requiere de una contraseña.
                     </mat-error>
+                    <mat-error *ngIf="formRegister.get('password')!.hasError('minlength')">
+                        Se requiere que la contraseña tenga 6 o más caracteres.
+                    </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                     <mat-label><label for="confirmPassword">Confirmar Contraseña</label></mat-label>
@@ -43,6 +45,9 @@
                     <mat-icon matSuffix class="secondary-text">lock</mat-icon>
                     <mat-error *ngIf="formRegister.get('confirmPassword')!.hasError('required')">
                         Se requiere de la confirmación de la contraseña.
+                    </mat-error>
+                    <mat-error *ngIf="formRegister.get('confirmPassword')!.hasError('MatchPassword')">
+                        Las contraseñas no coiciden
                     </mat-error>
                 </mat-form-field>
                 <div fxLayout="column" fxLayoutAlign="center" class="form-vertical-buttons">
