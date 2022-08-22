@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  endpoint: '',
   firebase: {
     apiKey: "AIzaSyBeSZkYl8FUk2dNgdWiQxjRO784a2emItc",
     authDomain: "libraryapp-4164f.firebaseapp.com",
