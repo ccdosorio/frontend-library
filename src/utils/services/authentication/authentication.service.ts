@@ -18,7 +18,6 @@ import {
 })
 export class AuthenticationService {
   userData: any; // Save logged in user data
-  credentialData: any // Save token user
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -47,11 +46,8 @@ export class AuthenticationService {
       .then((result) => {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
-          if (user) {
-            user.getIdToken().then((token) => {
-              localStorage.setItem('authToken', JSON.stringify(token));
-              this.router.navigate(['Managements']);
-            });
+          if (user) {            
+            this.router.navigate(['Managements/Intro']);
           }
           this.spinner.hide();
         });
@@ -99,7 +95,7 @@ export class AuthenticationService {
   }
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
+    const user = JSON.parse(localStorage.getItem('user')!);    
     return user !== null && user.emailVerified !== false ? true : false;
   }
   // Sign in with Google
@@ -114,8 +110,6 @@ export class AuthenticationService {
       .signInWithPopup(provider)
       .then((result) => {
         this.SetUserData(result.user);
-        this.credentialData = result.credential;
-        localStorage.setItem('authToken', JSON.stringify(this.credentialData.idToken));
         setTimeout(() => {
           this.router.navigate(['Managements/Intro']);
           this.spinner.hide();
@@ -147,13 +141,7 @@ export class AuthenticationService {
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
-      localStorage.removeItem('authToken');
       this.router.navigate(['Home']);
     });
-  }
-
-  // Credential Data
-  getCredentialData() {
-    return this.credentialData;
   }
 }
