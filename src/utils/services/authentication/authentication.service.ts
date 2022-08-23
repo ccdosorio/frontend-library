@@ -24,10 +24,10 @@ export class AuthenticationService {
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     private spinner: NgxSpinnerService
-  ) {
+  ) {    
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
-    this.afAuth.authState.subscribe((user) => {
+    this.afAuth.authState.subscribe((user: any) => {      
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -43,32 +43,33 @@ export class AuthenticationService {
     this.spinner.show();
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then((result: any) => {
         this.SetUserData(result.user);
-        this.afAuth.authState.subscribe((user) => {
+        this.afAuth.authState.subscribe((user: any) => {
           if (user) {            
             this.router.navigate(['Managements/Intro']);
           }
           this.spinner.hide();
         });
       })
-      .catch((error) => {
+      .catch((error: any) => {
         this.spinner.hide();
         SweetAlertMessage('error', 'Error', 'Ocurrió un error al iniciar sesión. Inténtelo nuevamente.');
       });
   }
   // Sign up with email/password
   SignUp(email: string, password: string) {
+    this.spinner.show();
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then((result: any) => {
         /* Call the SendVerificaitonMail() function when new user sign 
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
         this.spinner.hide();
       })
-      .catch((error) => {
+      .catch((error: any) => {
         this.spinner.hide();
         SweetAlertMessage('error', 'Error', 'Ha ocurrido un error durante el registro de la cuenta.');
       });
@@ -84,13 +85,15 @@ export class AuthenticationService {
   }
   // Reset Forggot password
   ForgotPassword(passwordResetEmail: string) {
+    this.spinner.show();
     return this.afAuth
       .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        SweetAlertMessage('success', 'Exitoso', 'Correo electrónico de restablecimiento de contraseña enviado, verifique su bandeja de entrada.');
+        this.spinner.hide();
       })
-      .catch((error) => {
-        window.alert(error);
+      .catch((error: any) => {
+        SweetAlertMessage('error', 'Error', 'Ocurrió un error durante el restablecimiento de la contraseña.')
       });
   }
   // Returns true when user is looged in and email is verified
@@ -108,14 +111,14 @@ export class AuthenticationService {
   AuthLogin(provider: any) {
     return this.afAuth
       .signInWithPopup(provider)
-      .then((result) => {
+      .then((result: any) => {
         this.SetUserData(result.user);
         setTimeout(() => {
           this.router.navigate(['Managements/Intro']);
           this.spinner.hide();
         }, 500);
       })
-      .catch((error) => {
+      .catch(() => {
         SweetAlertMessage('error', 'Error', 'Ha ocurrido un error al iniciar sesión.');
       });
   }

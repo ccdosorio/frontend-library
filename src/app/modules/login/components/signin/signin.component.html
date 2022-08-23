@@ -22,6 +22,9 @@
                     Se requiere de una contraseña.
                 </mat-error>
             </mat-form-field>
+            <div fxLayout="row" fxLayoutAlign="end">
+                <a routerLink="/Login/ForgotPassword" class="text-muted">¿Has olvidado tu contraseña?</a>
+            </div>
             <div fxLayout="column" fxLayoutAlign="center" class="form-vertical-buttons">
                 <button type="submit" mat-raised-button color="primary" aria-label="Ingresar" (click)="login()"
                     [disabled]="formLogin.invalid">

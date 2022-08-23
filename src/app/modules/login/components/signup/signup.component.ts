@@ -39,6 +39,10 @@ export class SignupComponent implements OnInit {
     this.authenticationService.SignUp(email, password);
   }
 
+  toReturn(): void {
+    
+  }
+
   ngOnInit(): void {
   }
 
