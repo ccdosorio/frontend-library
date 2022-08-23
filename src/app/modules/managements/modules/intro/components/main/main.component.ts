@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Navigation } from '@models';
 
 import { AppConfigService, SidenavService } from '@services';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -30,7 +29,7 @@ export class MainComponent implements OnInit {
     this._sidenavService.getConfigAdmin
     .subscribe((navigations) => {
       this.navigation = navigations;
-    })
+    });
    }
 
 }

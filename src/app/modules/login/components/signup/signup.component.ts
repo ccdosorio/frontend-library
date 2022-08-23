@@ -35,8 +35,8 @@ export class SignupComponent implements OnInit {
   }
 
   register(): void {
-    const { email, password } = this.formRegister.value;
-    this.authenticationService.SignUp(email, password);
+    const { email, password, name } = this.formRegister.value;
+    this.authenticationService.SignUp(email, password, name);
   }
 
   toReturn(): void {

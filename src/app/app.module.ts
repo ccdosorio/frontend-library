@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
@@ -19,6 +20,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { JwtInterceptor } from '@security';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     BrowserAnimationsModule,
     NgxSpinnerModule,
     LayoutModule,
+    HttpClientModule,
     // firebase
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -41,7 +44,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     { provide: APP_CONFIG, useValue: appConfig },
     { provide: ADMIN_NAVIGATION, useValue: AdminNavigation },
     { provide: USER_NAVIGATION, useValue: UserNavigation },
-    AuthenticationService
+    { provide: AuthenticationService, useClass: AuthenticationService },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

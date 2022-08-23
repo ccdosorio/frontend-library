@@ -1,7 +1,7 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from '@models';
+import { User, UserAuth } from '@models';
 import { SweetAlertMessage } from '@functions';
 import { NgxSpinnerService } from "ngx-spinner";
 
@@ -12,6 +12,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
+import { UserService } from '@services';
 
 @Injectable({
   providedIn: 'root',
@@ -23,11 +24,12 @@ export class AuthenticationService {
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
-    private spinner: NgxSpinnerService
-  ) {    
+    private spinner: NgxSpinnerService,
+    private userService: UserService
+  ) {
     /* Saving user data in localstorage when 
     logged in and setting up null when logged out */
-    this.afAuth.authState.subscribe((user: any) => {      
+    this.afAuth.authState.subscribe((user: any) => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -46,7 +48,7 @@ export class AuthenticationService {
       .then((result: any) => {
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user: any) => {
-          if (user) {            
+          if (user) {
             this.router.navigate(['Managements/Intro']);
           }
           this.spinner.hide();
@@ -57,8 +59,9 @@ export class AuthenticationService {
         SweetAlertMessage('error', 'Error', 'Ocurrió un error al iniciar sesión. Inténtelo nuevamente.');
       });
   }
+
   // Sign up with email/password
-  SignUp(email: string, password: string) {
+  SignUp(email: string, password: string, name: string) {
     this.spinner.show();
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
@@ -67,13 +70,32 @@ export class AuthenticationService {
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
-        this.spinner.hide();
+        const userResponse = JSON.parse(JSON.stringify(result.user));
+        const PAYLOAD = {
+          name,
+          email: userResponse.email
+        }
+        setTimeout(() => {
+          this.userService.getUser()
+          .subscribe({
+            next: () => this.spinner.hide(),
+            error: (error) => {
+              if (error.status === 404) {
+                this.userService.create(PAYLOAD).subscribe({
+                  next: () => this.spinner.hide(),
+                  error: () => this.spinner.hide()
+                });
+              }
+            }
+          });
+        }, 500);
       })
-      .catch((error: any) => {
+      .catch(() => {
         this.spinner.hide();
         SweetAlertMessage('error', 'Error', 'Ha ocurrido un error durante el registro de la cuenta.');
       });
   }
+
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
     return this.afAuth.currentUser
@@ -83,6 +105,7 @@ export class AuthenticationService {
         SweetAlertMessage('success', 'Exitoso', 'Se envió el correo de confirmación de cuenta.');
       });
   }
+
   // Reset Forggot password
   ForgotPassword(passwordResetEmail: string) {
     this.spinner.show();
@@ -96,11 +119,23 @@ export class AuthenticationService {
         SweetAlertMessage('error', 'Error', 'Ocurrió un error durante el restablecimiento de la contraseña.')
       });
   }
+
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);    
-    return user !== null && user.emailVerified !== false ? true : false;
+    console.log('isLoggedIn');
+    
+    const user = JSON.parse(localStorage.getItem('user')!);
+    console.log(user);
+    
+    return user !== null ? true : false;
   }
+
+  // Returns user auth
+  get currentUser(): UserAuth {
+    const user = JSON.parse(localStorage.getItem('user')!);
+    return user;
+  }
+
   // Sign in with Google
   GoogleAuth() {
     this.spinner.show();
@@ -113,15 +148,42 @@ export class AuthenticationService {
       .signInWithPopup(provider)
       .then((result: any) => {
         this.SetUserData(result.user);
+        const userResponse = JSON.parse(JSON.stringify(result.user));
+        const PAYLOAD = {
+          name: userResponse.displayName,
+          email: userResponse.email,
+          photo_url: userResponse.photoURL
+        }
+
         setTimeout(() => {
-          this.router.navigate(['Managements/Intro']);
-          this.spinner.hide();
+          this.userService.getUser()
+            .subscribe({
+              next: () => {
+                this.router.navigate(['Managements/Intro']);
+                this.spinner.hide();
+              },
+              error: (error) => {
+                if (error.status === 404) {
+                  this.userService.create(PAYLOAD).subscribe({
+                    next: () => {
+                      this.router.navigate(['Managements/Intro']);
+                      this.spinner.hide();
+                    },
+                    error: (e) => {
+                      this.spinner.hide();
+                    }
+                  });
+                }
+              }
+            });
         }, 500);
+
       })
       .catch(() => {
         SweetAlertMessage('error', 'Error', 'Ha ocurrido un error al iniciar sesión.');
       });
   }
+
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
@@ -140,6 +202,7 @@ export class AuthenticationService {
       merge: true,
     });
   }
+
   // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
