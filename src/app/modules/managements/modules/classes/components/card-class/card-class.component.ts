@@ -8,16 +8,11 @@ import { Classroom } from '@models';
 })
 export class CardClassComponent implements OnInit {
 
-  actionButton: string = 'Edit';
-
   @Input() classroom: Classroom | undefined;
 
   constructor() { }
 
-  ngOnInit(): void {
-    console.log(this.classroom);
-    
-  }
+  ngOnInit(): void { }
 
   editClass(): void {
     console.log('edit');

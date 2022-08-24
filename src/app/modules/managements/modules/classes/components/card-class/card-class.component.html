@@ -1,9 +1,11 @@
-<mat-card fxLayout="row" *ngIf="classroom">
-    <div fxLayout="column" fxFlex="50">
-        <h3>{{ classroom.name }}</h3>
-        <p class="text-muted">{{ classroom.description }}</p>
-    </div>
-    <div fxLayout="column" fxFlex="50" fxLayoutAlign="end end">
-        <button mat-stroked-button color="primary" [routerLink]="['../Edit', classroom.id]" routerLinkActive="router-link-active" >Editar</button>
-    </div>
-</mat-card>
+<div class="d-flex justify-content-center">
+    <mat-card *ngIf="classroom">
+        <div fxLayout="column" fxFlex="50">
+            <h3>{{ classroom.name }}</h3>
+            <p class="text-muted">{{ classroom.description }}</p>
+        </div>
+        <div fxLayout="column" fxFlex="50" fxLayoutAlign="end end">
+            <button mat-stroked-button color="primary" [routerLink]="['../Edit', classroom.id]">Editar</button>
+        </div>
+    </mat-card>
+</div>
