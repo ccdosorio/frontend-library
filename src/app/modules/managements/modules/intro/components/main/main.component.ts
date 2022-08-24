@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Navigation } from '@models';
 
-import { AppConfigService, SidenavService } from '@services';
+import { AppConfigService, AuthenticationService, SidenavService } from '@services';
 
 @Component({
   selector: 'app-main',
@@ -14,7 +14,8 @@ export class MainComponent implements OnInit {
 
   constructor(
     private appConfigService: AppConfigService,
-    private _sidenavService: SidenavService
+    private _sidenavService: SidenavService,
+    public authenticationService: AuthenticationService
   ) {
     this.appConfigService.setConfig({
       layout: {
