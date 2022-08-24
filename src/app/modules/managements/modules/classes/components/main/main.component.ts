@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
 
 import { AppConfigService } from '@services';
+import { ClassroomService } from 'utils/services/entity/classroom.service';
+import { Classroom } from '@models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -11,11 +14,14 @@ import { AppConfigService } from '@services';
 })
 export class MainComponent implements OnInit {
 
-  actionButton: string = 'Add';
+  listClassrooms: Classroom[] = [];
+  isData: boolean = false;
 
   constructor(
     private appConfigService: AppConfigService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private classroomService: ClassroomService,
+    private router: Router
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -26,17 +32,28 @@ export class MainComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+  getData(): void {
     this.spinner.show();
+    this.classroomService.getClassrooms()
+      .subscribe({
+        next: (resp => {
+          this.listClassrooms = resp;
+          this.isData = true;
+          this.spinner.hide();
+        }),
+        error: () => {
+          this.isData = true;
+          this.spinner.hide();
+        }
+      })
+  }
 
-    setTimeout(() => {
-      this.spinner.hide();
-    }, 2000);
+  ngOnInit(): void {
+    this.getData();
   }
 
   addClass(): void {
-    console.log('add');
-    
+    this.router.navigate(['../Create']);
   }
 
 }

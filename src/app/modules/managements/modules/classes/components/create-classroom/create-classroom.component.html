@@ -1,0 +1,32 @@
+<div class="container">
+    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column" class="py-3 d-flex justify-content-center">
+        <div fxFlex="50" fxLayout="column" fxLayout.xs="column">
+            <h1>{{ titleAction }} Clase</h1>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column" class="d-flex justify-content-center">
+        <div fxFlex="50" fxLayout="column" fxLayout.xs="column" fxLayoutGap="40px">
+            <mat-card>
+                <form (ngSubmit)="onSubmit()" [formGroup]="formClassroom">
+                    <mat-form-field appearance="outline">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput type="text" autocomplete="off" formControlName="name" />
+                        <mat-error *ngIf="formClassroom.get('name')!.hasError('required')">
+                            Se require de un nombre.
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Descripción</mat-label>
+                        <textarea matInput type="text" autocomplete="off" formControlName="description"></textarea>
+                        <mat-error *ngIf="formClassroom.get('description')!.hasError('required')">
+                            Se require de una descripción.
+                        </mat-error>
+                    </mat-form-field>
+                    <div class="d-flex justify-content-center">
+                        <button mat-raised-button color="primary" [class.spinner]="loading" [disabled]="loading">Guardar</button>
+                    </div>
+                </form>
+            </mat-card>
+        </div>
+    </div>
+</div>

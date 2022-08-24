@@ -1,28 +1,17 @@
 @import "src/colors";
 
-.close:hover,
-.close:focus {
-    box-shadow:
-        inset -3.5em 0 0 0 $indigo,
-        inset 3.5em 0 0 0 $indigo;
-}
-
 button {
     color: $indigo;
     transition: 0.25s;
+    width: 30%;
 
     &:hover,
     &:focus {
-        border-color: $indigo;
+        background-color: $indigo;
         color: #fff;
     }
 }
 
-button {
-    background: none;
-    border: 2px solid;
-    font: inherit;
-    line-height: 1;
-    margin: 0.5em;
-    padding: 1em 2em;
+mat-card {
+    width: 60%;
 }

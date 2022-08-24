@@ -1,15 +1,16 @@
 <div class="container">
-    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column">
+    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column" class="py-3 box-title">
         <div fxFlex="50" fxLayout="column" fxLayout.xs="column">
             <h1>Clases</h1>
         </div>
         <div fxFlex="50" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="end end">
-            <app-button-custom [action]="actionButton" (actionButton)="addClass()"></app-button-custom>
+            <button mat-raised-button color="primary" [routerLink]="['../Create']">Agregar</button>
         </div>
     </div>
-    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column" class="py-3">
-        <div fxFlex="100" fxLayout="column" fxLayout.xs="column" fxLayoutGap="40px">
-            <app-card-class></app-card-class>
+    <div *ngIf="listClassrooms.length > 0">
+        <div class="box-card" fxLayout="column" *ngFor="let classroom of listClassrooms">
+            <app-card-class [classroom]="classroom"></app-card-class>
         </div>
     </div>
+    <app-placeholder-empty *ngIf="isData && listClassrooms.length === 0"></app-placeholder-empty>
 </div>

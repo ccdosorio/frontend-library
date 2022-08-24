@@ -7,7 +7,7 @@ const routes: Routes = [
   // Intre page
   { path: 'Intro', loadChildren: () => import('./modules/intro/intro.module').then(m => m.IntroModule), canActivate: [AuthGuard] },
   // Mantenimientos
-  { path: 'Classes', loadChildren: () => import('./modules/classes/classes.module').then(m => m.ClassesModule), canActivate: [AuthGuard]  },
+  { path: 'Classrooms', loadChildren: () => import('./modules/classes/classes.module').then(m => m.ClassesModule), canActivate: [AuthGuard]  },
   { path: '**', redirectTo: '/NotFound/Main' }
 ];
 

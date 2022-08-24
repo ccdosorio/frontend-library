@@ -6,11 +6,13 @@ import { ClassesRouting } from './classes.routing';
 import { CoreModule } from 'core/core.module';
 import { CardClassComponent } from './components/card-class/card-class.component';
 import { SharedModule } from '@shared';
+import { CreateClassroomComponent } from './components/create-classroom/create-classroom.component';
 
 @NgModule({
   declarations: [
     MainComponent,
-    CardClassComponent
+    CardClassComponent,
+    CreateClassroomComponent
   ],
   imports: [
     CommonModule,
