@@ -12,5 +12,5 @@
             <app-card-class [classroom]="classroom"></app-card-class>
         </div>
     </div>
+    <app-placeholder-empty *ngIf="isData && listClassrooms.length === 0"></app-placeholder-empty>
 </div>
-<app-placeholder-empty *ngIf="isData && listClassrooms.length === 0"></app-placeholder-empty>

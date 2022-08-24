@@ -12,6 +12,12 @@ button {
     }
 }
 
+.example-header-image {
+    background-image: url('https://huro.cssninja.io/assets/img/photo/demo/abstracts/2.png');
+    background-size: cover;
+    margin: 1em;
+}
+
 mat-card {
     width: 60%;
 }

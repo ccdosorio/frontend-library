@@ -24,8 +24,13 @@ export class ClassroomService {
     return this.http.get<Classroom>(environment.endpoint + 'classrooms/' + classroomId, {});
   }
 
-  // Crear un clase
+  // Crear una clase
   create(bodeObject: any) {
     return this.http.post(environment.endpoint + 'classrooms', bodeObject, {})
+  }
+
+  // Editar una clase
+  update(bodeObject: any, classromId: number) {
+    return this.http.put(environment.endpoint + 'classrooms/' + classromId, bodeObject)
   }
 }

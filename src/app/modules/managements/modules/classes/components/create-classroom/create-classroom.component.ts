@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AppConfigService, ClassroomService } from '@services';
 import { SweetAlertMessage } from '@functions';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Classroom } from '@models';
 
 @Component({
   selector: 'app-create-classroom',
@@ -44,40 +45,62 @@ export class CreateClassroomComponent implements OnInit {
       SweetAlertMessage('info', 'Información', 'Debe completar todos los campos.');
       return;
     }
+
+    if (this.classroomId === 0) {
+      this.createClassroom();
+    } else {
+      this.updateClassroom();
+    }
+  }
+
+  createClassroom(): void {
     this.classroomService.create(this.formClassroom.value)
-      .subscribe({
-        next: () => {
-          this.loading = false;
-          SweetAlertMessage('success', 'Exitoso', 'Clase creada exitosamente.');
-          this.router.navigate(['Managements/Classrooms/Main']);
-        },
-        error: () => {
-          this.loading = false;
-          SweetAlertMessage('error', 'Error', 'Ocurrió un error al crear el registro.');
-        }
-      });
+    .subscribe({
+      next: () => {
+        this.loading = false;
+        SweetAlertMessage('success', 'Exitoso', 'Clase creada exitosamente.');
+        this.router.navigate(['Managements/Classrooms/Main']);
+      },
+      error: () => {
+        this.loading = false;
+        SweetAlertMessage('error', 'Error', 'Ocurrió un error al crear el registro.');
+      }
+    });
+  }
+
+  updateClassroom(): void {
+    this.classroomService.update(this.formClassroom.value, this.classroomId!)
+    .subscribe({
+      next: () => {
+        this.loading = false;
+        SweetAlertMessage('success', 'Exitoso', 'Clase editada exitosamente.');
+        this.router.navigate(['Managements/Classrooms/Main']);
+      },
+      error: () => {
+        this.loading = false;
+        SweetAlertMessage('error', 'Error', 'Ocurrió un error al editar el registro.');
+      }
+    });
   }
 
   getClassroom(classroomId: number): void {
     this.classroomService.getById(classroomId)
     .subscribe({
-      next: (resp) => {
-        console.log('resp: ', resp);
-        
-      },
-      error: (error) => {
-        console.log(error);
-      }
+      next: (resp) => this.setUserForm(resp),
+      error: (error) => console.log(error)
     });
+  }
+
+  setUserForm(classroom: Classroom): void {
+    this.formClassroom.get('name')?.setValue(classroom.name);
+    this.formClassroom.get('description')?.setValue(classroom.description);
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {      
       if (Object.keys(params).length > 0) {
         this.classroomId = Number(params['id']);
-        this.titleAction = 'Editar';
-        console.log(params['id']);
-        
+        this.titleAction = 'Editar';        
         this.getClassroom(Number(params['id']));
       } else {
         this.titleAction = 'Crear';
