@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'Intro', loadChildren: () => import('./modules/intro/intro.module').then(m => m.IntroModule), canActivate: [AuthGuard] },
   // Mantenimientos
   { path: 'Classrooms', loadChildren: () => import('./modules/classes/classes.module').then(m => m.ClassesModule), canActivate: [AuthGuard]  },
+  { path: 'Profile', loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule), canActivate: [AuthGuard]  },
   { path: '**', redirectTo: '/NotFound/Main' }
 ];
 

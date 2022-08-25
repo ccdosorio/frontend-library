@@ -22,9 +22,13 @@
     padding: 8px 0;
     display: flex;
     width: auto;
+
     .routeIcon {
-      margin-right: 40px;
-      color: $indigo;
+        margin-right: 40px;
+        color: $indigo;
     }
-  }
-  
+}
+
+mat-icon {
+    color: $indigo;
+}
