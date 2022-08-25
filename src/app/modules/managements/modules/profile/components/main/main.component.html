@@ -1,0 +1,47 @@
+<div class="container" *ngIf="user">
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <div class="box-info">
+            <!-- <img src="{{ user.photo }}" alt="user"> -->
+            <img src="assets/images/empty.svg" alt="user" class="img-user">
+            <h2>{{ user.name }}</h2>
+            <p class="text-muted">{{ user.email_address }}</p>
+            <div class="badge-user">{{ user.status }}</div>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center" class="py-3">
+        <mat-card>
+            <!-- <div fxLayoutAlign="end end">
+                <button type="button" mat-icon-button (click)="activeForm()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </div> -->
+            <form name="formUser" (ngSubmit)="onSubmit()" [formGroup]="formUser">
+                <mat-form-field appearance="outline">
+                    <mat-label><label for="name">Nombre Completo</label></mat-label>
+                    <input id="name" matInput autocomplete="off" formControlName="name" />
+                    <mat-icon matSuffix class="secondary-text">badge</mat-icon>
+                    <mat-error *ngIf="formUser.get('name')!.hasError('required')">
+                        Se require de un nombre.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label><label for="email">Correo electrónico</label></mat-label>
+                    <input id="email" matInput autocomplete="off" formControlName="email" />
+                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
+                    <mat-error *ngIf="formUser.get('email')!.hasError('pattern')">
+                        Correo electrónico nó válido.
+                    </mat-error>
+                    <mat-error *ngIf="formUser.get('email')!.hasError('required')">
+                        Se require de un correo electrónico.
+                    </mat-error>
+                </mat-form-field>
+                <div fxLayout="column" fxLayoutAlign="center">
+                    <button type="submit" mat-raised-button color="primary" aria-label="Actualizar"
+                        [disabled]="formUser.invalid">
+                        Actualizar
+                    </button>
+                </div>
+            </form>
+        </mat-card>
+    </div>
+</div>
