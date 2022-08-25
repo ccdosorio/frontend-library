@@ -76,7 +76,7 @@ export class CreateClassroomComponent implements OnInit {
         SweetAlertMessage('success', 'Exitoso', 'Clase editada exitosamente.');
         this.router.navigate(['Managements/Classrooms/Main']);
       },
-      error: () => {
+      error: () => {        
         this.loading = false;
         SweetAlertMessage('error', 'Error', 'Ocurrió un error al editar el registro.');
       }

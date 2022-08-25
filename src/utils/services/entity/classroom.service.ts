@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Classroom } from '@models';
 
 import { environment } from 'environments/environment';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,11 +26,11 @@ export class ClassroomService {
 
   // Crear una clase
   create(bodeObject: any) {
-    return this.http.post(environment.endpoint + 'classrooms', bodeObject, {})
+    return this.http.post(environment.endpoint + 'classrooms', bodeObject, {});
   }
 
   // Editar una clase
   update(bodeObject: any, classromId: number) {
-    return this.http.put(environment.endpoint + 'classrooms/' + classromId, bodeObject)
+    return this.http.post(environment.endpoint + 'classrooms/' + classromId, bodeObject, {});
   }
 }

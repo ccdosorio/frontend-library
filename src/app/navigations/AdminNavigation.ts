@@ -1,5 +1,11 @@
 export const AdminNavigation: any[] = [
     {
+        displayName: 'Inicio',
+        iconName: 'home',
+        image: 'assets/images/home.svg',
+        route: 'Managements/Intro/Main'
+    },
+    {
         displayName: 'Clases',
         iconName: 'school',
         image: 'assets/images/search-5.svg',

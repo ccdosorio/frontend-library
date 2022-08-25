@@ -7,7 +7,7 @@
     <div fxFlex="30" fxFlex.md="30" fxFlex.sm="100" fxFlex.xs="100" *ngFor="let card of navigation">
         <!-- No Flip Card -->
         <div class="simple-card animate__animated animate__fadeIn" fxLayout="row" fxLayoutGap="8px"
-            fxLayoutAlign="center center">
+            fxLayoutAlign="center center" (click)="selectCard(card)">
             <img src="{{card.image}}" class="card-image" alt="ico-image">
             <br>
             <span style="text-align: center;">{{card.displayName}}</span>
