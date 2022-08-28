@@ -4,11 +4,12 @@ import { AuthGuard } from '@security';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'Intro' },
-  // Intre page
+  // Intro page
   { path: 'Intro', loadChildren: () => import('./modules/intro/intro.module').then(m => m.IntroModule), canActivate: [AuthGuard] },
-  // Mantenimientos
+  // Maintenances
   { path: 'Classrooms', loadChildren: () => import('./modules/classes/classes.module').then(m => m.ClassesModule), canActivate: [AuthGuard]  },
   { path: 'Profile', loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule), canActivate: [AuthGuard]  },
+  { path: 'Books', loadChildren: () => import('./modules/books/books.module').then(m => m.BooksModule), canActivate: [AuthGuard]  },
   { path: '**', redirectTo: '/NotFound/Main' }
 ];
 

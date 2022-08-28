@@ -1,0 +1,16 @@
+<div class="container py-3">
+  <div fxLayout="row">
+      <div class="col">
+        <h1>Libros</h1>
+      </div>
+    <div class="col" fxLayoutAlign="end center">
+      <button mat-raised-button color="primary" [routerLink]="['../Create']">Crear</button>
+    </div>
+  </div>
+  <div class="books--grid">
+    <app-card-book
+      [book]="book"
+      *ngFor="let book of listBooks"
+    ></app-card-book>
+  </div>
+</div>
