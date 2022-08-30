@@ -7,6 +7,7 @@ import { SharedModule } from "@shared";
 import { BooksRouting } from "./books.routing";
 import { CardBookComponent } from './components/card-book/card-book.component';
 import { CreateBookComponent } from './components/create-book/create-book.component';
+import { UploadFileComponent } from './components/upload-file/upload-file.component';
 
 
 
@@ -14,7 +15,8 @@ import { CreateBookComponent } from './components/create-book/create-book.compon
   declarations: [
     MainComponent,
     CardBookComponent,
-    CreateBookComponent
+    CreateBookComponent,
+    UploadFileComponent
   ],
   imports: [
     CommonModule,

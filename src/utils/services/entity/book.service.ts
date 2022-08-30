@@ -25,7 +25,16 @@ export class BookService {
     return this.http.get<BookISBN>(environment.endpoint + 'books/isbn/' + isbn);
   }
 
+  // create books to user
   createUserBook(body: any): Observable<Book> {
     return this.http.post<Book>(environment.endpoint + 'user-books', body, {});
   }
+
+  // upload pdf book
+  uploadFile(bookId: number, file: File) {
+    let body = new FormData();
+    body.append('book', file);
+    return this.http.post(environment.endpoint + 'user-books/' + bookId + '/upload-book', body);
+  }
+
 }

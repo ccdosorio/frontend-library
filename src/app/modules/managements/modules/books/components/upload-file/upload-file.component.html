@@ -1,0 +1,12 @@
+<!-- PDF Input -->
+<div class="mb-3">
+    <label for="formFile" class="form-label">Seleccionar archivo</label>
+    <input (change)="onFileChange($event)" class="form-control input-contract" type="file">
+</div>
+<!-- End PDF Input -->
+
+<!-- Button -->
+<div class="d-flex justify-content-center">
+    <button type="button" mat-raised-button color="primary" (click)="upload()">Subir</button>
+</div>
+<!-- End Button -->

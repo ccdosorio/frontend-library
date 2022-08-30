@@ -1,5 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Book, BookISBN} from "@models";
+import { Component, Input, OnInit } from '@angular/core';
+
+import { MatDialog } from '@angular/material/dialog';
+
+import { Book } from "@models";
+import { UploadFileComponent } from '../upload-file/upload-file.component';
 
 @Component({
   selector: 'app-card-book',
@@ -10,11 +14,15 @@ export class CardBookComponent implements OnInit {
 
   @Input() book: Book | undefined;
 
-  constructor() { }
+  constructor(
+    private dialog: MatDialog
+  ) { }
 
-  upload(): void {
-    console.log('upload');
-    
+  openDialogFile(book: Book): void {
+    this.dialog.open(UploadFileComponent, {
+      width: '500px',
+      data: { data: book, action: this }
+    });
   }
 
   ngOnInit(): void {

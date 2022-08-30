@@ -41,7 +41,7 @@ export class CreateBookComponent implements OnInit {
       SweetAlertMessage('info', 'Información', 'Debes ingresar un ISBN válido para continuar.');
       return;
     }
-
+    this.book = undefined;
     this.spinner.show();
     const { isbnControl } = this.formSearch.value;
 

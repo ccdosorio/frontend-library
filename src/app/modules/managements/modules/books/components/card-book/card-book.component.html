@@ -1,14 +1,14 @@
-<mat-card class="example-card" *ngIf="book">
+<mat-card class="card-book animate__animated animate__fadeIn" *ngIf="book">
   <mat-card-header>
     <mat-card-title>{{ book.book.title }}</mat-card-title>
     <mat-card-subtitle>{{ book.book.published_at }}</mat-card-subtitle>
     <mat-card-subtitle><b>isbn10</b> {{ book.book.isbn10 }}</mat-card-subtitle>
     <mat-card-subtitle><b>isbn13</b> {{ book.book.isbn13 }}</mat-card-subtitle>
   </mat-card-header>
-  <img mat-card-image src="assets/images/search-5.svg" alt="Photo of a Shiba Inu">
+  <img mat-card-image src="{{ book.book.book_cover_l }}" alt="portada">
   <mat-card-content>
   </mat-card-content>
   <mat-card-actions class="d-flex justify-content-center">
-    <button mat-raised-button color="warn" type="button" (click)="upload()">Adjuntar pdf</button>
+    <button mat-raised-button color="warn" type="button" (click)="openDialogFile(book)">Adjuntar pdf</button>
   </mat-card-actions>
 </mat-card>
