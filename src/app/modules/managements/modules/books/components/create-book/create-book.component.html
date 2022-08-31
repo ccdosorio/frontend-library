@@ -30,8 +30,7 @@
                   <mat-card-subtitle>{{ book.published_at }}</mat-card-subtitle>
                   <mat-card-subtitle><b>isbn10</b> {{ book.isbn10 }}</mat-card-subtitle>
                   <mat-card-subtitle><b>isbn13</b> {{ book.isbn13 }}</mat-card-subtitle>
-                  <!-- <img mat-card-xl-image src="{{ bookCoverImage }}" > -->
-                  <img mat-card-xl-image src="assets/images/search-5.svg" >
+                  <img mat-card-xl-image src="data:image/png;base64,{{ bookCoverImage }}" >
                 </mat-card-title-group>
                 <mat-card-content>
                     <button mat-raised-button color="warn" (click)="createUserBook()">Agregar</button>

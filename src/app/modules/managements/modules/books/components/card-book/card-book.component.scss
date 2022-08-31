@@ -1,15 +1,44 @@
 @import 'src/colors.scss';
 
-.card-book {
-    letter-spacing: 0;
-    cursor: pointer;
-    padding: 15px 15px;
-    color: $dark_gray;
-    transition: 150ms;
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.card {
+    width: 320px;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #d7d7d7;
+    border-radius: 2px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
     background-color: white;
-    &:hover {
-        transform: scale(1.1);
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        border-radius: 5px;
-    }
+    transition: 150ms;
+}
+
+.card:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+}
+
+.card>img {
+    border-radius: 2px;
+    max-width: 100%;
+    margin-bottom: 10px;
+    height: auto;
+}
+
+.card h3 {
+    font-weight: bold;
+}
+
+.card p {
+    color: #757575;
+    line-height: 1.5;
+    padding-top: 10px;
+}
+
+button {
+    width: 50%;
 }

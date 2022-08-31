@@ -37,4 +37,22 @@ export class BookService {
     return this.http.post(environment.endpoint + 'user-books/' + bookId + '/upload-book', body);
   }
 
+  // download file pdf
+  downloadFile(bookId: number) {
+
+    const headerDict = {
+      'Content-Type': 'application/pdf',
+      'Accept': 'application/pdf'
+    }
+
+    const options = {
+      headers: new Headers(headerDict),
+    };
+
+
+    return this.http.get(environment.endpoint + 'user-books/' + bookId, {
+      headers: headerDict
+    });
+  }
+
 }

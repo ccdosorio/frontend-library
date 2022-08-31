@@ -20,6 +20,7 @@ export class CreateBookComponent implements OnInit {
 
   book: BookISBN | undefined;
   showEmptyMessage: boolean = false;
+  bookCoverImage: string = '';
 
   constructor(
     private appConfigService: AppConfigService,
@@ -47,6 +48,7 @@ export class CreateBookComponent implements OnInit {
 
     this.bookService.getByISBN(isbnControl).subscribe({
       next: (resp) => {
+        this.bookCoverImage = resp.book_cover_l;
         this.showEmptyMessage = false;
         this.book = resp;
         this.spinner.hide();

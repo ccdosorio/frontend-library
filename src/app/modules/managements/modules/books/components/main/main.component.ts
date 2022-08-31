@@ -42,7 +42,7 @@ export class MainComponent implements OnInit {
           this.isData = true;
           this.spinner.hide();
         }
-      })
+      });
   }
 
   ngOnInit(): void {
