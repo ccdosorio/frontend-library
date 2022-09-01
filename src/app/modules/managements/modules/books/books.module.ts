@@ -8,15 +8,15 @@ import { BooksRouting } from "./books.routing";
 import { CardBookComponent } from './components/card-book/card-book.component';
 import { CreateBookComponent } from './components/create-book/create-book.component';
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
-
-
+import { ImgBookComponent } from './components/img-book/img-book.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     CardBookComponent,
     CreateBookComponent,
-    UploadFileComponent
+    UploadFileComponent,
+    ImgBookComponent
   ],
   imports: [
     CommonModule,

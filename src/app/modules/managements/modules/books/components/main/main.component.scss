@@ -11,10 +11,10 @@ h1 {
 }
 
 // tablets
-@media screen and (min-width: 40em) and (max-width: 1545px) {
+@media screen and (min-width: 40em) and (max-width: 63.9em) {
   .books--grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 15px;
   }
 }
