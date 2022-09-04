@@ -1,12 +1,20 @@
-<div class="d-flex justify-content-center">
-    <mat-card *ngIf="classroom">
-        <div mat-card-avatar class="example-header-image"></div>
-        <div fxLayout="column" fxFlex="50">
-            <h3>{{ classroom.name }}</h3>
-            <p class="text-muted">{{ classroom.description }}</p>
+<!--Item-->
+<div class="list-view-item" *ngIf="classroom">
+    <div class="list-view-item-inner">
+        <img class="avatar" src="assets/img/icons/hexagons/purple-heavy.svg"
+            data-demo-src="assets/img/photo/demo/brands/airbnb.svg" alt="">
+        <div class="meta-left">
+            <h3 data-filter-match>{{ classroom.name }}</h3>
+            <span>
+                <i data-feather="map-pin"></i>
+                <span data-filter-match>{{ classroom.description }}</span>
+            </span>
         </div>
-        <div fxLayout="column" fxFlex="50" fxLayoutAlign="end end">
-            <button mat-stroked-button color="primary" [routerLink]="['../Edit', classroom.id]">Editar</button>
+        <div class="meta-right">
+            <div class="buttons">
+                <a class="button h-button is-primary is-outlined is-raised"
+                    [routerLink]="['../Edit', classroom.id]">Editar</a>
+            </div>
         </div>
-    </mat-card>
+    </div>
 </div>

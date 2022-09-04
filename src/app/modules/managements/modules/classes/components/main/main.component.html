@@ -1,16 +1,26 @@
-<div class="container py-3">
-    <div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column" fxLayout.md="column">
-        <div fxFlex="50" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
-            <h1>Clases</h1>
+<div class="page-content-inner">
+
+    <div class="projects-toolbar">
+
+        <!--Onboarding-->
+        <div class="standard-onboarding">
+            <div class="title-wrap">
+                <p></p>
+                <h2>Clases</h2>
+            </div>
         </div>
-        <div fxFlex="65" fxLayout="column" fxLayout.xs="column" fxLayoutAlign="center center">
-            <button mat-raised-button color="primary" [routerLink]="['../Create']">Crear</button>
+        <a class="button h-button is-primary is-raised is-bold" [routerLink]="['../Create']">
+            <span>Nueva Clase</span>
+        </a>
+    </div>
+
+    <!--List-->
+    <div class="list-view list-view-v3">
+        <!--Item-->
+        <div id="active-items-tab" class="tab-content is-active">
+            <div class="list-view-inner" *ngFor="let classroom of listClassrooms">
+                <app-card-class [classroom]="classroom"></app-card-class>
+            </div>
         </div>
     </div>
-    <div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column" fxLayout.md="column" *ngFor="let classroom of listClassrooms">
-        <div fxFlex="100" fxLayout="column" fxLayout.xs="column" class="box-card">
-            <app-card-class [classroom]="classroom"></app-card-class>
-        </div>
-    </div>
-    <app-placeholder-empty *ngIf="isData && listClassrooms.length === 0"></app-placeholder-empty>
 </div>

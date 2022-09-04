@@ -14,8 +14,4 @@ export class CardClassComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  editClass(): void {
-    console.log('edit');
-  }
-
 }
