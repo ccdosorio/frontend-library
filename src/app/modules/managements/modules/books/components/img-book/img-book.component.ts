@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-img-book',
@@ -13,7 +13,7 @@ export class ImgBookComponent implements OnInit {
   set changeImg(newImg: string) {
     this.img = 'data:image/png;base64,' + newImg;
   }
-  imageDefault = './assets/images/empty.svg';
+  imageDefault = './assets/img/illustrations/onboarding/set2-1.svg';
 
   constructor() { }
 

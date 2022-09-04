@@ -1,32 +1,65 @@
-<div class="container animate__animated animate__fadeIn">
-    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column" class="py-3 d-flex justify-content-center">
-        <div fxFlex="50" fxLayout="column" fxLayout.xs="column">
-            <h1>{{ titleAction }} Clase</h1>
-        </div>
-    </div>
-    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column" class="d-flex justify-content-center">
-        <div fxFlex="50" fxLayout="column" fxLayout.xs="column" fxLayoutGap="40px">
-            <mat-card>
-                <form (ngSubmit)="onSubmit()" [formGroup]="formClassroom">
-                    <mat-form-field appearance="outline">
-                        <mat-label>Nombre</mat-label>
-                        <input matInput type="text" autocomplete="off" formControlName="name" />
-                        <mat-error *ngIf="formClassroom.get('name')!.hasError('required')">
-                            Se require de un nombre.
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline">
-                        <mat-label>Descripción</mat-label>
-                        <textarea matInput type="text" autocomplete="off" formControlName="description"></textarea>
-                        <mat-error *ngIf="formClassroom.get('description')!.hasError('required')">
-                            Se require de una descripción.
-                        </mat-error>
-                    </mat-form-field>
-                    <div class="d-flex justify-content-center">
-                        <button mat-raised-button color="primary" [class.spinner]="loading" [disabled]="loading">Guardar</button>
+<div class="page-content-inner py-3">
+
+    <!--Form Layout 1-->
+    <div class="form-layout">
+        <div class="form-outer">
+            <div class="form-header stuck-header">
+                <div class="form-header-inner">
+                    <div class="left">
+                        <h3>{{ titleAction }} Clase</h3>
                     </div>
-                </form>
-            </mat-card>
+                    <div class="right">
+                        <div class="buttons">
+                            <a [routerLink]="['../Main']" class="button h-button is-light is-dark-outlined">
+                                <span class="icon">
+                                    <i class="lnir lnir-arrow-left rem-100"></i>
+                                </span>
+                                <span>Regresar</span>
+                            </a>
+                            <button *ngIf="!loading" id="save-button" class="button h-button is-primary is-raised"
+                                [disabled]="formClassroom.invalid" (click)="onSubmit()">Crear</button>
+
+                            <a *ngIf="loading" class="button h-button is-primary is-loading">Crear</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-body" [formGroup]="formClassroom">
+                <!--Fieldset-->
+                <div class="form-fieldset">
+                    <div class="fieldset-heading">
+                        <h4>Información de la clase</h4>
+                        <p>Por favor ingresa los campos</p>
+                    </div>
+
+                    <div class="columns is-multiline">
+                        <div class="column is-12">
+                            <div class="field">
+                                <label>Nombre</label>
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="" formControlName="name">
+                                    <mat-error class="animate__animated animate__fadeIn" *ngIf="formClassroom.get('name')!.hasError('required')
+                                    && formClassroom.get('name')!.touched">
+                                        Se require de un nombre.
+                                    </mat-error>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-12">
+                            <div class="field">
+                                <label>Descripción</label>
+                                <div class="control">
+                                    <textarea class="textarea" rows="4" placeholder="" formControlName="description"></textarea>
+                                    <mat-error class="animate__animated animate__fadeIn" *ngIf="formClassroom.get('description')!.hasError('required')
+                                    && formClassroom.get('description')!.touched">
+                                        Se require de una descripción.
+                                    </mat-error>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

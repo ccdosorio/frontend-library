@@ -1,23 +1,11 @@
-@import 'src/colors.scss';
-
-* {
-    margin: 0px;
-    padding: 0px;
-}
-
-.card {
-    padding: 20px;
-    margin: 10px;
-    border: 1px solid #d7d7d7;
-    border-radius: 2px;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+.card-book {
     background-color: white;
-    transition: 150ms;
+    text-align: center;
+    padding: 0 20px 30px 20px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #283252;
+    margin-bottom: 12px;
+    min-width: 140px;
 }
-
-.card:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 5px;
-}
-

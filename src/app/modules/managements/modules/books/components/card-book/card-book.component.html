@@ -1,28 +1,13 @@
-<!-- <section class="animate__animated animate__fadeIn" *ngIf="book">
-  <article class="card">
-    <img src="data:image/png;base64,{{ book.book.book_cover_l }}" alt="portada">
-    <h3>{{ book.book.title }}</h3>
+<!--Card-->
+<div class="onboarding-card card-book" *ngIf="book">
+  <app-img-book [img]="book.book.book_cover_m"></app-img-book>
+  <div class="onboarding-content">
+    <h3 class="dark-inverted">{{ book.book.title }}</h3>
     <p><b>isbn10</b> {{ book.book.isbn10 }}</p>
     <p><b>isbn13</b> {{ book.book.isbn13 }}</p>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="button" (click)="openDialogFile(book)">Adjuntar pdf</button>
-      <button mat-raised-button type="button" [disabled]="book.book_file === null" (click)="downloadPdf(book)">Descargar</button>
-    </mat-card-actions>
-  </article>
-</section> -->
-
-<!-- <app-img *ngIf="product.images.length > 0" [img]="product.images[0]"></app-img> -->
-<mat-card class="card" *ngIf="book">
-  <app-img-book [img]="book.book.book_cover_l"></app-img-book>
-  <h2>{{ book.book.title }}</h2>
-  <p><b>isbn10</b> {{ book.book.isbn10 }}</p>
-  <p><b>isbn13</b> {{ book.book.isbn13 }}</p>
-  <mat-card-actions>
-    <button mat-icon-button type="button" color="primary" type="button" (click)="openDialogFile(book)">
-      <mat-icon>file_upload</mat-icon>
-    </button>
-    <button mat-icon-button type="button" [disabled]="book.book_file === null" (click)="downloadPdf(book)">
-      <mat-icon>file_download</mat-icon>
-    </button>
-  </mat-card-actions>
-</mat-card>
+    <div class="button-wrap">
+      <a class="button h-button is-primary is-rounded is-elevated" (click)="openDialogFile(book)">Adjuntar PDF</a>
+      <a class="button h-button is-primary is-rounded is-outlined" (click)="downloadPdf(book)">Ver</a>
+    </div>
+  </div>
+</div>

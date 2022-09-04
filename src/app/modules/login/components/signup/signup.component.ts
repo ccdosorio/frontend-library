@@ -5,7 +5,6 @@ import * as feather from 'feather-icons';
 
 import { AppConfigService, AuthenticationService } from '@services';
 import { ValidatePassword } from "@helpers";
-import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-signup',

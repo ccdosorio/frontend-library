@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import * as feather from 'feather-icons';
+
 import { AppConfigService, ClassroomService } from '@services';
 import { SweetAlertMessage } from '@functions';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -97,6 +99,7 @@ export class CreateClassroomComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    feather.replace();
     this.route.params.subscribe((params) => {      
       if (Object.keys(params).length > 0) {
         this.classroomId = Number(params['id']);
