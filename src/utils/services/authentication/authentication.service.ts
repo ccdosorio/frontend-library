@@ -176,6 +176,7 @@ export class AuthenticationService {
 
       })
       .catch(() => {
+        this.spinner.hide();
         SweetAlertMessage('error', 'Error', 'Ha ocurrido un error al iniciar sesión.');
       });
   }

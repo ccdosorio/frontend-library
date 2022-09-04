@@ -4,10 +4,12 @@ import { CommonModule } from '@angular/common';
 import { MainComponent } from './components/main/main.component';
 import { ProfileRouting } from './profile.routing';
 import { CoreModule } from 'core/core.module';
+import { PlanComponent } from './components/plan/plan.component';
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
+    PlanComponent
   ],
   imports: [
     CommonModule,

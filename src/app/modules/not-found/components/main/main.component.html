@@ -1,9 +1,16 @@
-<div fxLayout="column" fxLayoutAlign="center center" fxFill>
-    <img src="assets/images/error-404.svg" alt="home">
-    <h1>No pudimos encontrar esa página.</h1>
-    <p class="text-muted">Parece que no pudimos encontrar esa página. Vuelva a intentarlo o póngase en contacto con un
-        administrador si el problema persiste</p>
-    <button type="buttom" mat-raised-button color="primary" aria-label="Regresar" routerLink="/Home">
-        Regresar
-    </button>
+<div class="minimal-wrapper darker">
+    <!--Page body-->
+    <div class="error-container">
+        <div class="error-wrapper">
+            <div class="error-inner has-text-centered">
+                <img class="light-image" src="assets/img/illustrations/placeholders/error-3.svg" alt="" />
+                <h3 class="dark-inverted">No pudimos encontrar esa página</h3>
+                <p>Parece que no pudimos encontrar esa página. Vuelva a intentarlo o póngase en contacto con un
+                    administrador si el problema persiste.</p>
+                <div class="button-wrap">
+                    <a class="button h-button is-primary is-rounded is-elevated" routerLink="/Home">Regresar</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

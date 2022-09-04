@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import * as feather from 'feather-icons';
+
 import { AppConfigService, AuthenticationService } from '@services';
 import { ValidatePassword } from "@helpers";
+import { StepperSelectionEvent } from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-signup',
@@ -39,11 +42,8 @@ export class SignupComponent implements OnInit {
     this.authenticationService.SignUp(email, password, name);
   }
 
-  toReturn(): void {
-    
-  }
-
   ngOnInit(): void {
+    feather.replace();
   }
 
 }

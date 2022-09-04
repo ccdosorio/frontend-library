@@ -1,45 +1,80 @@
-<div fxLayout="column" fxLayoutAlign="center center" fxFill>
-    <h2>Iniciar Sesión</h2>
-    <p class="text-muted">Bienvenido a nuestra biblioteca virtual</p>
-    <mat-card>
-        <form name="loginForm" [formGroup]="formLogin">
-            <mat-form-field appearance="outline">
-                <mat-label><label for="email">Correo electrónico</label></mat-label>
-                <input id="email" matInput autocomplete="off" formControlName="email" />
-                <mat-icon matSuffix class="secondary-text">mail</mat-icon>
-                <mat-error *ngIf="formLogin.get('email')!.hasError('pattern')">
-                    Correo electrónico nó válido.
-                </mat-error>
-                <mat-error *ngIf="formLogin.get('email')!.hasError('required')">
-                    Se require de un correo electrónico.
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label><label for="password">Contraseña</label></mat-label>
-                <input id="password" matInput type="password" autocomplete="off" formControlName="password" />
-                <mat-icon matSuffix class="secondary-text">vpn_key</mat-icon>
-                <mat-error *ngIf="formLogin.get('password')!.hasError('required')">
-                    Se requiere de una contraseña.
-                </mat-error>
-            </mat-form-field>
-            <div fxLayout="row" fxLayoutAlign="end">
-                <a routerLink="/Login/ForgotPassword" class="text-muted">¿Has olvidado tu contraseña?</a>
+<div class="auth-wrapper">
+    <!--Page body-->
+
+    <div class="auth-wrapper-inner is-single">
+
+        <!--Single Centered Form-->
+        <div class="single-form-wrap">
+
+            <div class="inner-wrap">
+                <!--Form Title-->
+                <div class="auth-head">
+                    <h2>Bienvenido de nuevo</h2>
+                    <p>Por favor inicia sesión en tu cuenta</p>
+                    <a routerLink="/Login/Signup">Aún no tengo cuenta</a>
+                </div>
+
+                <!--Form-->
+                <div class="form-card">
+
+                    <form name="loginForm" [formGroup]="formLogin">
+                        <div id="signin-form" class="login-form">
+                            <!-- Input -->
+                            <div class="field">
+                                <div class="control has-icon">
+                                    <input class="input" type="text" placeholder="Correo electrónico"
+                                        formControlName="email">
+                                    <span class="form-icon">
+                                        <i data-feather="user"></i>
+                                    </span>
+                                    <mat-error class="animate__animated animate__fadeIn" *ngIf="formLogin.get('email')!.hasError('pattern')
+                                    && formLogin.get('email')!.touched">
+                                        Correo electrónico nó válido.
+                                    </mat-error>
+                                    <mat-error class="animate__animated animate__fadeIn" *ngIf="formLogin.get('email')!.hasError('required')
+                                    && formLogin.get('email')!.touched">
+                                        Se require de un correo electrónico.
+                                    </mat-error>
+                                </div>
+                            </div>
+                            <!-- Input -->
+                            <div class="field">
+                                <div class="control has-icon">
+                                    <input class="input" type="password" placeholder="Contraseña"
+                                        formControlName="password">
+                                    <span class="form-icon">
+                                        <i data-feather="lock"></i>
+                                    </span>
+                                    <mat-error class="animate__animated animate__fadeIn" *ngIf="formLogin.get('password')!.hasError('required')
+                                    && formLogin.get('password')!.touched">
+                                        Se requiere de una contraseña.
+                                    </mat-error>
+                                </div>
+                            </div>
+
+                            <!-- Submit -->
+                            <div class="control login">
+                                <button class="button h-button is-primary is-bold is-fullwidth is-raised"
+                                    (click)="login()" [disabled]="formLogin.invalid">
+                                    Iniciar sesión
+                                </button>
+                                <button class="button h-button is-danger is-bold is-fullwidth is-raised"
+                                    (click)="authenticationService.GoogleAuth()">
+                                    Iniciar sesión con Google
+                                </button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="forgot-link has-text-centered">
+                    <a routerLink="/Login/ForgotPassword">¿Has olvidado tu contraseña?</a>
+                </div>
+
             </div>
-            <div fxLayout="column" fxLayoutAlign="center" class="form-vertical-buttons">
-                <button type="submit" mat-raised-button color="primary" aria-label="Ingresar" (click)="login()"
-                    [disabled]="formLogin.invalid">
-                    Ingresar
-                </button>
-                <button mat-raised-button color="warn" (click)="authenticationService.GoogleAuth()">
-                    Iniciar sesión con Google
-                </button>
-                <button mat-raised-button color="primary" routerLink="/Home">
-                    Regresar
-                </button>
-            </div>
-        </form>
-    </mat-card>
-    <div fxLayout="row" fxLayoutAlign="center center" class="py-3">
-        <a routerLink="/Login/Signup" class="text-muted">¿No tienes cuenta? <span>Regístrate</span></a>
+
+        </div>
+
     </div>
 </div>

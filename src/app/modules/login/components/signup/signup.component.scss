@@ -1,13 +1,5 @@
-a {
-    cursor: pointer;
-    text-decoration: none;
-}
+@import 'src/colors.scss';
 
-span {
-    font-weight: bold;
-    color: darkcyan;
-}
-
-h2 {
-    font-size: 30px;
+mat-stepper {
+    background-color: $ligth_gray;
 }

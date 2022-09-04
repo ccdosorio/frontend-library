@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import * as feather from 'feather-icons';
+
 import { AppConfigService, AuthenticationService } from '@services';
 
 @Component({
@@ -35,6 +37,7 @@ export class SigninComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    feather.replace();
   }
 
 }
