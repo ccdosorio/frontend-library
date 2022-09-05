@@ -8,13 +8,14 @@
             <h3 data-filter-match>{{ book.content.striped_accents_title }}</h3>
             <span>
                 <i data-feather="map-pin"></i>
-                <span data-filter-match>Páginas {{ book.content.number_of_pages | number
-                    }}</span>
+                <span data-filter-match>
+                    Páginas {{ book.content.number_of_pages | number }}
+                </span>
             </span>
         </div>
         <div class="meta-right">
             <div class="buttons">
-                <a class="button h-button is-primary is-outlined is-raised">Más Información</a>
+                <a class="button h-button is-primary is-outlined is-raised" (click)="moreInfo()">Más Información</a>
             </div>
         </div>
     </div>

@@ -11,6 +11,7 @@ import { UploadFileComponent } from './components/upload-file/upload-file.compon
 import { ImgBookComponent } from './components/img-book/img-book.component';
 import { SearchBookComponent } from './components/search-book/search-book.component';
 import { ItemSearchComponent } from './components/item-search/item-search.component';
+import { ModalBookComponent } from './components/modal-book/modal-book.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ItemSearchComponent } from './components/item-search/item-search.compon
     UploadFileComponent,
     ImgBookComponent,
     SearchBookComponent,
-    ItemSearchComponent
+    ItemSearchComponent,
+    ModalBookComponent
   ],
   imports: [
     CommonModule,

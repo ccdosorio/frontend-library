@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MatDialogRef } from '@angular/material/dialog';
 
 import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
@@ -41,6 +42,7 @@ import { JwtInterceptor } from '@security';
     AngularFireDatabaseModule,
   ],
   providers: [
+    { provide: MatDialogRef, useValue: {} },
     { provide: APP_CONFIG, useValue: appConfig },
     { provide: ADMIN_NAVIGATION, useValue: AdminNavigation },
     { provide: USER_NAVIGATION, useValue: UserNavigation },

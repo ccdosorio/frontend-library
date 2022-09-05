@@ -5,3 +5,6 @@ export * from './BookISBN';
 export * from './BookAuthorElement';
 export * from './ElasticSearch';
 export * from './SearchHit';
+export * from './ContentBook';
+export * from './Author';
+export * from './HighlightFields';
