@@ -1,47 +1,126 @@
-<div class="container animate__animated animate__fadeIn">
-    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column" class="py-3 d-flex justify-content-center">
-        <div fxFlex="50" fxLayout="column" fxLayout.xs="column">
-            <h1>Crear Libro</h1>
-            <div fxLayout="row" fxLayout.xs="column" [formGroup]="formSearch">
-                <div fxLayout="column" fxFlex="80" fxLayout.xs="column">
-                    <mat-form-field appearance="fill">
-                        <mat-label>Buscar libro por ISBN</mat-label>
-                        <input matInput type="text" formControlName="isbnControl">
-                    </mat-form-field>
-                    <mat-error *ngIf="formSearch.get('isbnControl')!.hasError('minlength') 
-                    || formSearch.get('isbnControl')!.hasError('maxlength')">
-                        ISBN inválido.
-                    </mat-error>
-                </div>
-                <div fxLayout="column" fxFlex="20" fxLayoutAlign="center end" fxLayoutAlign.xs="end end"
-                    fxLayout.xs="column">
-                    <button mat-raised-button color="primary" (click)="searchBook()">Buscar</button>
+<div class="page-content-wrapper py-3">
+    <div class="page-content is-relative">
+
+        <div class="datatable-toolbar" [formGroup]="formSearch">
+
+            <div class="column is-6">
+                <div class="field">
+                    <div class="control">
+                        <input type="text" class="input" placeholder="Buscar por ISBN" formControlName="isbnControl">
+                        <mat-error *ngIf="formSearch.get('isbnControl')!.hasError('minlength') 
+                        || formSearch.get('isbnControl')!.hasError('maxlength')">
+                            ISBN inválido.
+                        </mat-error>
+                    </div>
                 </div>
             </div>
+
+            <div class="buttons">
+                <button class="button h-button is-primary is-elevated" (click)="searchBook()">
+                    <span class="icon">
+                        <i aria-hidden="true" class="fas fa-search"></i>
+                    </span>
+                    <span>Buscar</span>
+                </button>
+            </div>
         </div>
-    </div>
 
-    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column"
-        class="d-flex justify-content-center animate__animated animate__fadeIn" *ngIf="book">
-        <div fxFlex="50" fxLayout="column" fxLayout.xs="column" fxLayoutGap="40px" class="d-flex justify-content-end">
-            <mat-card>
-                <mat-card-title-group>
-                  <mat-card-title>{{ book.title }}</mat-card-title>
-                  <mat-card-subtitle>{{ book.published_at }}</mat-card-subtitle>
-                  <mat-card-subtitle><b>isbn10</b> {{ book.isbn10 }}</mat-card-subtitle>
-                  <mat-card-subtitle><b>isbn13</b> {{ book.isbn13 }}</mat-card-subtitle>
-                  <img mat-card-xl-image src="data:image/png;base64,{{ bookCoverImage }}" >
-                </mat-card-title-group>
-                <mat-card-content>
-                    <button mat-raised-button color="warn" (click)="createUserBook()">Agregar</button>
-                </mat-card-content>
-              </mat-card>
+        <div class="page-content-inner is-webapp">
+
+            <!--Pronotion Page-->
+            <div class="promotion-page-wrapper animate__animated animate__fadeIn" *ngIf="book">
+                <div class="wrapper-outer">
+                    <div class="wrapper-inner">
+                        <div class="action-box">
+                            <div class="box-content">
+                                <img *ngIf="book.book_cover_m !== null" class="light-image is-larger" src="data:image/png;base64,{{ bookCoverImage }}" />
+                                <img *ngIf="book.book_cover_m === null" class="light-image is-larger" src="{{ bookCoverImage }}" />
+                                <h3 class="dark-inverted">{{ book.title }}</h3>
+                                <h1><b>{{ book.published_at }}</b></h1>
+                                <p><b>isbn10</b> {{ book.isbn10 }}</p>
+                                <p><b>isbn13</b> {{ book.isbn13 }}</p>
+                                <div class="buttons">
+                                    <button class="button h-button is-dark-outlined" [routerLink]="['../Main']" routerLinkActive="router-link-active" >Cancelar</button>
+                                    <br><br><br>
+                                    <button class="button h-button is-primary is-raised"
+                                        (click)="createUserBook()">Crear</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="side-wrapper">
+                        <div class="side-inner">
+                            <div class="side-title">
+                                <h3 class="dark-inverted">Información adicional</h3>
+                                <p>Echa un vistazo a algunas características increíbles.</p>
+                            </div>
+
+                            <div class="action-list">
+                                <div class="media-flex">
+                                    <span class="icon">
+                                        <i aria-hidden="true" class="fas fa-check"></i>
+                                    </span>
+                                    <div class="flex-meta">
+                                        <span>Temas</span>
+                                        <p>Estos son algunos de los temas a tratar.</p>
+                                        <div class="columns is-multiline">
+                                            <div class="column is-6" *ngFor="let item of book.book_subjects">
+                                                <span class="tag is-rounded is-info is-elevated">{{ item.name  | slice:0:25 }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media-flex">
+                                    <span class="icon">
+                                        <i aria-hidden="true" class="fas fa-check"></i>
+                                    </span>
+                                    <div class="flex-meta">
+                                        <span>Autores</span>
+                                        <p>Estos son los autores del libro.</p>
+                                        <div class="columns is-multiline" *ngIf="book.book_authors.length === 1">
+                                            <div class="column is-12" *ngFor="let item of book.book_authors">
+                                                <span class="tag is-rounded is-info is-elevated">{{ item.name  | slice:0:25 }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="columns is-multiline" *ngIf="book.book_authors.length > 1">
+                                            <div class="column is-6" *ngFor="let item of book.book_authors">
+                                                <span class="tag is-rounded is-info is-elevated">{{ item.name  | slice:0:25 }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="media-flex">
+                                    <span class="icon">
+                                        <i aria-hidden="true" class="fas fa-check"></i>
+                                    </span>
+                                    <div class="flex-meta">
+                                        <span>Personas</span>
+                                        <p>Personajes que aparecen en el libro.</p>
+                                        <div class="columns is-multiline" *ngIf="book.book_people.length === 1">
+                                            <div class="column is-12" *ngFor="let item of book.book_people">
+                                                <span class="tag is-rounded is-info is-elevated">{{ item.name  | slice:0:25 }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="columns is-multiline" *ngIf="book.book_people.length > 1">
+                                            <div class="column is-6" *ngFor="let item of book.book_people">
+                                                <span class="tag is-rounded is-info is-elevated">{{ item.name  | slice:0:25 }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Datatable -->
+            <div class="table-wrapper" data-simplebar *ngIf="showEmptyMessage">
+                <app-placeholder-empty></app-placeholder-empty>
+            </div>
+
         </div>
-    </div>
 
-    <div fxLayout="row" fxLayout.md="column" fxLayout.xs="column"
-        class="py-3 d-flex animate__animated animate__fadeIn justify-content-center" *ngIf="showEmptyMessage">
-        <app-placeholder-empty></app-placeholder-empty>
     </div>
-
 </div>

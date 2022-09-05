@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as feather from 'feather-icons';
 
 import { AppConfigService, BookService } from '@services';
 import { SweetAlertMessage } from '@functions';
@@ -48,7 +49,11 @@ export class CreateBookComponent implements OnInit {
 
     this.bookService.getByISBN(isbnControl).subscribe({
       next: (resp) => {
-        this.bookCoverImage = resp.book_cover_l;
+        if (resp.book_cover_m === null) {
+          this.bookCoverImage = 'assets/img/illustrations/onboarding/set2-1.svg';
+        } else {
+          this.bookCoverImage = resp.book_cover_m;
+        }
         this.showEmptyMessage = false;
         this.book = resp;
         this.spinner.hide();
@@ -89,6 +94,7 @@ export class CreateBookComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    feather.replace();
   }
 
 }
