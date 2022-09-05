@@ -199,7 +199,7 @@
                 </div>
             </div>
 
-            <!--Form Confg-->
+            <!--Form Plan-->
             <div class="column is-8" *ngIf="isTabPlan">
                 <div class="account-box is-form is-footerless">
                     <div class="form-head stuck-header">
@@ -216,69 +216,59 @@
                                         </span>
                                         <span>Regresar</span>
                                     </a>
-                                    <button id="save-button" class="button h-button is-primary is-raised">
-                                        Guardar Cambios
-                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!--Pronotion Page-->
-                    <div class="promotion-page-wrapper">
-                        <div class="wrapper-outer" style="border: none;">
-                            <div class="wrapper-inner">
-                                <div class="action-box">
-                                    <div class="box-content">
-                                        <img class="light-image is-larger"
-                                            src="assets/img/illustrations/placeholders/promotion.svg" alt="" />
-                                        <img class="dark-image is-larger"
-                                            src="assets/img/illustrations/placeholders/promotion-dark.svg" alt="" />
-                                        <h3 class="dark-inverted">Plan Básico</h3>
-                                        <div class="price">
-                                            <span class="dark-inverted">5</span>
-                                            <span>Por Mes</span>
-                                        </div>
-                                        <div class="buttons">
-                                            <button class="button h-button is-primary is-raised"
-                                                (click)="changeTab(2)">Actualizar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="wizard-v1-wrapper">
+                        <div id="wizard-step-0" class="inner-wrapper is-active" data-step-title="Project Type">
+                            <div class="step-content">
 
-                            <div class="side-wrapper">
-                                <div class="side-inner">
-                                    <div class="side-title">
-                                        <h3 class="dark-inverted">Características</h3>
-                                        <p>Echa un vistazo a algunas características increíbles</p>
-                                    </div>
-
-                                    <div class="action-list">
-                                        <div class="media-flex">
-                                            <span class="icon">
-                                                <i aria-hidden="true" class="fas fa-check"></i>
-                                            </span>
-                                            <div class="flex-meta">
-                                                <span>Creación de clases ilimitadas</span>
-                                                <p>Podrás crear las clases que tú prefieras.</p>
+                                <div class="wizard-types">
+                                    <div class="columns">
+                                        <div class="column is-4">
+                                            <div class="wizard-card">
+                                                <img src="assets/img/illustrations/wizard/finish.svg" alt="" />
+                                                <h3 class="dark-inverted">Básico</h3>
+                                                <p>Some short explanation about the type goes here.</p>
+                                                <div class="button-wrap">
+                                                    <a type="button"
+                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Elige
+                                                        este plan</a>
+                                                </div>
+                                                <div class="learn-more-link">
+                                                    <a type="button" class="dark-inverted-hover">Ver más información</a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="media-flex">
-                                            <span class="icon">
-                                                <i aria-hidden="true" class="fas fa-check"></i>
-                                            </span>
-                                            <div class="flex-meta">
-                                                <span>Subir libros a la plataforma</span>
-                                                <p>Podrás subir y compartir los libros de tu preferencia.</p>
+                                        <div class="column is-4">
+                                            <div class="wizard-card">
+                                                <img src="assets/img/illustrations/widgets/1.svg" alt="" />
+                                                <h3 class="dark-inverted">Profesor</h3>
+                                                <p>Some short explanation about the type goes here.</p>
+                                                <div class="button-wrap">
+                                                    <a type="button"
+                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Elige
+                                                        este plan</a>
+                                                </div>
+                                                <div class="learn-more-link">
+                                                    <a type="button" class="dark-inverted-hover">Ver más información</a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="media-flex">
-                                            <span class="icon">
-                                                <i aria-hidden="true" class="fas fa-check"></i>
-                                            </span>
-                                            <div class="flex-meta">
-                                                <span>Sección de preguntas</span>
-                                                <p>Tendrás muchas preguntas para compartir acerca de tus libros.</p>
+                                        <div class="column is-4">
+                                            <div class="wizard-card">
+                                                <img src="assets/img/illustrations/widgets/6.svg" alt="" />
+                                                <h3 class="dark-inverted">Familiar</h3>
+                                                <p>Some short explanation about the type goes here.</p>
+                                                <div class="button-wrap">
+                                                    <a type="button"
+                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Elige
+                                                        este plan</a>
+                                                </div>
+                                                <div class="learn-more-link">
+                                                    <a type="button" class="dark-inverted-hover">Ver más información</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
