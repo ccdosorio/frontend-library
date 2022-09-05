@@ -1,50 +1,70 @@
-<mat-sidenav-container fullscreen>
-
-    <mat-sidenav #sidenav mode="push">
-
-        <mat-toolbar>
-            <span>Menú</span>
-        </mat-toolbar>
-
-        <mat-nav-list>
-            <a mat-list-item routerLink="{{ item.route }}" mat-list-item (click)="sidenav.toggle()"
-                class="menu-list-item" *ngFor="let item of navigation">
-                <mat-icon mat-list-icon class="routeIcon">{{ item.iconName }}</mat-icon>
-                <span>{{ item.displayName }}</span>
-            </a>
-        </mat-nav-list>
-
-    </mat-sidenav>
-
-    <mat-toolbar>
-        <button mat-icon-button (click)="sidenav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-
-        <span class="spacer"></span>
-
-        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>grid_view</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item [routerLink]="['Managements/Profile/Main']">
-                <mat-icon>manage_accounts</mat-icon>
-                <span>Perfil</span>
-            </button>
-            <button mat-menu-item (click)="signOut()">
-                <mat-icon>exit_to_app</mat-icon>
-                <span>Cerrar sesión</span>
-            </button>
-        </mat-menu>
-
-    </mat-toolbar>
-
-    <div class="container-fluid sidenav-router">
-        <div class="page-content-wrapper">
-            <div class="page-content is-relative tabs-wrapper is-slider is-squared is-inverted">
-                <router-outlet></router-outlet>
+<div id="huro-app" class="app-wrapper">
+    <!--Webapp navbar alt-->
+    <div class="webapp-navbar">
+        <div class="webapp-navbar-inner">
+            <div class="left">
+                <a [routerLink]="['Managements/Intro/Main']" routerLinkActive="router-link-active"  class="brand">
+                    <img class="light-image" src="assets/img/illustrations/dashboards/lifestyle/reading.svg" alt="" />
+                </a>
+                <div class="separator"></div>
+                <h1 id="webapp-page-title" class="title is-5">Bienvenido</h1>
+            </div>
+            <div class="center">
+                <div id="webapp-navbar-menu" class="centered-drops">
+                    <div class="centered-drop" *ngFor="let item of navigation">
+                        <div class="dropdown is-modern is-spaced dropdown-trigger has-mega-dropdown">
+                            <div class="is-trigger" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <button class="button h-button is-rounded" aria-haspopup="true"
+                                    aria-controls="dropdown-menu" routerLink="{{ item.route }}">
+                                    <span>{{ item.displayName }}</span>
+                                    <span class="caret"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="webapp-navbar-search" class="centered-search is-hidden">
+                    <div class="field">
+                        <div class="control has-icon">
+                            <input type="text" class="input is-rounded search-input" placeholder="Search records...">
+                            <div class="form-icon">
+                                <i data-feather="search"></i>
+                            </div>
+                            <div id="webapp-navbar-search-close" class="form-icon is-right">
+                                <i data-feather="x"></i>
+                            </div>
+                            <div class="search-results has-slimscroll"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                    <mat-icon>grid_view</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item [routerLink]="['Managements/Profile/Main']">
+                        <mat-icon>manage_accounts</mat-icon>
+                        <span>Perfil</span>
+                    </button>
+                    <button mat-menu-item (click)="signOut()">
+                        <mat-icon>exit_to_app</mat-icon>
+                        <span>Cerrar sesión</span>
+                    </button>
+                </mat-menu>
             </div>
         </div>
     </div>
 
-</mat-sidenav-container>
+    <!-- Content Wrapper -->
+    <div id="app-onboarding" class="view-wrapper is-webapp" data-page-title="Blank Template" data-naver-offset="214"
+        data-menu-item="#layouts-navbar-menu" data-mobile-item="#home-sidebar-menu-mobile">
+
+        <div class="page-content-wrapper">
+            <div class="page-content is-relative">
+                    <router-outlet></router-outlet>
+            </div>
+        </div>
+
+    </div>
+</div>

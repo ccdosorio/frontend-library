@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import * as feather from 'feather-icons';
+
 import { Navigation } from '@models';
 import { AuthenticationService, SidenavService } from '@services';
 
@@ -21,7 +23,8 @@ export class SidenavComponent implements OnInit {
     this.authenticationService.SignOut();
    }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    feather.replace(); 
     this._sidenavService.getConfigAdmin
     .subscribe((navigations) => {      
       this.navigation = navigations;
