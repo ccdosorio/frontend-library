@@ -89,6 +89,17 @@
                     </div>
                 </div>
             </div>
+
+            <!--List-->
+            <div class="list-view list-view-v3" *ngIf="currentSearch && currentSearch.total_hits > 0">
+                <!--Item-->
+                <div id="active-items-tab" class="tab-content is-active">
+                    <div class="list-view-inner" *ngFor="let item of currentSearch.search_hits">
+                        <app-item-search [book]="item"></app-item-search>
+                    </div>
+                </div>
+            </div>
+            <!--/List-->
             <!-- Message Empty -->
             <app-placeholder-empty *ngIf="showEmptyMessage"></app-placeholder-empty>
         </div>

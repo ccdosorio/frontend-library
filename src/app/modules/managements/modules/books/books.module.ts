@@ -10,6 +10,7 @@ import { CreateBookComponent } from './components/create-book/create-book.compon
 import { UploadFileComponent } from './components/upload-file/upload-file.component';
 import { ImgBookComponent } from './components/img-book/img-book.component';
 import { SearchBookComponent } from './components/search-book/search-book.component';
+import { ItemSearchComponent } from './components/item-search/item-search.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchBookComponent } from './components/search-book/search-book.compon
     CreateBookComponent,
     UploadFileComponent,
     ImgBookComponent,
-    SearchBookComponent
+    SearchBookComponent,
+    ItemSearchComponent
   ],
   imports: [
     CommonModule,
