@@ -1,47 +1,351 @@
-<div class="container" *ngIf="user">
-    <div fxLayout="row" fxLayoutAlign="center center">
-        <div class="box-info">
-            <!-- <img src="{{ user.photo }}" alt="user"> -->
-            <img src="assets/images/empty.svg" alt="user" class="img-user">
-            <h2>{{ user.name }}</h2>
-            <p class="text-muted">{{ user.email_address }}</p>
-            <div class="badge-user">{{ user.status }}</div>
+<div class="page-content-inner">
+
+    <!--Edit Profile-->
+    <div class="account-wrapper">
+        <div class="columns">
+
+            <!--Navigation-->
+            <div class="column is-4">
+                <div class="account-box is-navigation">
+                    <div class="media-flex-center" *ngIf="user">
+                        <div class="h-avatar is-large">
+                            <img *ngIf="user.photo === null" class="avatar" src="https://via.placeholder.com/150x150"
+                                data-demo-src="assets/img/avatars/photos/8.jpg" alt="">
+                            <img *ngIf="user.photo !== null" class="avatar" src="{{ user.photo }}">
+                        </div>
+                        <div class="flex-meta">
+                            <span>{{ user.name }}</span>
+                            <span>{{ user.email_address }}</span>
+                        </div>
+                    </div>
+
+                    <div class="account-menu">
+                        <a class="account-menu-item animate__animated animate__fadeIn" [class.is-active]="item.active"
+                            (click)="changeTab(i)" *ngFor="let item of tabs; index as i">
+                            <i class="lnil lnil-user-alt"></i>
+                            <span>{{ item.title }}</span>
+                            <span class="end">
+                                <i aria-hidden="true" class="fas fa-arrow-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--Form General-->
+            <div class="column is-8" *ngIf="isTabGeneral" [formGroup]="formUser">
+                <div class="account-box is-form is-footerless">
+                    <div class="form-head stuck-header">
+                        <div class="form-head-inner">
+                            <div class="left">
+                                <h3>Información General</h3>
+                                <p>Edita la información general de tu cuenta</p>
+                            </div>
+                            <div class="right">
+                                <div class="buttons">
+                                    <button id="save-button" class="button h-button is-primary is-raised"
+                                        (click)="onSubmit()" [disabled]="formUser.invalid">
+                                        Guardar Cambios
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-body" *ngIf="user">
+                        <!--Fieldset-->
+                        <div class="fieldset">
+                            <div class="fieldset-heading">
+                                <h4>Foto de Perfil</h4>
+                                <p>Así te reconocerán los demás</p>
+                            </div>
+
+                            <div class="h-avatar profile-h-avatar is-xl">
+                                <img class="avatar" *ngIf="user.photo === null"
+                                    src="https://via.placeholder.com/150x150"
+                                    data-demo-src="assets/img/avatars/photos/8.jpg" alt="">
+                                <img *ngIf="user.photo !== null" class="avatar" src="{{ user.photo }}">
+                            </div>
+                            <div class="control d-flex justify-content-end">
+                                <div class="file">
+                                    <label class="file-label">
+                                        <input class="file-input" type="file" name="resume" formControlName="photo_url">
+                                        <span class="file-cta">
+                                            <span class="file-icon">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                            </span>
+                                            <span class="file-label">
+                                                Seleccionar foto
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Fieldset-->
+                        <div class="fieldset">
+                            <div class="fieldset-heading">
+                                <h4>Información personal</h4>
+                                <p>Nos gustaría conocerte más.</p>
+                            </div>
+
+                            <div class="columns is-multiline">
+                                <!--Field-->
+                                <div class="column is-12">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input type="text" class="input" placeholder="Nombre"
+                                                formControlName="name">
+                                            <div class="form-icon">
+                                                <i data-feather="user"></i>
+                                            </div>
+                                            <mat-error class="animate__animated animate__fadeIn" *ngIf="formUser.get('name')!.hasError('required') 
+                                            && formUser.get('name')!.touched">
+                                                Se require de un nombre.
+                                            </mat-error>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Form Suscription-->
+            <div class="column is-8" *ngIf="isTabSuscription">
+                <div class="account-box is-form is-footerless">
+                    <div class="form-head stuck-header">
+                        <div class="form-head-inner">
+                            <div class="left">
+                                <h3>Suscripción</h3>
+                                <p>Actualmente esta es tu suscripción</p>
+                            </div>
+                            <div class="right">
+                                <div class="buttons">
+                                    <a (click)="changeTab(0)" class="button h-button is-light is-dark-outlined">
+                                        <span class="icon">
+                                            <i class="lnir lnir-arrow-left rem-100"></i>
+                                        </span>
+                                        <span>Regresar</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Pronotion Page-->
+                    <div class="promotion-page-wrapper">
+                        <div class="wrapper-outer" style="border: none;">
+                            <div class="wrapper-inner">
+                                <div class="action-box">
+                                    <div class="box-content">
+                                        <img class="light-image is-larger"
+                                            src="assets/img/illustrations/placeholders/promotion.svg" alt="" />
+                                        <img class="dark-image is-larger"
+                                            src="assets/img/illustrations/placeholders/promotion-dark.svg" alt="" />
+                                        <h3 class="dark-inverted">Plan Básico</h3>
+                                        <div class="price">
+                                            <span class="dark-inverted">5</span>
+                                            <span>Por Mes</span>
+                                        </div>
+                                        <div class="buttons">
+                                            <button class="button h-button is-primary is-raised"
+                                                (click)="changeTab(2)">Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="side-wrapper">
+                                <div class="side-inner">
+                                    <div class="side-title">
+                                        <h3 class="dark-inverted">Características</h3>
+                                        <p>Echa un vistazo a algunas características increíbles</p>
+                                    </div>
+
+                                    <div class="action-list">
+                                        <div class="media-flex">
+                                            <span class="icon">
+                                                <i aria-hidden="true" class="fas fa-check"></i>
+                                            </span>
+                                            <div class="flex-meta">
+                                                <span>Creación de clases ilimitadas</span>
+                                                <p>Podrás crear las clases que tú prefieras.</p>
+                                            </div>
+                                        </div>
+                                        <div class="media-flex">
+                                            <span class="icon">
+                                                <i aria-hidden="true" class="fas fa-check"></i>
+                                            </span>
+                                            <div class="flex-meta">
+                                                <span>Subir libros a la plataforma</span>
+                                                <p>Podrás subir y compartir los libros de tu preferencia.</p>
+                                            </div>
+                                        </div>
+                                        <div class="media-flex">
+                                            <span class="icon">
+                                                <i aria-hidden="true" class="fas fa-check"></i>
+                                            </span>
+                                            <div class="flex-meta">
+                                                <span>Sección de preguntas</span>
+                                                <p>Tendrás muchas preguntas para compartir acerca de tus libros.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Form Confg-->
+            <div class="column is-8" *ngIf="isTabPlan">
+                <div class="account-box is-form is-footerless">
+                    <div class="form-head stuck-header">
+                        <div class="form-head-inner">
+                            <div class="left">
+                                <h3>Planes</h3>
+                                <p>Selecciona el plan que deseas</p>
+                            </div>
+                            <div class="right">
+                                <div class="buttons">
+                                    <a (click)="changeTab(1)" class="button h-button is-light is-dark-outlined">
+                                        <span class="icon">
+                                            <i class="lnir lnir-arrow-left rem-100"></i>
+                                        </span>
+                                        <span>Regresar</span>
+                                    </a>
+                                    <button id="save-button" class="button h-button is-primary is-raised">
+                                        Guardar Cambios
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Pronotion Page-->
+                    <div class="promotion-page-wrapper">
+                        <div class="wrapper-outer" style="border: none;">
+                            <div class="wrapper-inner">
+                                <div class="action-box">
+                                    <div class="box-content">
+                                        <img class="light-image is-larger"
+                                            src="assets/img/illustrations/placeholders/promotion.svg" alt="" />
+                                        <img class="dark-image is-larger"
+                                            src="assets/img/illustrations/placeholders/promotion-dark.svg" alt="" />
+                                        <h3 class="dark-inverted">Plan Básico</h3>
+                                        <div class="price">
+                                            <span class="dark-inverted">5</span>
+                                            <span>Por Mes</span>
+                                        </div>
+                                        <div class="buttons">
+                                            <button class="button h-button is-primary is-raised"
+                                                (click)="changeTab(2)">Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="side-wrapper">
+                                <div class="side-inner">
+                                    <div class="side-title">
+                                        <h3 class="dark-inverted">Características</h3>
+                                        <p>Echa un vistazo a algunas características increíbles</p>
+                                    </div>
+
+                                    <div class="action-list">
+                                        <div class="media-flex">
+                                            <span class="icon">
+                                                <i aria-hidden="true" class="fas fa-check"></i>
+                                            </span>
+                                            <div class="flex-meta">
+                                                <span>Creación de clases ilimitadas</span>
+                                                <p>Podrás crear las clases que tú prefieras.</p>
+                                            </div>
+                                        </div>
+                                        <div class="media-flex">
+                                            <span class="icon">
+                                                <i aria-hidden="true" class="fas fa-check"></i>
+                                            </span>
+                                            <div class="flex-meta">
+                                                <span>Subir libros a la plataforma</span>
+                                                <p>Podrás subir y compartir los libros de tu preferencia.</p>
+                                            </div>
+                                        </div>
+                                        <div class="media-flex">
+                                            <span class="icon">
+                                                <i aria-hidden="true" class="fas fa-check"></i>
+                                            </span>
+                                            <div class="flex-meta">
+                                                <span>Sección de preguntas</span>
+                                                <p>Tendrás muchas preguntas para compartir acerca de tus libros.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Form Confg-->
+            <div class="column is-8" *ngIf="isTabConfig">
+                <div class="account-box is-form is-footerless">
+                    <div class="form-head stuck-header">
+                        <div class="form-head-inner">
+                            <div class="left">
+                                <h3>Configuraciones</h3>
+                                <p>Edita las configuraciones de tu cuenta</p>
+                            </div>
+                            <div class="right">
+                                <div class="buttons">
+                                    <a (click)="changeTab(2)" class="button h-button is-light is-dark-outlined">
+                                        <span class="icon">
+                                            <i class="lnir lnir-arrow-left rem-100"></i>
+                                        </span>
+                                        <span>Regresar</span>
+                                    </a>
+                                    <button id="save-button" class="button h-button is-primary is-raised">
+                                        Guardar Cambios
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-body">
+                        <!--Fieldset-->
+                        <div class="fieldset">
+                            <div class="fieldset-heading">
+                                <h4>Cambiar Contraseña</h4>
+                                <p>Para mejorar la seguridad de la cuenta</p>
+                            </div>
+
+                            <div class="columns is-multiline">
+                                <!--Field-->
+                                <div class="column is-12">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input type="password" class="input" placeholder="Nueva Contraseña">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Field-->
+                                <div class="column is-12">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input type="password" class="input"
+                                                placeholder="Repita la nueva contraseña">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
-  <!-- <div fxLayout="row" fxLayoutAlign="center center" class="py-3">
-      <mat-card>
-          <div fxLayoutAlign="end end">
-              <button type="button" mat-icon-button (click)="activeForm()">
-                  <mat-icon>edit</mat-icon>
-              </button>
-          </div>
-            <form name="formUser" (ngSubmit)="onSubmit()" [formGroup]="formUser">
-                <mat-form-field appearance="outline">
-                    <mat-label><label for="name">Nombre Completo</label></mat-label>
-                    <input id="name" matInput autocomplete="off" formControlName="name" />
-                    <mat-icon matSuffix class="secondary-text">badge</mat-icon>
-                    <mat-error *ngIf="formUser.get('name')!.hasError('required')">
-                        Se require de un nombre.
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline">
-                    <mat-label><label for="email">Correo electrónico</label></mat-label>
-                    <input id="email" matInput autocomplete="off" formControlName="email" />
-                    <mat-icon matSuffix class="secondary-text">mail</mat-icon>
-                    <mat-error *ngIf="formUser.get('email')!.hasError('pattern')">
-                        Correo electrónico nó válido.
-                    </mat-error>
-                    <mat-error *ngIf="formUser.get('email')!.hasError('required')">
-                        Se require de un correo electrónico.
-                    </mat-error>
-                </mat-form-field>
-                <div fxLayout="column" fxLayoutAlign="center">
-                    <button type="submit" mat-raised-button color="primary" aria-label="Actualizar"
-                        [disabled]="formUser.invalid">
-                        Actualizar
-                    </button>
-                </div>
-            </form>
-        </mat-card>
-    </div> -->
+
 </div>
