@@ -1,0 +1,97 @@
+<div class="page-content-inner">
+
+    <!--Form Layout 1-->
+    <div class="form-layout">
+        <div class="form-outer">
+            <div class="form-header stuck-header">
+                <div class="form-header-inner">
+                    <div class="left">
+                        <h3>Buscar un libro</h3>
+                        <p>Por favor ingresa los filtros necesarios</p>
+                    </div>
+                    <div class="right">
+                        <div class="buttons">
+                            <button id="save-button" class="button h-button is-primary is-raised"
+                                (click)="search()">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-body" [formGroup]="formSearch">
+                <!--Fieldset-->
+                <div class="form-fieldset">
+
+                    <div class="columns is-multiline">
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Título</label>
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="" formControlName="title">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Author</label>
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="" formControlName="author_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Editorial</label>
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="" formControlName="publisher">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Lugar</label>
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="" formControlName="place_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Personaje</label>
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="" formControlName="character_name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Tema</label>
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="" formControlName="subject">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>ISBN</label>
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="" formControlName="isbn">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column is-4">
+                            <div class="field">
+                                <label>Página</label>
+                                <div class="control">
+                                    <input type="text" class="input" placeholder="" formControlName="page">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Message Empty -->
+            <app-placeholder-empty *ngIf="showEmptyMessage"></app-placeholder-empty>
+        </div>
+    </div>
+
+</div>

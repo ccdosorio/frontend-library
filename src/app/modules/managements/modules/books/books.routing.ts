@@ -3,12 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CreateBookComponent } from './components/create-book/create-book.component';
 import { MainComponent } from "./components/main/main.component";
+import { SearchBookComponent } from './components/search-book/search-book.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'Main' },
   { path: 'Main', component: MainComponent },
   { path: 'Create', component: CreateBookComponent },
+  { path: 'Search', component: SearchBookComponent },
   { path: '**', redirectTo: '/NotFound/Main' }
 ];
 

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 import { Observable } from "rxjs";
 
 import { environment } from "../../../environments/environment";
-import { Book, BookISBN } from "@models";
+import { Book, BookISBN, ElasticSearch } from "@models";
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +53,19 @@ export class BookService {
     return this.http.get(environment.endpoint + 'user-books/' + bookId, {
       headers: headerDict
     });
+  }
+
+  searchElastic(payload: any): Observable<ElasticSearch> {
+    const params = new HttpParams()
+      .set('title', payload.title)
+      .set('author_name', payload.author_name)
+      .set('publisher', payload.publisher)
+      .set('place_name', payload.place_name)
+      .set('character_name', payload.character_name)
+      .set('isbn', payload.isbn)
+      .set('page', payload.page);
+
+    return this.http.get<ElasticSearch>(environment.endpoint + 'books', { params });
   }
 
 }
