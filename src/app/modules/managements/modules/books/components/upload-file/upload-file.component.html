@@ -1,12 +1,28 @@
 <!-- PDF Input -->
-<div class="mb-3">
-    <label for="formFile" class="form-label">Seleccionar archivo</label>
-    <input (change)="onFileChange($event)" class="form-control input-contract" type="file">
+<div class="field is-grouped d-flex justify-content-center">
+    <div class="control">
+        <div class="file has-name is-fullwidth">
+            <label class="file-label">
+                <input class="file-input" type="file" name="resume" (change)="onFileChange($event)">
+                <span class="file-cta">
+                    <span class="file-icon">
+                        <i class="lnil lnil-lg lnil-cloud-upload"></i>
+                    </span>
+                    <span class="file-label">
+                        Seleccionar archivo ...
+                    </span>
+                </span>
+                <span class="file-name light-text" *ngIf="file">
+                    {{ file.name }}
+                </span>
+            </label>
+        </div>
+    </div>
 </div>
 <!-- End PDF Input -->
 
 <!-- Button -->
 <div class="d-flex justify-content-center">
-    <button type="button" mat-raised-button color="primary" (click)="upload()">Subir</button>
+    <a type="button" class="button h-button is-info is-raised" (click)="upload()">Subir</a>
 </div>
 <!-- End Button -->
