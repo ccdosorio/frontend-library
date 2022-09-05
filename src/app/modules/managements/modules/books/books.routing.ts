@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CreateBookComponent } from './components/create-book/create-book.component';
 import { MainComponent } from "./components/main/main.component";
+import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
 import { SearchBookComponent } from './components/search-book/search-book.component';
 
 
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'Main', component: MainComponent },
   { path: 'Create', component: CreateBookComponent },
   { path: 'Search', component: SearchBookComponent },
+  { path: 'PdfViewer', component: PdfViewerComponent },
   { path: '**', redirectTo: '/NotFound/Main' }
 ];
 

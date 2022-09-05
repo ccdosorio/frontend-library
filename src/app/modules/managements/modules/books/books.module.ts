@@ -12,6 +12,7 @@ import { ImgBookComponent } from './components/img-book/img-book.component';
 import { SearchBookComponent } from './components/search-book/search-book.component';
 import { ItemSearchComponent } from './components/item-search/item-search.component';
 import { ModalBookComponent } from './components/modal-book/modal-book.component';
+import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ModalBookComponent } from './components/modal-book/modal-book.component
     ImgBookComponent,
     SearchBookComponent,
     ItemSearchComponent,
-    ModalBookComponent
+    ModalBookComponent,
+    PdfViewerComponent
   ],
   imports: [
     CommonModule,

@@ -23,6 +23,9 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { JwtInterceptor } from '@security';
 
+// Syncfusion PdfViewer component from PdfViewer package
+import { PdfViewerModule } from '@syncfusion/ej2-angular-pdfviewer';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -34,6 +37,7 @@ import { JwtInterceptor } from '@security';
     NgxSpinnerModule,
     LayoutModule,
     HttpClientModule,
+    PdfViewerModule,
     // firebase
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

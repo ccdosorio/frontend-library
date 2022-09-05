@@ -22,6 +22,7 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@syncfusion/ej2-angular-pdfviewer": "^20.2.46",
     "animate.css": "^4.1.1",
     "feather-icons": "^4.29.0",
     "firebase": "^9.9.3",
