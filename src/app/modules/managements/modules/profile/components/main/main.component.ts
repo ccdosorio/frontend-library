@@ -20,6 +20,9 @@ export class MainComponent implements OnInit {
   isTeacherPlan: boolean = false;
   isFamilyPlan: boolean = false;
 
+  // image
+  file: File | undefined;
+
   tabs: any[] = [
     {
       tabIndex: 0,
@@ -173,6 +176,10 @@ export class MainComponent implements OnInit {
         }
       });
     }
+  }
+
+  onFileChange(event: any) {
+    this.file = event.target.files[0];
   }
 
   ngOnInit(): void {
