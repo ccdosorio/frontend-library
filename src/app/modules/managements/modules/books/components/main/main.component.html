@@ -14,5 +14,9 @@
       <app-card-book [book]="book" *ngFor="let book of listBooks"></app-card-book>
     </div>
   </div>
+      <!-- Placeholder Empty -->
+      <div class="table-wrapper" data-simplebar *ngIf="isData && listBooks.length === 0">
+        <app-placeholder-empty></app-placeholder-empty>
+    </div>
 
 </div>

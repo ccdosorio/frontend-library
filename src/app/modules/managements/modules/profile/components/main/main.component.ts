@@ -96,6 +96,7 @@ export class MainComponent implements OnInit {
     this.userService.update(this.formUser.value, this.user!.id).subscribe({
       next: (resp) => {
         this.user = resp;
+        this.setForm();
         SweetAlertMessage('success', 'Exitoso', 'Usuario Editado con éxito.');
       },
       error: (err) => {

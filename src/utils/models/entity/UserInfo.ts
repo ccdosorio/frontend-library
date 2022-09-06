@@ -1,3 +1,5 @@
+import { Authority } from "./Authority";
+
 export interface UserInfo {
     id:               number;
     email_address:    string;
@@ -11,4 +13,5 @@ export interface UserInfo {
     updated_at:       Date;
     created_by:       string;
     updated_by:       string;
+    authorities:      Authority[];
 }

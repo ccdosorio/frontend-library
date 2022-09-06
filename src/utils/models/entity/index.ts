@@ -8,3 +8,4 @@ export * from './SearchHit';
 export * from './ContentBook';
 export * from './Author';
 export * from './HighlightFields';
+export * from './Authority';

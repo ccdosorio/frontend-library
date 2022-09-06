@@ -1,2 +1,3 @@
 export * from './AdminNavigation';
-export * from './UserNavigation';
+export * from './TeacherNavigation';
+export * from './FamilyNavigation';

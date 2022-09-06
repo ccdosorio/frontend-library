@@ -12,7 +12,7 @@ export class UserService {
   constructor(
     private http: HttpClient
   ) { }
-  
+
   // Obtener los datos del usuario authenticado
   getUser(): Observable<UserInfo> {
     return this.http.get<UserInfo>(environment.endpoint + 'users', {});
@@ -26,5 +26,10 @@ export class UserService {
   // Crear un usuario
   update(bodeObject: any, id: number): Observable<UserInfo> {
     return this.http.post<UserInfo>(environment.endpoint + 'users/' + id, bodeObject, {})
+  }
+
+  // Cambiar de rol: normal, profesor, familiar
+  setRol(endpoint: string) {
+    return this.http.post(environment.endpoint + 'users/' + endpoint, {}, {});
   }
 }

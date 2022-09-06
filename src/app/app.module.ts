@@ -7,11 +7,11 @@ import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ADMIN_NAVIGATION, APP_CONFIG, USER_NAVIGATION } from "@services";
+import { ADMIN_NAVIGATION, APP_CONFIG, FAMILY_NAVIGATION, TEACHER_NAVIGATION } from "@services";
 import { appConfig } from "./config";
 import { LayoutModule } from './layout/layout.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { AdminNavigation, UserNavigation } from './navigations';
+import { AdminNavigation, TeacherNavigation, FamilyNavigation } from './navigations';
 import { environment } from '../environments/environment';
 import { AuthenticationService } from '@services';
 
@@ -49,7 +49,8 @@ import { PdfViewerModule } from '@syncfusion/ej2-angular-pdfviewer';
     { provide: MatDialogRef, useValue: {} },
     { provide: APP_CONFIG, useValue: appConfig },
     { provide: ADMIN_NAVIGATION, useValue: AdminNavigation },
-    { provide: USER_NAVIGATION, useValue: UserNavigation },
+    { provide: TEACHER_NAVIGATION, useValue: TeacherNavigation },
+    { provide: FAMILY_NAVIGATION, useValue: FamilyNavigation },
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
