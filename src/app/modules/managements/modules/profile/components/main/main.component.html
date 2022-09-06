@@ -11,7 +11,8 @@
                         <div class="h-avatar is-large">
                             <img *ngIf="user.photo === null" class="avatar" src="https://via.placeholder.com/150x150"
                                 data-demo-src="assets/img/avatars/photos/8.jpg" alt="">
-                            <img *ngIf="user.photo !== null" class="avatar" src="{{ user.photo }}">
+                            <img *ngIf="user.photo !== null" class="avatar"
+                                src="data:image/png;base64,{{ user.photo }}">
                         </div>
                         <div class="flex-meta">
                             <span>{{ user.name }}</span>
@@ -64,7 +65,8 @@
                                 <img class="avatar" *ngIf="user.photo === null"
                                     src="https://via.placeholder.com/150x150"
                                     data-demo-src="assets/img/avatars/photos/8.jpg" alt="">
-                                <img *ngIf="user.photo !== null" class="avatar" src="{{ user.photo }}">
+                                <img *ngIf="user.photo !== null" class="avatar"
+                                    src="data:image/png;base64,{{ user.photo }}">
                             </div>
                             <div class="control d-flex justify-content-end">
                                 <div class="file">
@@ -114,7 +116,7 @@
 
             <!--Form Suscription-->
             <div class="column is-8" *ngIf="isTabSuscription">
-                <div class="account-box is-form is-footerless">
+                <div class="account-box is-form is-footerless" *ngIf="user">
                     <div class="form-head stuck-header">
                         <div class="form-head-inner">
                             <div class="left">
@@ -133,69 +135,7 @@
                             </div>
                         </div>
                     </div>
-                    <!--Pronotion Page-->
-                    <div class="promotion-page-wrapper">
-                        <div class="wrapper-outer" style="border: none;">
-                            <div class="wrapper-inner">
-                                <div class="action-box">
-                                    <div class="box-content">
-                                        <img class="light-image is-larger"
-                                            src="assets/img/illustrations/placeholders/promotion.svg" alt="" />
-                                        <img class="dark-image is-larger"
-                                            src="assets/img/illustrations/placeholders/promotion-dark.svg" alt="" />
-                                        <h3 class="dark-inverted">Plan Básico</h3>
-                                        <div class="price">
-                                            <span class="dark-inverted">5</span>
-                                            <span>Por Mes</span>
-                                        </div>
-                                        <div class="buttons">
-                                            <button class="button h-button is-primary is-raised"
-                                                (click)="changeTab(2)">Actualizar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="side-wrapper">
-                                <div class="side-inner">
-                                    <div class="side-title">
-                                        <h3 class="dark-inverted">Características</h3>
-                                        <p>Echa un vistazo a algunas características increíbles</p>
-                                    </div>
-
-                                    <div class="action-list">
-                                        <div class="media-flex">
-                                            <span class="icon">
-                                                <i aria-hidden="true" class="fas fa-check"></i>
-                                            </span>
-                                            <div class="flex-meta">
-                                                <span>Creación de clases ilimitadas</span>
-                                                <p>Podrás crear las clases que tú prefieras.</p>
-                                            </div>
-                                        </div>
-                                        <div class="media-flex">
-                                            <span class="icon">
-                                                <i aria-hidden="true" class="fas fa-check"></i>
-                                            </span>
-                                            <div class="flex-meta">
-                                                <span>Subir libros a la plataforma</span>
-                                                <p>Podrás subir y compartir los libros de tu preferencia.</p>
-                                            </div>
-                                        </div>
-                                        <div class="media-flex">
-                                            <span class="icon">
-                                                <i aria-hidden="true" class="fas fa-check"></i>
-                                            </span>
-                                            <div class="flex-meta">
-                                                <span>Sección de preguntas</span>
-                                                <p>Tendrás muchas preguntas para compartir acerca de tus libros.</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <app-plan-card [user]="user" (onUpdated)="changeTab($event)"></app-plan-card>
                 </div>
             </div>
 
@@ -230,11 +170,13 @@
                                             <div class="wizard-card">
                                                 <img src="assets/img/illustrations/wizard/finish.svg" alt="" />
                                                 <h3 class="dark-inverted">Básico</h3>
-                                                <p>Some short explanation about the type goes here.</p>
+                                                <p>Acceso a muchas características de la plataforma.</p>
                                                 <div class="button-wrap">
-                                                    <a type="button"
-                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Elige
-                                                        este plan</a>
+                                                    <button type="button"
+                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button"
+                                                        (click)="changePlan(1)" [disabled]="isBasicPlan">
+                                                        Elige este plan
+                                                    </button>
                                                 </div>
                                                 <div class="learn-more-link">
                                                     <a type="button" class="dark-inverted-hover">Ver más información</a>
@@ -245,11 +187,13 @@
                                             <div class="wizard-card">
                                                 <img src="assets/img/illustrations/widgets/1.svg" alt="" />
                                                 <h3 class="dark-inverted">Profesor</h3>
-                                                <p>Some short explanation about the type goes here.</p>
+                                                <p>Podrás compartir libros con tus alumnos.</p>
                                                 <div class="button-wrap">
-                                                    <a type="button"
-                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Elige
-                                                        este plan</a>
+                                                    <button type="button"
+                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button"
+                                                        (click)="changePlan(2)" [disabled]="isTeacherPlan">
+                                                        Elige este plan
+                                                    </button>
                                                 </div>
                                                 <div class="learn-more-link">
                                                     <a type="button" class="dark-inverted-hover">Ver más información</a>
@@ -260,12 +204,12 @@
                                             <div class="wizard-card">
                                                 <img src="assets/img/illustrations/widgets/6.svg" alt="" />
                                                 <h3 class="dark-inverted">Familiar</h3>
-                                                <p>Some short explanation about the type goes here.</p>
-                                                <div class="button-wrap">
-                                                    <a type="button"
-                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button">Elige
-                                                        este plan</a>
-                                                </div>
+                                                <p>Compartiras salas de lectura con tus familiares.</p>
+                                                <button type="button"
+                                                    class="button h-button is-primary is-rounded is-elevated is-bold type-select-button"
+                                                    (click)="changePlan(3)" [disabled]="isFamilyPlan">
+                                                    Elige este plan
+                                                </button>
                                                 <div class="learn-more-link">
                                                     <a type="button" class="dark-inverted-hover">Ver más información</a>
                                                 </div>

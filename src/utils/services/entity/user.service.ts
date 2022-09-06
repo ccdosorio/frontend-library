@@ -29,7 +29,7 @@ export class UserService {
   }
 
   // Cambiar de rol: normal, profesor, familiar
-  setRol(endpoint: string) {
-    return this.http.post(environment.endpoint + 'users/' + endpoint, {}, {});
+  setRol(endpoint: string): Observable<UserInfo>  {
+    return this.http.post<UserInfo>(environment.endpoint + 'users/' + endpoint, {}, {});
   }
 }

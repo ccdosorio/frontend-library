@@ -6,6 +6,7 @@ import { AppConfigService, UserService } from '@services';
 import { UserInfo } from '@models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SweetAlertMessage } from '@functions';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-main',
@@ -13,6 +14,11 @@ import { SweetAlertMessage } from '@functions';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+
+  // flags
+  isBasicPlan: boolean = false;
+  isTeacherPlan: boolean = false;
+  isFamilyPlan: boolean = false;
 
   tabs: any[] = [
     {
@@ -56,7 +62,8 @@ export class MainComponent implements OnInit {
   constructor(
     private appConfigService: AppConfigService,
     private userService: UserService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private spinner: NgxSpinnerService
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -72,6 +79,7 @@ export class MainComponent implements OnInit {
       .subscribe({
         next: resp => {
           this.user = resp;
+          this.setRole();
           this.setForm();
         },
         error: error => console.log(error)
@@ -81,7 +89,6 @@ export class MainComponent implements OnInit {
   setForm(): void {
     this.formUser.get('name')?.setValue(this.user?.name);
     this.formUser.get('email')?.setValue(this.user?.email_address);
-    this.formUser.get('photo_url')?.setValue(this.user?.photo);
   }
 
   activeForm(): void {
@@ -121,8 +128,51 @@ export class MainComponent implements OnInit {
       this.isTabConfig = true;
       this.isTabGeneral = this.isTabPlan = this.isTabSuscription = false;
     }
-    
+
     this.tabs = this.tabs.map((tab, i) => i === index ? { ...tab, active: true } : { ...tab, active: false });
+  }
+
+  changePlan(type: number): void {
+    this.spinner.show();
+    let endpoint: string = '';
+    if (type === 1) {
+      endpoint = 'basic-role';
+    } else if (type === 2) {
+      endpoint = 'professor-role';
+    } else if (type === 3) {
+      endpoint = 'family-role';
+    }
+
+    this.userService.setRol(endpoint).subscribe({
+      next: () => {
+        this.getUser();
+        SweetAlertMessage('success', 'Exitoso', 'Suscripción realizada exitosamente.');
+        this.spinner.hide();
+      },
+      error: () => {
+        SweetAlertMessage('error', 'Error', 'Ocurrió un error durante la modificación del plan.');
+        this.spinner.hide();
+      }
+    })
+  }
+
+  setRole(): void {
+    // setting
+    this.isBasicPlan = this.isFamilyPlan = this.isTeacherPlan = false;
+    if (this.user?.authorities.length === 1) {
+      this.isBasicPlan = true;
+    }
+
+    if (this.user!.authorities.length > 1) {
+      this.user!.authorities.filter(item => {
+        if (item.name === 'PROFESSOR_USER_ROLE') {
+          this.isTeacherPlan = true;
+        }
+        if (item.name === 'FAMILY_USER_ROLE') {
+          this.isFamilyPlan = true;
+        }
+      });
+    }
   }
 
   ngOnInit(): void {

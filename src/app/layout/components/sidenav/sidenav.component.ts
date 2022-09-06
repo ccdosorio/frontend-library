@@ -14,8 +14,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class SidenavComponent implements OnInit {
 
   navigation: Navigation[] = [];
-  
-  constructor( 
+
+  constructor(
     private _sidenavService: SidenavService,
     public authenticationService: AuthenticationService,
     private userService: UserService,
@@ -24,15 +24,13 @@ export class SidenavComponent implements OnInit {
 
   signOut(): void {
     this.authenticationService.SignOut();
-   }
+  }
 
   ngOnInit(): void {
     this.spinner.show();
-    feather.replace(); 
+    feather.replace();
     this.userService.getUser().subscribe({
       next: (resp) => {
-        console.log(resp);
-        
         if (resp.authorities.length === 1) {
           this.navigationsAdmin();
         } else if (resp.authorities.length > 1) {
@@ -44,7 +42,6 @@ export class SidenavComponent implements OnInit {
               this.navigationsFamily();
             }
           });
-          
         }
         this.spinner.hide();
       },
@@ -53,27 +50,26 @@ export class SidenavComponent implements OnInit {
         this.spinner.hide();
       }
     });
-    
   }
 
   navigationsAdmin(): void {
     this._sidenavService.getConfigAdmin
-    .subscribe((navigations) => {      
-      this.navigation = navigations;
-    });
+      .subscribe((navigations) => {
+        this.navigation = navigations;
+      });
   }
 
   navigationsTeacher(): void {
     this._sidenavService.getConfigTeacher
-    .subscribe((navigations) => {      
-      this.navigation = navigations;
-    });
+      .subscribe((navigations) => {
+        this.navigation = navigations;
+      });
   }
 
   navigationsFamily(): void {
     this._sidenavService.getConfigFamily
-    .subscribe((navigations) => {      
-      this.navigation = navigations;
-    });
+      .subscribe((navigations) => {
+        this.navigation = navigations;
+      });
   }
 }

@@ -1,0 +1,81 @@
+<!--Pronotion Page-->
+<div class="promotion-page-wrapper">
+    <div class="wrapper-outer" style="border: none;">
+        <div class="wrapper-inner">
+            <div class="action-box">
+                <div class="box-content">
+                    <img class="light-image is-larger" src="assets/img/illustrations/placeholders/promotion.svg"
+                        alt="" />
+                    <img class="dark-image is-larger" src="assets/img/illustrations/placeholders/promotion-dark.svg"
+                        alt="" />
+                    <h3 class="dark-inverted">{{ titlePlan }}</h3>
+                    <div class="price">
+                        <span class="dark-inverted">{{ pricePlan }}</span>
+                        <span>Por Mes</span>
+                    </div>
+                    <div class="buttons">
+                        <!-- (click)="changeTab(2)" -->
+                        <button class="button h-button is-primary is-raised" (click)="update()">Actualizar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="side-wrapper">
+            <div class="side-inner">
+                <div class="side-title">
+                    <h3 class="dark-inverted">Características</h3>
+                    <p>Echa un vistazo a algunas características increíbles</p>
+                </div>
+
+                <div class="action-list">
+                    <div class="media-flex">
+                        <span class="icon">
+                            <i aria-hidden="true" class="fas fa-check"></i>
+                        </span>
+                        <div class="flex-meta">
+                            <span>Sección de libros</span>
+                            <p>Podrás subir y compartir los libros de tu preferencia.</p>
+                        </div>
+                    </div>
+                    <div class="media-flex" *ngIf="isFamilyPlan">
+                        <span class="icon">
+                            <i aria-hidden="true" class="fas fa-check"></i>
+                        </span>
+                        <div class="flex-meta">
+                            <span>Sección de Salas Familiares</span>
+                            <p>Podrás crear salas y compartirlas con tu familia.</p>
+                        </div>
+                    </div>
+                    <div class="media-flex" *ngIf="isTeacherPlan">
+                        <span class="icon">
+                            <i aria-hidden="true" class="fas fa-check"></i>
+                        </span>
+                        <div class="flex-meta">
+                            <span>Sección de Clases</span>
+                            <p>Podrás crear clases y compartirlas con tus alumnos.</p>
+                        </div>
+                    </div>
+                    <div class="media-flex" *ngIf="isTeacherPlan">
+                        <span class="icon">
+                            <i aria-hidden="true" class="fas fa-check"></i>
+                        </span>
+                        <div class="flex-meta">
+                            <span>Sección de preguntas</span>
+                            <p>Tendrás muchas preguntas para compartir acerca de tus libros.</p>
+                        </div>
+                    </div>
+                    <div class="media-flex">
+                        <span class="icon">
+                            <i aria-hidden="true" class="fas fa-check"></i>
+                        </span>
+                        <div class="flex-meta">
+                            <span>Buscar libro</span>
+                            <p>Podrás buscar recomendaciones de libros.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
