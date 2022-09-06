@@ -1,7 +1,7 @@
 <div class="datatable-toolbar">
     <div class="field has-addons">
         <p class="control">
-            <button class="button h-button" [disabled]="!isFile">
+            <button class="button h-button" [disabled]="!isFile" (click)="download()">
                 <span class="icon is-small">
                     <i aria-hidden="true" class="fas fa-download"></i>
                 </span>
@@ -9,11 +9,27 @@
             </button>
         </p>
         <p class="control">
-            <button class="button h-button" [routerLink]="['../../Main']" >
+            <button class="button h-button" [routerLink]="['../../Main']">
                 <span class="icon is-small">
                     <i aria-hidden="true" class="fas fa-arrow-left"></i>
                 </span>
                 <span>Regresar</span>
+            </button>
+        </p>
+        <p class="control" *ngIf="isLoaded">
+            <button class="button h-button" (click)="prevPage()" [disabled]="page === 1">
+                <span class="icon is-small">
+                    <i aria-hidden="true" class="fas fa-arrow-left"></i>
+                </span>
+                <span>Anterior</span>
+            </button>
+        </p>
+        <p class="control" *ngIf="isLoaded">
+            <button class="button h-button" (click)="nextPage()" [disabled]="page === totalPages">
+                <span class="icon is-small">
+                    <i aria-hidden="true" class="fas fa-arrow-left"></i>
+                </span>
+                <span>Siguiente</span>
             </button>
         </p>
     </div>
@@ -30,42 +46,11 @@
 
 <div class="page-content-inner">
     <div class="d-flex justify-content-center" *ngIf="isFile">
-        <pdf-viewer
-          [src]="pdfSrc"
-          [original-size]="true"
-          [render-text]="true"
-          [rotation]="0"
-          [show-all]="false"
-          [fit-to-page]="true"
-          [zoom]="1"
-          [zoom-scale]="'page-width'"
-          [stick-to-page]="true"
-          [external-link-target]="'blank'"
-          [autoresize]="true"
-          [show-borders]="false"
-          class="pdf-viewer"
-          [page]="page"
-          (after-load-complete)="afterLoadComplete($event)"
-          class="pdf-viewer"
-        ></pdf-viewer>
+        <pdf-viewer [src]="pdfSrc" [original-size]="true" [render-text]="true" [rotation]="0" [show-all]="false"
+            [fit-to-page]="true" [zoom]="1" [zoom-scale]="'page-width'" [stick-to-page]="true"
+            [external-link-target]="'blank'" [autoresize]="true" [show-borders]="false" class="pdf-viewer" [page]="page"
+            (after-load-complete)="afterLoadComplete($event)" class="pdf-viewer"></pdf-viewer>
     </div>
     <!-- Empty Message -->
     <app-placeholder-empty *ngIf="!isFile"></app-placeholder-empty>
-    <div id="paging-first-datatable" class="pagination datatable-pagination" *ngIf="isLoaded">
-        <div class="datatable-info">
-            <span>{{ page }} / {{ totalPages }}</span>
-        </div>
-        <ul class="pagination">
-            <li class="active">
-                <a (click)="prevPage()" [class.not-active]="page === 1" data-page="prev">
-                    <i class="fas fa-angle-left"></i>
-                </a>
-            </li>
-            <li class="active">
-                <a (click)="nextPage()" [class.not-active]="page === totalPages" data-page="next">
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
 </div>

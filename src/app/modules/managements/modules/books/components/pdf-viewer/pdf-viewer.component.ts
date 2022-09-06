@@ -5,8 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { AppConfigService, BookService } from '@services';
 import { UploadFileComponent } from '../upload-file/upload-file.component';
-import { Book } from '@models';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Book } from '@models';
+
+const FileSaver = require('file-saver');
 
 @Component({
   selector: 'app-pdf-viewer',
@@ -18,6 +20,7 @@ export class PdfViewerComponent implements OnInit {
   pdfSrc = '';
   bookId: number = 0;
   isFile: boolean = false;
+  book: Book | undefined;
 
   // pdf
   page: number = 1;
@@ -49,13 +52,20 @@ export class PdfViewerComponent implements OnInit {
         var file = new Blob([resp], { type: 'application/pdf' });
         var fileURL = URL.createObjectURL(file);
         this.pdfSrc = fileURL;
+        this.getBook();
         this.spinner.hide();
       },
-      error: (error) => {
+      error: () => {
         this.isFile = false;
         this.spinner.hide();
       }
     })
+  }
+
+  getBook(): void {
+    this.bookService.getBookById(this.bookId).subscribe({
+      next: (resp) => this.book = resp
+    });
   }
 
   afterLoadComplete(pdfData: any) {
@@ -78,6 +88,9 @@ export class PdfViewerComponent implements OnInit {
     });
   }
 
+  download(): void {
+    FileSaver.saveAs(this.pdfSrc, this.book?.book.title);
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {

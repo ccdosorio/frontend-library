@@ -24,6 +24,7 @@
     "@angular/router": "~13.0.0",
     "animate.css": "^4.1.1",
     "feather-icons": "^4.29.0",
+    "file-saver": "^2.0.5",
     "firebase": "^9.9.3",
     "js-base64": "^3.7.2",
     "ng2-pdf-viewer": "^9.1.1",
