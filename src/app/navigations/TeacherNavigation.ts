@@ -9,7 +9,7 @@ export const TeacherNavigation: any[] = [
         displayName: 'Sección de Clases',
         iconName: 'school',
         image: 'assets/images/search-5.svg',
-        route: 'Managements/Intro/Main'
+        route: 'Managements/Classrooms/Main'
     },
     {
         displayName: 'Sección de preguntas',

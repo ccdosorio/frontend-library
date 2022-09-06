@@ -6,8 +6,7 @@
     <p><b>isbn10</b> {{ book.book.isbn10 }}</p>
     <p><b>isbn13</b> {{ book.book.isbn13 }}</p>
     <div class="button-wrap">
-      <a class="button h-button is-primary is-rounded is-elevated" (click)="openDialogFile(book)">Adjuntar PDF</a>
-      <a class="button h-button is-primary is-rounded is-outlined" (click)="downloadPdf(book)">Ver</a>
+      <a class="button h-button is-info is-rounded" [routerLink]="['../PdfViewer', book.id ]" routerLinkActive="router-link-active" >Ver</a>
     </div>
   </div>
-</div>
+</div> 

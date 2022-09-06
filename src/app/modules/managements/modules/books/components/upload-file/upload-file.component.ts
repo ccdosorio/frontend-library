@@ -3,7 +3,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { SweetAlertMessage } from '@functions';
-import { Book } from '@models';
 import { BookService } from '@services';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -18,7 +17,7 @@ export class UploadFileComponent implements OnInit {
 
   constructor(
     private bookService: BookService,
-    @Inject(MAT_DIALOG_DATA) public data: { data: Book, action: any },
+    @Inject(MAT_DIALOG_DATA) public data: { bookId: number, action: any },
     private spinner: NgxSpinnerService
   ) { }
 
@@ -42,7 +41,7 @@ export class UploadFileComponent implements OnInit {
 
     this.spinner.show();
 
-    this.bookService.uploadFile(this.data.data.id, this.file!).subscribe({
+    this.bookService.uploadFile(this.data.bookId, this.file!).subscribe({
       next: () => {
         SweetAlertMessage('success', 'Exitoso', 'Archivo subido con éxito.');
         this.file = undefined;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 
 import { Observable } from "rxjs";
 
@@ -37,22 +37,11 @@ export class BookService {
     return this.http.post(environment.endpoint + 'user-books/' + bookId + '/upload-book', body);
   }
 
-  // download file pdf
-  downloadFile(bookId: number) {
-
-    const headerDict = {
-      'Content-Type': 'application/pdf',
-      'Accept': 'application/pdf'
-    }
-
-    const options = {
-      headers: new Headers(headerDict),
-    };
-
-
-    return this.http.get(environment.endpoint + 'user-books/' + bookId, {
-      headers: headerDict
-    });
+  // view file pdf
+  viewPdfFile(bookId: number) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Accept', 'application/pdf');
+    return this.http.get(environment.endpoint + 'user-books/' + bookId, { headers: headers, responseType: 'blob' });
   }
 
   searchElastic(payload: any): Observable<ElasticSearch> {

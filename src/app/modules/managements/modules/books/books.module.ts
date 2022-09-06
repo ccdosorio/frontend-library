@@ -14,6 +14,8 @@ import { ItemSearchComponent } from './components/item-search/item-search.compon
 import { ModalBookComponent } from './components/modal-book/modal-book.component';
 import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component';
 
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -30,7 +32,8 @@ import { PdfViewerComponent } from './components/pdf-viewer/pdf-viewer.component
     CommonModule,
     BooksRouting,
     CoreModule,
-    SharedModule
+    SharedModule,
+    PdfViewerModule
   ]
 })
 export class BooksModule { }

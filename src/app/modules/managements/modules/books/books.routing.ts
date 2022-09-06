@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'Main', component: MainComponent },
   { path: 'Create', component: CreateBookComponent },
   { path: 'Search', component: SearchBookComponent },
-  { path: 'PdfViewer', component: PdfViewerComponent },
+  { path: 'PdfViewer/:bookId', component: PdfViewerComponent },
   { path: '**', redirectTo: '/NotFound/Main' }
 ];
 
