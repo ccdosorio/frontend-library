@@ -78,14 +78,18 @@ export class MainComponent implements OnInit {
   }
 
   getUser(): void {
+    this.spinner.show();
     this.userService.getUser()
       .subscribe({
         next: resp => {
           this.user = resp;
           this.setRole();
           this.setForm();
+          this.spinner.hide();
         },
-        error: error => console.log(error)
+        error: _ => {
+          this.spinner.hide()
+        }
       });
   }
 
