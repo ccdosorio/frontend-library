@@ -1,21 +1,44 @@
-<mat-toolbar class="mat-elevation-z2">
-
-    <!-- Left Side -->
-    
-    <!-- /Left Side -->
-
-    <!-- Divider -->
-    <span class="example-spacer"></span>
-    <!-- /Divider -->
-
-    <!-- Right Side -->
-    <button mat-button routerLink="/Login/Signin" color="primary">
-        <span style="padding-left: 8px;">Iniciar Sesión</span>
-    </button>
-
-    <button mat-button routerLink="/Login/Signup" color="primary">
-        <span style="padding-left: 8px;">Registrarse</span>
-    </button>
-    <!-- /Right Side -->
-
-</mat-toolbar>
+<!--Webapp navbar alt-->
+<div class="webapp-navbar">
+    <div class="webapp-navbar-inner">
+        <div class="left">
+            <a [routerLink]="['Managements/Intro/Main']" routerLinkActive="router-link-active" class="brand">
+                <img class="light-image" src="assets/img/illustrations/dashboards/lifestyle/reading.svg" alt="" />
+            </a>
+            <div class="separator"></div>
+            <h1 id="webapp-page-title" class="title is-5">Bienvenido</h1>
+        </div>
+        <div class="center">
+            <div id="webapp-navbar-menu" class="centered-drops">
+                <div class="centered-drop">
+                    <div class="dropdown is-modern is-spaced dropdown-trigger has-mega-dropdown">
+                        <div class="is-trigger" aria-haspopup="true" aria-controls="dropdown-menu">
+                            <button class="button h-button is-rounded" aria-haspopup="true"
+                                aria-controls="dropdown-menu" routerLink="/Login/Signin">
+                                <span>Iniciar Sesión</span>
+                                <span class="caret">
+                                    <i data-feather="log-in"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="centered-drop">
+                    <div class="dropdown is-modern is-spaced dropdown-trigger has-mega-dropdown">
+                        <div class="is-trigger" aria-haspopup="true" aria-controls="dropdown-menu">
+                            <button class="button h-button is-rounded" aria-haspopup="true"
+                                aria-controls="dropdown-menu" routerLink="/Login/Signup">
+                                <span>Registrarse</span>
+                                <span class="caret">
+                                    <i data-feather="user"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+        </div>
+    </div>
+</div>
