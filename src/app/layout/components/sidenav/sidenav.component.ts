@@ -27,8 +27,13 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.spinner.show();
     feather.replace();
+    this.getUserNavigation();
+    this._sidenavService.change.subscribe(resp => this.getUserNavigation());
+  }
+
+  getUserNavigation(): void {
+    this.spinner.show();
     this.userService.getUser().subscribe({
       next: (resp) => {
         if (resp.authorities.length === 1) {

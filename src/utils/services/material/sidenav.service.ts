@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { EventEmitter, Inject, Injectable, InjectionToken, Output } from '@angular/core';
 import { Navigation } from '@models';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -19,6 +19,8 @@ export class SidenavService {
   private navigationsAdmin: Navigation[];
   private navigationsTeacher: Navigation[];
   private navigationsFamily: Navigation[];
+
+  @Output() change: EventEmitter<boolean> = new EventEmitter();
 
   constructor(
     @Inject(ADMIN_NAVIGATION) private adminNavigation: Navigation[],
@@ -55,6 +57,10 @@ export class SidenavService {
 
   private _initFamily(): void {
     this.navigationFamilySubject = new BehaviorSubject<any[]>(this.navigationsFamily);
+  }
+
+  navigations() {
+    this.change.emit();
   }
 
 }

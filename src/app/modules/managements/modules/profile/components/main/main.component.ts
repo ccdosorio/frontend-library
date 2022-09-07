@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import * as feather from 'feather-icons';
 
-import { AppConfigService, UserService } from '@services';
+import { AppConfigService, SidenavService, UserService } from '@services';
 import { UserInfo } from '@models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SweetAlertMessage } from '@functions';
@@ -66,7 +66,8 @@ export class MainComponent implements OnInit {
     private appConfigService: AppConfigService,
     private userService: UserService,
     private fb: FormBuilder,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private sidenavService: SidenavService
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -153,6 +154,7 @@ export class MainComponent implements OnInit {
     this.userService.setRol(endpoint).subscribe({
       next: () => {
         this.getUser();
+        this.sidenavService.navigations();
         SweetAlertMessage('success', 'Exitoso', 'Suscripción realizada exitosamente.');
         this.spinner.hide();
       },
