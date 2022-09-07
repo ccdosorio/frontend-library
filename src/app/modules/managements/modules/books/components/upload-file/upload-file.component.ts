@@ -46,10 +46,12 @@ export class UploadFileComponent implements OnInit {
         SweetAlertMessage('success', 'Exitoso', 'Archivo subido con éxito.');
         this.file = undefined;
         this.data.action.dialog.closeAll();
+        this.data.action.loadPdf();
         this.spinner.hide();
 
       }, error: (error) => {
-        SweetAlertMessage('error', 'Error', error.message);
+        this.data.action.loadPdf();
+        SweetAlertMessage('error', 'Error', error.error.message);
         this.spinner.hide();
       }
     })
