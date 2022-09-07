@@ -16,22 +16,23 @@
                 <span>Regresar</span>
             </button>
         </p>
-        <p class="control" *ngIf="isLoaded">
-            <button class="button h-button" (click)="prevPage()" [disabled]="page === 1">
-                <span class="icon is-small">
-                    <i aria-hidden="true" class="fas fa-arrow-left"></i>
-                </span>
-                <span>Anterior</span>
-            </button>
-        </p>
-        <p class="control" *ngIf="isLoaded">
-            <button class="button h-button" (click)="nextPage()" [disabled]="page === totalPages">
-                <span class="icon is-small">
-                    <i aria-hidden="true" class="fas fa-arrow-left"></i>
-                </span>
-                <span>Siguiente</span>
-            </button>
-        </p>
+        <button class="button h-button is-info" *ngIf="isLoaded" (click)="prevPage()" [disabled]="page === 1">
+            <span class="icon">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span>Anterior</span>
+        </button>
+        <button class="button h-button is-info" *ngIf="isLoaded" (click)="nextPage()" [disabled]="page === totalPages">
+            <span class="icon">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+            <span>Siguiente</span>
+        </button>
+        <div id="paging-first-datatable" class="pagination datatable-pagination" *ngIf="isLoaded">
+            <div class="datatable-info">
+                <span>{{ page }} / {{ totalPages }}</span>
+            </div>
+        </div>
     </div>
 
     <div class="buttons">
