@@ -27,23 +27,21 @@ export class MainComponent implements OnInit {
     {
       tabIndex: 0,
       title: 'General',
-      active: true
+      active: true,
+      icon: 'lnil-user-alt'
     },
     {
       tabIndex: 1,
       title: 'Suscripción',
-      active: false
+      active: false,
+      icon: 'lnil-money-bag'
     },
     {
       tabIndex: 2,
       title: 'Cambiar plan',
-      active: false
-    },
-    // {
-    //   tabIndex: 3,
-    //   title: 'Configuraciones',
-    //   active: false
-    // }
+      active: false,
+      icon: 'lnil-change'
+    }
   ];
 
   // flags

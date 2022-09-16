@@ -1,80 +1,76 @@
-<div class="auth-wrapper">
-    <!--Page body-->
+<div class="auth-wrapper-inner is-single">
 
-    <div class="auth-wrapper-inner is-single">
+    <!--Single Centered Form-->
+    <div class="single-form-wrap">
 
-        <!--Single Centered Form-->
-        <div class="single-form-wrap">
+        <div class="inner-wrap">
+            <!--Form Title-->
+            <div class="auth-head">
+                <h2>Bienvenido de nuevo</h2>
+                <p>Por favor inicia sesión en tu cuenta</p>
+                <a routerLink="/Login/Signup">Aún no tengo cuenta</a>
+            </div>
 
-            <div class="inner-wrap">
-                <!--Form Title-->
-                <div class="auth-head">
-                    <h2>Bienvenido de nuevo</h2>
-                    <p>Por favor inicia sesión en tu cuenta</p>
-                    <a routerLink="/Login/Signup">Aún no tengo cuenta</a>
-                </div>
+            <!--Form-->
+            <div class="form-card">
 
-                <!--Form-->
-                <div class="form-card">
-
-                    <form name="loginForm" [formGroup]="formLogin">
-                        <div id="signin-form" class="login-form">
-                            <!-- Input -->
-                            <div class="field">
-                                <div class="control has-icon">
-                                    <input class="input" type="text" placeholder="Correo electrónico"
-                                        formControlName="email">
-                                    <span class="form-icon">
-                                        <i data-feather="user"></i>
-                                    </span>
-                                    <mat-error class="animate__animated animate__fadeIn" *ngIf="formLogin.get('email')!.hasError('pattern')
-                                    && formLogin.get('email')!.touched">
-                                        Correo electrónico nó válido.
-                                    </mat-error>
-                                    <mat-error class="animate__animated animate__fadeIn" *ngIf="formLogin.get('email')!.hasError('required')
-                                    && formLogin.get('email')!.touched">
-                                        Se require de un correo electrónico.
-                                    </mat-error>
-                                </div>
+                <form name="loginForm" [formGroup]="formLogin">
+                    <div id="signin-form" class="login-form">
+                        <!-- Input -->
+                        <div class="field">
+                            <div class="control has-icon">
+                                <input class="input" type="text" placeholder="Correo electrónico"
+                                    formControlName="email">
+                                <span class="form-icon">
+                                    <i data-feather="user"></i>
+                                </span>
+                                <mat-error class="animate__animated animate__fadeIn" *ngIf="formLogin.get('email')!.hasError('pattern')
+                                && formLogin.get('email')!.touched">
+                                    Correo electrónico nó válido.
+                                </mat-error>
+                                <mat-error class="animate__animated animate__fadeIn" *ngIf="formLogin.get('email')!.hasError('required')
+                                && formLogin.get('email')!.touched">
+                                    Se require de un correo electrónico.
+                                </mat-error>
                             </div>
-                            <!-- Input -->
-                            <div class="field">
-                                <div class="control has-icon">
-                                    <input class="input" type="password" placeholder="Contraseña"
-                                        formControlName="password">
-                                    <span class="form-icon">
-                                        <i data-feather="lock"></i>
-                                    </span>
-                                    <mat-error class="animate__animated animate__fadeIn" *ngIf="formLogin.get('password')!.hasError('required')
-                                    && formLogin.get('password')!.touched">
-                                        Se requiere de una contraseña.
-                                    </mat-error>
-                                </div>
-                            </div>
-
-                            <!-- Submit -->
-                            <div class="control login">
-                                <button class="button h-button is-primary is-bold is-fullwidth is-raised"
-                                    (click)="login()" [disabled]="formLogin.invalid">
-                                    Iniciar sesión
-                                </button>
-                                <button class="button h-button is-danger is-bold is-fullwidth is-raised"
-                                    (click)="authenticationService.GoogleAuth()">
-                                    Iniciar sesión con Google
-                                </button>
-                            </div>
-
                         </div>
-                    </form>
-                </div>
+                        <!-- Input -->
+                        <div class="field">
+                            <div class="control has-icon">
+                                <input class="input" type="password" placeholder="Contraseña"
+                                    formControlName="password">
+                                <span class="form-icon">
+                                    <i data-feather="lock"></i>
+                                </span>
+                                <mat-error class="animate__animated animate__fadeIn" *ngIf="formLogin.get('password')!.hasError('required')
+                                && formLogin.get('password')!.touched">
+                                    Se requiere de una contraseña.
+                                </mat-error>
+                            </div>
+                        </div>
 
-                <div class="forgot-link has-text-centered">
-                    <a routerLink="/Login/ForgotPassword">¿Has olvidado tu contraseña?</a>
-                </div>
+                        <!-- Submit -->
+                        <div class="control login">
+                            <button class="button h-button is-info is-bold is-fullwidth is-raised"
+                                (click)="login()" [disabled]="formLogin.invalid">
+                                Iniciar sesión
+                            </button>
+                            <button class="button h-button is-danger is-bold is-fullwidth is-raised"
+                                (click)="authenticationService.GoogleAuth()">
+                                Iniciar sesión con Google
+                            </button>
+                        </div>
 
+                    </div>
+                </form>
+            </div>
+
+            <div class="forgot-link has-text-centered">
+                <a routerLink="/Login/ForgotPassword">¿Has olvidado tu contraseña?</a>
             </div>
 
         </div>
 
     </div>
+
 </div>

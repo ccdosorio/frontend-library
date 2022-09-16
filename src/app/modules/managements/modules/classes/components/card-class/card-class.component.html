@@ -1,7 +1,7 @@
 <!--Item-->
 <div class="list-view-item" *ngIf="classroom">
     <div class="list-view-item-inner">
-        <img class="avatar" src="assets/img/icons/hexagons/purple-heavy.svg"
+        <img class="avatar" src="assets/img/icons/hexagons/yellow.svg"
             data-demo-src="assets/img/photo/demo/brands/airbnb.svg" alt="">
         <div class="meta-left">
             <h3 data-filter-match>{{ classroom.name }}</h3>
@@ -12,7 +12,7 @@
         </div>
         <div class="meta-right">
             <div class="buttons">
-                <a class="button h-button is-primary is-outlined is-raised"
+                <a class="button h-button is-info is-outlined is-raised"
                     [routerLink]="['../Edit', classroom.id]">Editar</a>
             </div>
         </div>

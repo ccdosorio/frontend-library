@@ -36,8 +36,8 @@ export class PdfViewerComponent implements OnInit {
   ) {
     this.appConfigService.setConfig({
       layout: {
-        generic_container: { visible: false },
-        sidenav: { visible: true },
+        generic_container: { visible: true },
+        sidenav: { visible: false },
         toolbar: { visible: false }
       }
     });

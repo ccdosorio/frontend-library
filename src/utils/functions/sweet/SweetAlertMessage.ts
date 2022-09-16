@@ -5,7 +5,7 @@ export function SweetAlertMessage(icon: SweetAlertIcon, title: string, text: str
         icon: icon,
         title: title,
         html: text,
-        confirmButtonColor: '#37105ff',
+        confirmButtonColor: '#039BE5',
         confirmButtonText: 'Ok',
     });
 }

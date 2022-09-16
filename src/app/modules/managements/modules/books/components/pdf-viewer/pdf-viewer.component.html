@@ -18,33 +18,34 @@
         </p>
     </div>
 
+    <div class="buttons d-flex justify-content-center" *ngIf="isLoaded">
+        <button class="button h-button is-warning" (click)="prevPage()" [disabled]="page === 1">
+            <span class="icon">
+                <i class="fas fa-arrow-left"></i>
+            </span>
+            <span>Anterior</span>
+        </button>
+        <button class="button h-button is-warning" (click)="nextPage()" [disabled]="page === totalPages">
+            <span class="icon">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+            <span>Siguiente</span>
+        </button>
+        <div id="paging-first-datatable" class="pagination datatable-pagination">
+            <div class="datatable-info">
+                <span>{{ page }} / {{ totalPages }}</span>
+            </div>
+        </div>
+    </div>
+
+
     <div class="buttons">
-        <button class="button h-button is-primary is-elevated" (click)="openDialogFile()">
+        <button class="button h-button is-info is-elevated" (click)="openDialogFile()">
             <span class="icon">
                 <i aria-hidden="true" class="fas fa-upload"></i>
             </span>
             <span>{{ isFile ? 'Modificar' : 'Subir' }} Pdf</span>
         </button>
-    </div>
-</div>
-
-<div class="buttons d-flex justify-content-center" *ngIf="isLoaded">
-    <button class="button h-button is-info" (click)="prevPage()" [disabled]="page === 1">
-        <span class="icon">
-            <i class="fas fa-arrow-left"></i>
-        </span>
-        <span>Anterior</span>
-    </button>
-    <button class="button h-button is-info" (click)="nextPage()" [disabled]="page === totalPages">
-        <span class="icon">
-            <i class="fas fa-arrow-right"></i>
-        </span>
-        <span>Siguiente</span>
-    </button>
-    <div id="paging-first-datatable" class="pagination datatable-pagination">
-        <div class="datatable-info">
-            <span>{{ page }} / {{ totalPages }}</span>
-        </div>
     </div>
 </div>
 

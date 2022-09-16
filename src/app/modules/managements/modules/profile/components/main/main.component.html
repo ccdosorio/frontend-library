@@ -23,7 +23,7 @@
                     <div class="account-menu">
                         <a class="account-menu-item animate__animated animate__fadeIn" [class.is-active]="item.active"
                             (click)="changeTab(i)" *ngFor="let item of tabs; index as i">
-                            <i class="lnil lnil-user-alt"></i>
+                            <i class="lnil {{ item.icon }}"></i>
                             <span>{{ item.title }}</span>
                             <span class="end">
                                 <i aria-hidden="true" class="fas fa-arrow-right"></i>
@@ -45,7 +45,7 @@
                             </div>
                             <div class="right">
                                 <div class="buttons">
-                                    <button id="save-button" class="button h-button is-primary is-raised"
+                                    <button id="save-button" class="button h-button is-info is-raised"
                                         (click)="onSubmit()" [disabled]="formUser.invalid">
                                         Guardar Cambios
                                     </button>
@@ -177,7 +177,7 @@
                                                 <p>Acceso a muchas características de la plataforma.</p>
                                                 <div class="button-wrap">
                                                     <button type="button"
-                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button"
+                                                        class="button h-button is-info is-rounded is-elevated is-bold type-select-button"
                                                         (click)="changePlan(1)" [disabled]="isBasicPlan">
                                                         Elige este plan
                                                     </button>
@@ -194,7 +194,7 @@
                                                 <p>Podrás compartir libros con tus alumnos.</p>
                                                 <div class="button-wrap">
                                                     <button type="button"
-                                                        class="button h-button is-primary is-rounded is-elevated is-bold type-select-button"
+                                                        class="button h-button is-info is-rounded is-elevated is-bold type-select-button"
                                                         (click)="changePlan(2)" [disabled]="isTeacherPlan">
                                                         Elige este plan
                                                     </button>
@@ -210,7 +210,7 @@
                                                 <h3 class="dark-inverted">Familiar</h3>
                                                 <p>Compartiras salas de lectura con tus familiares.</p>
                                                 <button type="button"
-                                                    class="button h-button is-primary is-rounded is-elevated is-bold type-select-button"
+                                                    class="button h-button is-info is-rounded is-elevated is-bold type-select-button"
                                                     (click)="changePlan(3)" [disabled]="isFamilyPlan">
                                                     Elige este plan
                                                 </button>
@@ -218,62 +218,6 @@
                                                     <a type="button" class="dark-inverted-hover">Ver más información</a>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--Form Confg-->
-            <div class="column is-8" *ngIf="isTabConfig">
-                <div class="account-box is-form is-footerless">
-                    <div class="form-head stuck-header">
-                        <div class="form-head-inner">
-                            <div class="left">
-                                <h3>Configuraciones</h3>
-                                <p>Edita las configuraciones de tu cuenta</p>
-                            </div>
-                            <div class="right">
-                                <div class="buttons">
-                                    <a (click)="changeTab(2)" class="button h-button is-light is-dark-outlined">
-                                        <span class="icon">
-                                            <i class="lnir lnir-arrow-left rem-100"></i>
-                                        </span>
-                                        <span>Regresar</span>
-                                    </a>
-                                    <button id="save-button" class="button h-button is-primary is-raised">
-                                        Guardar Cambios
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-body">
-                        <!--Fieldset-->
-                        <div class="fieldset">
-                            <div class="fieldset-heading">
-                                <h4>Cambiar Contraseña</h4>
-                                <p>Para mejorar la seguridad de la cuenta</p>
-                            </div>
-
-                            <div class="columns is-multiline">
-                                <!--Field-->
-                                <div class="column is-12">
-                                    <div class="field">
-                                        <div class="control">
-                                            <input type="password" class="input" placeholder="Nueva Contraseña">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--Field-->
-                                <div class="column is-12">
-                                    <div class="field">
-                                        <div class="control">
-                                            <input type="password" class="input"
-                                                placeholder="Repita la nueva contraseña">
                                         </div>
                                     </div>
                                 </div>

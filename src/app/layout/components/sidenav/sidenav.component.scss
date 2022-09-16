@@ -1,35 +1,5 @@
 @import "src/colors";
 
-.spacer {
-    flex: 1 1 auto;
-}
-
-.mat-toolbar {
-    top: 0;
-    height: 50px;
-    background-color: white;
-    color: $dark_gray;
-    border-bottom: solid 1px $ligth_gray;
-}
-
-.sidenav-router {
-    width: 100%;
-    //height: 100%;
-    position: relative;
-    // background-color: $ligth_gray;
-}
-
-.mat-list-item {
-    padding: 8px 0;
-    display: flex;
-    width: auto;
-
-    .routeIcon {
-        margin-right: 40px;
-        color: $indigo;
-    }
-}
-
 mat-icon {
     color: $dark_gray;
 }

@@ -10,16 +10,16 @@
                     </div>
                     <div class="right">
                         <div class="buttons">
-                            <a [routerLink]="['../Main']" class="button h-button is-light is-dark-outlined">
+                            <a [routerLink]="['/Managements/Classrooms/Main']" class="button h-button is-light is-dark-outlined">
                                 <span class="icon">
                                     <i class="lnir lnir-arrow-left rem-100"></i>
                                 </span>
                                 <span>Regresar</span>
                             </a>
-                            <button *ngIf="!loading" id="save-button" class="button h-button is-primary is-raised"
-                                [disabled]="formClassroom.invalid" (click)="onSubmit()">Crear</button>
+                            <button *ngIf="!loading" id="save-button" class="button h-button is-info is-raised"
+                                [disabled]="formClassroom.invalid" (click)="onSubmit()">{{ titleAction }}</button>
 
-                            <a *ngIf="loading" class="button h-button is-primary is-loading">Crear</a>
+                            <a *ngIf="loading" class="button h-button is-info is-loading">{{ titleAction }}</a>
                         </div>
                     </div>
                 </div>

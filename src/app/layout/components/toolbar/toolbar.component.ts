@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import * as feather from 'feather-icons';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,6 +12,7 @@ export class ToolbarComponent implements OnInit {
   constructor( ) { }
 
   ngOnInit(): void {
+    feather.replace();
   }
 
 }
