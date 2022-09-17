@@ -1,5 +1,5 @@
 export const environment = {
-    production: false,
+    production: true,
     endpoint: 'https://library-galileo-project.herokuapp.com/v1/',
     firebase: {
         apiKey: "AIzaSyBeSZkYl8FUk2dNgdWiQxjRO784a2emItc",
