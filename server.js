@@ -3,8 +3,6 @@ const app = express();
 
 app.use(express.static(__dirname + '/dist/frontend-library'));
 
-app.use(cors());
-
 app.get('/*', (req, resp) => {
     resp.sendFile(__dirname + '/dist/frontend-library/index.html');
 });
