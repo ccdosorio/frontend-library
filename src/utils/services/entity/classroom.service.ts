@@ -33,4 +33,11 @@ export class ClassroomService {
   update(bodeObject: any, classromId: number) {
     return this.http.post(environment.endpoint + 'classrooms/' + classromId, bodeObject, {});
   }
+
+  // upload excel invitations
+  uploadFile(classroomId: number, file: File) {
+    let body = new FormData();
+    body.append('students', file);
+    return this.http.post(environment.endpoint + 'classrooms/' + classroomId + '/add-students', body);
+  }
 }

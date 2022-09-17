@@ -2,23 +2,24 @@ import { Component, Inject, OnInit } from '@angular/core';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { SweetAlertMessage } from '@functions';
-import { BookService } from '@services';
 import { NgxSpinnerService } from 'ngx-spinner';
 
+import { SweetAlertMessage } from '@functions';
+import { ClassroomService } from '@services';
+
 @Component({
-  selector: 'app-upload-file',
-  templateUrl: './upload-file.component.html',
-  styleUrls: ['./upload-file.component.scss']
+  selector: 'app-send-invitation',
+  templateUrl: './send-invitation.component.html',
+  styleUrls: ['./send-invitation.component.scss']
 })
-export class UploadFileComponent implements OnInit {
+export class SendInvitationComponent implements OnInit {
 
   file: File | undefined;
 
   constructor(
-    private bookService: BookService,
-    @Inject(MAT_DIALOG_DATA) public data: { bookId: number, action: any },
-    private spinner: NgxSpinnerService
+    @Inject(MAT_DIALOG_DATA) public data: { action: any },
+    private spinner: NgxSpinnerService,
+    private classroomService: ClassroomService
   ) { }
 
   ngOnInit(): void {
@@ -34,14 +35,9 @@ export class UploadFileComponent implements OnInit {
       return;
     }
 
-    if (this.file.size >= 104857600) {
-      SweetAlertMessage('info', 'Información', 'El archivo es demasiado grande, por favor seleccione un archivo de menos de 100MB.');
-      return;
-    }
-
     this.spinner.show();
 
-    this.bookService.uploadFile(this.data.bookId, this.file!).subscribe({
+    this.classroomService.uploadFile(1, this.file!).subscribe({
       next: () => {
         SweetAlertMessage('success', 'Exitoso', 'Archivo subido con éxito.');
         this.file = undefined;
@@ -55,6 +51,7 @@ export class UploadFileComponent implements OnInit {
         this.spinner.hide();
       }
     });
+
   }
 
 }

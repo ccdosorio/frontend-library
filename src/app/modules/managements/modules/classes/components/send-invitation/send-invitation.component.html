@@ -1,0 +1,30 @@
+<!-- Excel Input -->
+<div class="field is-grouped d-flex justify-content-center">
+    <div class="control">
+        <div class="file has-name is-fullwidth">
+            <label class="file-label">
+                <input class="file-input" type="file" name="resume"
+                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    (change)="onFileChange($event)">
+                <span class="file-cta">
+                    <span class="file-icon">
+                        <i class="lnil lnil-lg lnil-cloud-upload"></i>
+                    </span>
+                    <span class="file-label">
+                        Seleccionar archivo ...
+                    </span>
+                </span>
+                <span class="file-name light-text" *ngIf="file">
+                    {{ file.name }}
+                </span>
+            </label>
+        </div>
+    </div>
+</div>
+<!-- End Excel Input -->
+
+<!-- Button -->
+<div class="d-flex justify-content-center">
+    <a type="button" class="button h-button is-info is-raised" (click)="upload()">Subir</a>
+</div>
+<!-- End Button -->

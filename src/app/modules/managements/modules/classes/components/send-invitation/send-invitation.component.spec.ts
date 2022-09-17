@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ButtonCustomComponent } from './button-custom.component';
+import { SendInvitationComponent } from './send-invitation.component';
 
-describe('ButtonCustomComponent', () => {
-  let component: ButtonCustomComponent;
-  let fixture: ComponentFixture<ButtonCustomComponent>;
+describe('SendInvitationComponent', () => {
+  let component: SendInvitationComponent;
+  let fixture: ComponentFixture<SendInvitationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ButtonCustomComponent ]
+      declarations: [ SendInvitationComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ButtonCustomComponent);
+    fixture = TestBed.createComponent(SendInvitationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
