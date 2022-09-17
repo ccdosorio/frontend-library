@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  endpoint: '',
+  endpoint: 'https://library-galileo-project.herokuapp.com/v1/',
   firebase: {
     apiKey: "AIzaSyBeSZkYl8FUk2dNgdWiQxjRO784a2emItc",
     authDomain: "libraryapp-4164f.firebaseapp.com",
