@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Classroom } from '@models';
+import { Classroom, Book, ClassroomBook } from '@models';
 
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -24,9 +24,19 @@ export class ClassroomService {
     return this.http.get<Classroom>(environment.endpoint + 'classrooms/' + classroomId, {});
   }
 
+  // Obtener libros de la clase
+  getBooksByClassroom(classroomId: number): Observable<ClassroomBook[]> {
+    return this.http.get<ClassroomBook[]>(environment.endpoint + 'classrooms/' + classroomId + '/books', {});
+  }
+
   // Crear una clase
   create(bodeObject: any) {
     return this.http.post(environment.endpoint + 'classrooms', bodeObject, {});
+  }
+
+  // Agregar libro a una clase
+  addBookClassroom(classroomId: number, bodeObject: any) {
+    return this.http.post(environment.endpoint + 'classrooms/' + classroomId + '/books', bodeObject, {});
   }
 
   // Editar una clase

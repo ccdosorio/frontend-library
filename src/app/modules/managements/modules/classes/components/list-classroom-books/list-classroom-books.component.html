@@ -1,0 +1,55 @@
+<div class="list-view-inner" *ngIf="books">
+
+    <!--Item-->
+    <div class="list-view-item" *ngFor="let item of books">
+        <div class="list-view-item-inner">
+            <div class="pre-meta">
+                <h3 data-filter-match>{{ item.user_book.book.title }}</h3>
+            </div>
+            <img class="avatar" src="data:image/png;base64,{{ item.user_book.book.book_cover_m }}"
+                data-demo-src="assets/img/illustrations/list-views/cake-1.svg" alt="">
+            <div class="meta-left">
+                <h3 data-filter-match>
+                    <!-- <img class="avatar" src="https://via.placeholder.com/150x150"
+                        data-demo-src="assets/img/avatars/photos/7.jpg" alt="" data-user-popover="0"> -->
+                    <!-- <span>by Alice C.</span> -->
+                </h3>
+                <span>
+                    <i data-feather="archive"></i>
+                    <span data-filter-match>{{ item.description }}</span>
+                    <i aria-hidden="true" class="fas fa-circle icon-separator"></i>
+                    <i data-feather="clock"></i>
+                    <span data-filter-match>isbn10: {{ item.user_book.book.isbn10 }}</span>
+                    <i aria-hidden="true" class="fas fa-circle icon-separator"></i>
+                    <i data-feather="paperclip"></i>
+                    <span data-filter-match>isbn13: {{ item.user_book.book.isbn13 }}</span>
+                </span>
+            </div>
+            <div class="meta-right">
+                <div class="buttons">
+                    <a class="button h-button is-warning is-outlined is-raised"[routerLink]="['/Managements/Books/PdfViewer', item.user_book.id]">Ver</a>
+                    <!-- <button class="button is-light is-circle hint--bubble hint--primary hint--top" data-hint="Save">
+                        <span class="icon is-small">
+                            <i data-feather="heart"></i>
+                        </span>
+                    </button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <nav class="flex-pagination pagination is-rounded" data-hint="pagination" data-filter-hide>
+    <a class="pagination-previous has-chevron"><i data-feather="chevron-left"></i></a>
+    <a class="pagination-next has-chevron"><i data-feather="chevron-right"></i></a>
+    <ul class="pagination-list">
+        <li><a class="pagination-link" data-hint="Goto page 1">1</a></li>
+        <li><span class="pagination-ellipsis">…</span></li>
+        <li><a class="pagination-link" data-hint="Goto page 45">45</a></li>
+        <li><a class="pagination-link is-current" data-hint="Page 46" aria-current="page">46</a>
+        </li>
+        <li><a class="pagination-link" data-hint="Goto page 47">47</a></li>
+        <li><span class="pagination-ellipsis">…</span></li>
+        <li><a class="pagination-link" data-hint="Goto page 86">86</a></li>
+    </ul>
+</nav> -->

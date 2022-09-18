@@ -12,6 +12,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   exports: [
@@ -26,7 +28,9 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatListModule,
     MatMenuModule,
     MatDialogModule,
-    MatStepperModule
+    MatStepperModule,
+    MatCheckboxModule,
+    MatTableModule
   ]
 })
 export class AngularMaterialModule { }

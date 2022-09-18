@@ -8,13 +8,19 @@ import { CardClassComponent } from './components/card-class/card-class.component
 import { SharedModule } from '@shared';
 import { CreateClassroomComponent } from './components/create-classroom/create-classroom.component';
 import { SendInvitationComponent } from './components/send-invitation/send-invitation.component';
+import { DetailClassroomComponent } from './components/detail-classroom/detail-classroom.component';
+import { ListClassroomBooksComponent } from './components/list-classroom-books/list-classroom-books.component';
+import { CreateClassroomBookComponent } from './components/create-classroom-book/create-classroom-book.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     CardClassComponent,
     CreateClassroomComponent,
-    SendInvitationComponent
+    SendInvitationComponent,
+    DetailClassroomComponent,
+    ListClassroomBooksComponent,
+    CreateClassroomBookComponent
   ],
   imports: [
     CommonModule,

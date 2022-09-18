@@ -12,7 +12,7 @@ import { CoreModule } from 'core/core.module';
     CoreModule
   ],
   exports: [
-    PlaceholderEmptyComponent,
+    PlaceholderEmptyComponent
   ]
 })
 export class SharedModule { }

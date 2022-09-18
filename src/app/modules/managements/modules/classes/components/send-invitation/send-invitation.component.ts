@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 import { SweetAlertMessage } from '@functions';
 import { ClassroomService } from '@services';
+import { Classroom } from '@models';
 
 @Component({
   selector: 'app-send-invitation',
@@ -17,7 +18,7 @@ export class SendInvitationComponent implements OnInit {
   file: File | undefined;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { action: any },
+    @Inject(MAT_DIALOG_DATA) public data: { data: Classroom, action: any },
     private spinner: NgxSpinnerService,
     private classroomService: ClassroomService
   ) { }
