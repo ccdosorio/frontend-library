@@ -58252,8 +58252,8 @@ body.is-dark .lifestyle-dashboard.lifestyle-dashboard-v1 .overview-card .heatmap
     border-radius: 16px;
     background: #039BE5;
     font-family: "Roboto", sans-serif;
-    -webkit-box-shadow: 0 14px 26px -12px rgba(103, 28, 201, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(103, 28, 201, .2);
-    box-shadow: 0 14px 26px -12px rgba(103, 28, 201, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(103, 28, 201, .2)
+    -webkit-box-shadow: 0 14px 26px -12px rgba(3, 155, 229, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(3, 155, 229, .2);
+    box-shadow: 0 14px 26px -12px rgba(3, 155, 229, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(3, 155, 229, .2)
 }
 
 .lifestyle-dashboard.lifestyle-dashboard-v4 .illustration-header-2 .header-image {

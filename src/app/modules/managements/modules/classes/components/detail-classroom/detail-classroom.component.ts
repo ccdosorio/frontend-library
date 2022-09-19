@@ -22,6 +22,23 @@ export class DetailClassroomComponent implements OnInit {
   showEmptyMessage: boolean = false;
   books: ClassroomBook[] = [];
 
+  tabs: any[] = [
+    {
+      tabIndex: 0,
+      title: 'Libros',
+      active: true,
+    },
+    {
+      tabIndex: 1,
+      title: 'Estudiantes',
+      active: false
+    }
+  ];
+
+  // flags
+  isTabBooks: boolean = true;
+  isTabStudents: boolean = false;
+
   constructor(
     private appConfigService: AppConfigService,
     private classroomService: ClassroomService,
@@ -94,6 +111,18 @@ export class DetailClassroomComponent implements OnInit {
       maxHeight: '80vh',
       data: { data: this.classroom, action: this }
     });
+  }
+
+  changeTab(index: number) {
+    if (index === 0) {
+      this.isTabBooks = true;
+      this.isTabStudents = false
+    } else if (index === 1) {
+      this.isTabStudents = true
+      this.isTabBooks = false;
+    }
+
+    this.tabs = this.tabs.map((tab, i) => i === index ? { ...tab, active: true } : { ...tab, active: false });
   }
 
 }

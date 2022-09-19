@@ -22,6 +22,8 @@ export class CreateClassroomBookComponent implements OnInit {
 
   loading = false;
   showEmptyMessage: boolean = false;
+  isFamilyPlan: boolean = false;
+  isTeacherPlan: boolean = false;
 
   listBooks: Book[] = [];
 
@@ -73,7 +75,7 @@ export class CreateClassroomBookComponent implements OnInit {
       description: this.formClassroom.get('description')?.value
     };
 
-    this.classroomService.addBookClassroom(this.data.data.id,  PAYLOAD)
+    this.classroomService.addBookClassroom(this.data.data.id, PAYLOAD)
       .subscribe({
         next: () => {
           this.loading = false;
@@ -111,5 +113,4 @@ export class CreateClassroomBookComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.id + 1}`;
   }
-
 }

@@ -65,8 +65,8 @@
                                         <span>Temas</span>
                                         <p>Estos son algunos de los temas a tratar.</p>
                                         <div class="columns is-multiline">
-                                            <div class="column is-6" *ngFor="let item of book.book_subjects">
-                                                <span class="tag is-rounded is-warning is-elevated">{{ item.name  | slice:0:25 }}</span>
+                                            <div class="column is-6" *ngFor="let item of book.book_subjects | slice:0:5 ; let i = index">
+                                                <span class="tag is-rounded is-warning is-elevated" *ngIf="i<5">{{ item.name  | slice:0:25 }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -84,8 +84,8 @@
                                             </div>
                                         </div>
                                         <div class="columns is-multiline" *ngIf="book.book_authors.length > 1">
-                                            <div class="column is-6" *ngFor="let item of book.book_authors">
-                                                <span class="tag is-rounded is-warning is-elevated">{{ item.name  | slice:0:25 }}</span>
+                                            <div class="column is-6" *ngFor="let item of book.book_authors | slice:0:5 ; let i = index">
+                                                <span class="tag is-rounded is-warning is-elevated" *ngIf="i<5">{{ item.name  | slice:0:25 }}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -103,8 +103,8 @@
                                             </div>
                                         </div>
                                         <div class="columns is-multiline" *ngIf="book.book_people.length > 1">
-                                            <div class="column is-6" *ngFor="let item of book.book_people">
-                                                <span class="tag is-rounded is-warning is-elevated">{{ item.name  | slice:0:25 }}</span>
+                                            <div class="column is-6" *ngFor="let item of book.book_people | slice:0:5 ; let i = index">
+                                                <span class="tag is-rounded is-warning is-elevated" *ngIf="i<5">{{ item.name  | slice:0:25 }}</span>
                                             </div>
                                         </div>
                                     </div>

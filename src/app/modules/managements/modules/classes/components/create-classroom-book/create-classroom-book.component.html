@@ -1,11 +1,11 @@
 <div class="page-content-inner">
-
+    <h4>Agregar Libro</h4>
     <div class="form-body" [formGroup]="formClassroom">
         <div class="column is-12">
             <div class="field">
                 <label>Descripción</label>
                 <div class="control">
-                    <textarea class="textarea" rows="4" placeholder="" formControlName="description"></textarea>
+                    <input class="input" placeholder="" formControlName="description" />
                     <mat-error class="animate__animated animate__fadeIn" *ngIf="formClassroom.get('description')!.hasError('required')
                         && formClassroom.get('description')!.touched">
                         Se require de una descripción.

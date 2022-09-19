@@ -1,30 +1,75 @@
-<!-- Excel Input -->
-<div class="field is-grouped d-flex justify-content-center">
-    <div class="control">
-        <div class="file has-name is-fullwidth">
-            <label class="file-label">
-                <input class="file-input" type="file" name="resume"
-                    accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                    (change)="onFileChange($event)">
-                <span class="file-cta">
-                    <span class="file-icon">
-                        <i class="lnil lnil-lg lnil-cloud-upload"></i>
-                    </span>
-                    <span class="file-label">
-                        Seleccionar archivo ...
-                    </span>
-                </span>
-                <span class="file-name light-text" *ngIf="file">
-                    {{ file.name }}
-                </span>
-            </label>
+<div class="form-body" [formGroup]="formInvite">
+    <!--Fieldset-->
+    <div class="form-fieldset">
+        <div class="fieldset-heading">
+            <h4>Enviar invitación</h4>
+            <p *ngIf="isFamilyPlan">Por favor ingresa los campos</p>
         </div>
+
+        <div class="columns is-multiline" *ngIf="isFamilyPlan">
+            <div class="column is-12">
+                <div class="field">
+                    <label>Nombre</label>
+                    <div class="control">
+                        <input type="text" class="input" placeholder="" formControlName="name">
+                        <mat-error class="animate__animated animate__fadeIn" *ngIf="formInvite.get('name')!.hasError('required')
+                        && formInvite.get('name')!.touched">
+                            Se require de un nombre.
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-12">
+                <div class="field">
+                    <label>Correo electrónico</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="" formControlName="email">
+                        <mat-error class="animate__animated animate__fadeIn" *ngIf="formInvite.get('email')!.hasError('pattern')
+                        && formInvite.get('email')!.touched">
+                            Correo electrónico nó válido.
+                        </mat-error>
+                        <mat-error class="animate__animated animate__fadeIn" *ngIf="formInvite.get('email')!.hasError('required')
+                        && formInvite.get('email')!.touched">
+                            Se require de un correo electrónico.
+                        </mat-error>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Excel Input -->
+        <div class="field is-grouped d-flex justify-content-center" *ngIf="isTeacherPlan">
+            <div class="control">
+                <div class="file has-name is-fullwidth">
+                    <label class="file-label">
+                        <input class="file-input" type="file" name="resume"
+                            accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                            (change)="onFileChange($event)">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="lnil lnil-lg lnil-cloud-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Seleccionar archivo ...
+                            </span>
+                        </span>
+                        <span class="file-name light-text" *ngIf="file">
+                            {{ file.name }}
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <!-- End Excel Input -->
     </div>
 </div>
-<!-- End Excel Input -->
 
 <!-- Button -->
 <div class="d-flex justify-content-center">
-    <a type="button" class="button h-button is-info is-raised" (click)="upload()">Subir</a>
+    <a type="button" class="button h-button is-info is-raised" (click)="upload()" *ngIf="isTeacherPlan">Subir</a>
+    <button *ngIf="isFamilyPlan" class="button h-button is-info is-raised" [disabled]="formInvite.invalid"
+        (click)="sendInvite()">
+        Enviar
+    </button>
 </div>
 <!-- End Button -->
