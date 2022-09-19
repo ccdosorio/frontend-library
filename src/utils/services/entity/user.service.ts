@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserInfo } from '@models';
+import { UserInfo, UserInvitation } from '@models';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
@@ -18,6 +18,14 @@ export class UserService {
     return this.http.get<UserInfo>(environment.endpoint + 'users', {});
   }
 
+  // Obtener al usuario invitado
+  getUserInvitations(uuid: number): Observable<UserInvitation> {
+    const headers = new HttpHeaders()
+      .set('Authorization', 'Basic bGlicmFyeS1nYWxpbGVvLXByb2plY3Q6NjhlZTM3NjMtNDMxNS00OTI4LWI0MzUtYzNlZGMwOTNkM2E5');
+    return this.http.get<UserInvitation>(environment.endpoint + 'users/invitations/' + uuid, { headers });
+  }
+
+
   // Crear un usuario
   create(bodeObject: any) {
     return this.http.post(environment.endpoint + 'users', bodeObject, {})
@@ -29,7 +37,7 @@ export class UserService {
   }
 
   // Cambiar de rol: normal, profesor, familiar
-  setRol(endpoint: string): Observable<UserInfo>  {
+  setRol(endpoint: string): Observable<UserInfo> {
     return this.http.post<UserInfo>(environment.endpoint + 'users/' + endpoint, {}, {});
   }
 }

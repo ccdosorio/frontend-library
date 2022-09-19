@@ -67,8 +67,6 @@ export class DetailClassroomComponent implements OnInit {
     this.classroomService.getBooksByClassroom(classroomId)
       .subscribe({
         next: (resp) => {
-          console.log(resp);
-
           if (resp.length === 0) {
             this.showEmptyMessage = true;
           }

@@ -1,61 +1,67 @@
-<div class="datatable-toolbar">
-    <div class="field has-addons">
-        <p class="control">
-            <button class="button h-button" [disabled]="!isFile" (click)="download()">
-                <span class="icon is-small">
-                    <i aria-hidden="true" class="fas fa-download"></i>
-                </span>
-                <span>Descargar</span>
-            </button>
-        </p>
-        <p class="control">
-            <button class="button h-button" [routerLink]="['../../Main']">
-                <span class="icon is-small">
-                    <i aria-hidden="true" class="fas fa-arrow-left"></i>
-                </span>
-                <span>Regresar</span>
-            </button>
-        </p>
-    </div>
+<div class="page-content-wrapper py-3">
 
-    <div class="buttons d-flex justify-content-center" *ngIf="isLoaded">
-        <button class="button h-button is-warning" (click)="prevPage()" [disabled]="page === 1">
-            <span class="icon">
-                <i class="fas fa-arrow-left"></i>
-            </span>
-            <span>Anterior</span>
-        </button>
-        <button class="button h-button is-warning" (click)="nextPage()" [disabled]="page === totalPages">
-            <span class="icon">
-                <i class="fas fa-arrow-right"></i>
-            </span>
-            <span>Siguiente</span>
-        </button>
-        <div id="paging-first-datatable" class="pagination datatable-pagination">
-            <div class="datatable-info">
-                <span>{{ page }} / {{ totalPages }}</span>
+    <div class="datatable-toolbar">
+        <div class="field has-addons">
+            <p class="control">
+                <button class="button h-button" [disabled]="!isFile" (click)="download()">
+                    <span class="icon is-small">
+                        <i aria-hidden="true" class="fas fa-download"></i>
+                    </span>
+                    <span>Descargar</span>
+                </button>
+            </p>
+            <p class="control">
+                <button class="button h-button" [routerLink]="['../../Main']">
+                    <span class="icon is-small">
+                        <i aria-hidden="true" class="fas fa-arrow-left"></i>
+                    </span>
+                    <span>Regresar</span>
+                </button>
+            </p>
+        </div>
+    
+        <div class="buttons d-flex justify-content-center" *ngIf="isLoaded">
+            <button class="button h-button is-warning" (click)="prevPage()" [disabled]="page === 1">
+                <span class="icon">
+                    <i class="fas fa-arrow-left"></i>
+                </span>
+                <span>Anterior</span>
+            </button>
+            <button class="button h-button is-warning" (click)="nextPage()" [disabled]="page === totalPages">
+                <span class="icon">
+                    <i class="fas fa-arrow-right"></i>
+                </span>
+                <span>Siguiente</span>
+            </button>
+            <div id="paging-first-datatable" class="pagination datatable-pagination">
+                <div class="datatable-info">
+                    <span>{{ page }} / {{ totalPages }}</span>
+                </div>
             </div>
         </div>
+    
+    
+        <div class="buttons">
+            <button class="button h-button is-info is-elevated" (click)="openDialogFile()">
+                <span class="icon">
+                    <i aria-hidden="true" class="fas fa-upload"></i>
+                </span>
+                <span>{{ isFile ? 'Modificar' : 'Subir' }} Pdf</span>
+            </button>
+        </div>
+    </div>
+    
+    <div class="page-content-inner">
+        <div class="d-flex justify-content-center" *ngIf="isFile">
+            <pdf-viewer [src]="pdfSrc" [original-size]="true" [render-text]="true" [rotation]="0" [show-all]="false"
+                [fit-to-page]="true" [zoom]="1" [zoom-scale]="'page-width'" [stick-to-page]="true"
+                [external-link-target]="'blank'" [autoresize]="true" [show-borders]="false" class="pdf-viewer" [page]="page"
+                (after-load-complete)="afterLoadComplete($event)" class="pdf-viewer"></pdf-viewer>
+        </div>
+        <!-- Empty Message -->
+        <app-placeholder-empty *ngIf="!isFile"></app-placeholder-empty>
     </div>
 
 
-    <div class="buttons">
-        <button class="button h-button is-info is-elevated" (click)="openDialogFile()">
-            <span class="icon">
-                <i aria-hidden="true" class="fas fa-upload"></i>
-            </span>
-            <span>{{ isFile ? 'Modificar' : 'Subir' }} Pdf</span>
-        </button>
-    </div>
-</div>
 
-<div class="page-content-inner">
-    <div class="d-flex justify-content-center" *ngIf="isFile">
-        <pdf-viewer [src]="pdfSrc" [original-size]="true" [render-text]="true" [rotation]="0" [show-all]="false"
-            [fit-to-page]="true" [zoom]="1" [zoom-scale]="'page-width'" [stick-to-page]="true"
-            [external-link-target]="'blank'" [autoresize]="true" [show-borders]="false" class="pdf-viewer" [page]="page"
-            (after-load-complete)="afterLoadComplete($event)" class="pdf-viewer"></pdf-viewer>
-    </div>
-    <!-- Empty Message -->
-    <app-placeholder-empty *ngIf="!isFile"></app-placeholder-empty>
 </div>

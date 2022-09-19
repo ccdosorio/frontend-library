@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Classroom, Book, ClassroomBook } from '@models';
 
@@ -48,6 +48,7 @@ export class ClassroomService {
   uploadFile(classroomId: number, file: File) {
     let body = new FormData();
     body.append('students', file);
-    return this.http.post(environment.endpoint + 'classrooms/' + classroomId + '/add-students', body);
+      
+    return this.http.post(environment.endpoint + 'classrooms/' + classroomId + '/add-students', body, { responseType: 'blob' });
   }
 }

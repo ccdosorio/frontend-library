@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import * as feather from 'feather-icons';
 
-import { AppConfigService, AuthenticationService } from '@services';
+import { AppConfigService, AuthenticationService, UserService } from '@services';
 import { ValidatePassword } from "@helpers";
 
 @Component({
@@ -12,6 +13,8 @@ import { ValidatePassword } from "@helpers";
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+
+  invitationUuid: number = 0;
 
   formRegister: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
@@ -25,7 +28,9 @@ export class SignupComponent implements OnInit {
   constructor(
     private appConfigService: AppConfigService,
     private fb: FormBuilder,
-    public authenticationService: AuthenticationService
+    public authenticationService: AuthenticationService,
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -41,8 +46,25 @@ export class SignupComponent implements OnInit {
     this.authenticationService.SignUp(email, password, name);
   }
 
-  ngOnInit(): void {
-    feather.replace();
+  getInvitation(): void {
+    this.userService.getUserInvitations(this.invitationUuid).subscribe({
+      next: (resp) => {
+        this.formRegister.get('name')?.setValue(resp.name);
+        this.formRegister.get('name')?.disable();
+        this.formRegister.get('email')?.setValue(resp.email_address);
+        this.formRegister.get('email')?.disable();
+      },
+      error: (error) => console.log(error),
+    })
   }
 
+  ngOnInit(): void {
+    feather.replace();
+    this.route.params.subscribe((params) => {
+      if (Object.keys(params).length > 0) {
+        this.invitationUuid = params['uuid'];
+        this.getInvitation();
+      }
+    });
+  }
 }

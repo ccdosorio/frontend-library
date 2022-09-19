@@ -11,3 +11,4 @@ export * from './HighlightFields';
 export * from './Authority';
 export * from './ClassroomBook';
 export * from './UserBook';
+export * from './UserInvitation';

@@ -8,6 +8,8 @@ import { SweetAlertMessage } from '@functions';
 import { ClassroomService } from '@services';
 import { Classroom } from '@models';
 
+const FileSaver = require('file-saver');
+
 @Component({
   selector: 'app-send-invitation',
   templateUrl: './send-invitation.component.html',
@@ -23,11 +25,10 @@ export class SendInvitationComponent implements OnInit {
     private classroomService: ClassroomService
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   onFileChange(event: any) {
-    this.file = event.target.files[0];
+    this.file = event.target.files[0];    
   }
 
   upload(): void {
@@ -38,17 +39,17 @@ export class SendInvitationComponent implements OnInit {
 
     this.spinner.show();
 
-    this.classroomService.uploadFile(1, this.file!).subscribe({
-      next: () => {
+    this.classroomService.uploadFile(this.data.data.id, this.file!).subscribe({
+      next: (resp) => {
         SweetAlertMessage('success', 'Exitoso', 'Archivo subido con éxito.');
-        this.file = undefined;
+        const blob = new Blob([resp], { type : 'application/vnd.ms.excel' });
+        const fileXls = new File([blob], this.file!.name, { type: 'application/vnd.ms.excel' });
+        FileSaver.saveAs(fileXls);
         this.data.action.dialog.closeAll();
-        this.data.action.loadPdf();
         this.spinner.hide();
-
-      }, error: (error) => {
-        this.data.action.loadPdf();
-        SweetAlertMessage('error', 'Error', error.error.message);
+        this.file = undefined;
+      }, error: () => {
+        SweetAlertMessage('error', 'Error', 'Ocurrió un error al subir el archivo.');
         this.spinner.hide();
       }
     });
