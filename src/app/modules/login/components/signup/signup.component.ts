@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { ValidatePassword } from "@helpers";
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent implements OnInit, AfterViewInit {
 
   invitationUuid: number = 0;
 
@@ -24,6 +24,8 @@ export class SignupComponent implements OnInit {
   }, {
     validator: ValidatePassword.MatchPassword
   });
+
+  @ViewChild('inputTheme') inputTheme!: ElementRef<HTMLInputElement>;
 
   constructor(
     private appConfigService: AppConfigService,
@@ -39,6 +41,24 @@ export class SignupComponent implements OnInit {
         toolbar: { visible: false }
       }
     });
+  }
+
+  ngOnInit(): void {
+    feather.replace();
+    this.route.params.subscribe((params) => {
+      if (Object.keys(params).length > 0) {
+        this.invitationUuid = params['uuid'];
+        this.getInvitation();
+      }
+    });
+  }
+
+  ngAfterViewInit() {
+    if (localStorage.getItem('darkMode')) {
+      const body = document.getElementsByTagName('body')[0];
+      this.inputTheme.nativeElement.checked = false;
+      body.classList.add('is-dark');
+    }
   }
 
   register(): void {
@@ -58,13 +78,16 @@ export class SignupComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    feather.replace();
-    this.route.params.subscribe((params) => {
-      if (Object.keys(params).length > 0) {
-        this.invitationUuid = params['uuid'];
-        this.getInvitation();
-      }
-    });
+  setTheme(): void {
+    const body = document.getElementsByTagName('body')[0];
+
+    if (body.classList.contains('is-dark')) {
+      body.classList.remove('is-dark');
+      localStorage.removeItem('darkMode');
+    } else {
+      body.classList.add('is-dark');
+      localStorage.setItem('darkMode', JSON.stringify(true));
+    }
   }
+
 }

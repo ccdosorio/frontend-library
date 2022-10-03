@@ -1,4 +1,6 @@
 <img class="light-image" (error)="imgError()" [src]="img" *ngIf="img; else elseImg">
+<img class="dark-image" (error)="imgError()" [src]="img" *ngIf="img; else elseImg">
 <ng-template #elseImg>
     <img class="light-image" [src]="imageDefault">
+    <img class="dark-image" [src]="imageDefault">
 </ng-template>

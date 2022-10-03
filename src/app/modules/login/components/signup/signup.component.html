@@ -1,6 +1,18 @@
 <div class="auth-wrapper">
 
     <div class="auth-wrapper-inner is-single">
+
+        <!--Fake navigation-->
+        <div class="auth-nav">
+            <div class="left"></div>
+            <div class="center"></div>
+            <div class="right">
+                <label class="dark-mode ml-auto">
+                    <input #inputTheme type="checkbox" checked (click)="setTheme()">
+                    <span></span>
+                </label>
+            </div>
+        </div>
         <!--Single Centered Form-->
         <div class="single-form-wrap">
 

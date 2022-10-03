@@ -3,7 +3,7 @@
     <div class="webapp-navbar">
         <div class="webapp-navbar-inner">
             <div class="left">
-                <a [routerLink]="['Managements/Intro/Main']" routerLinkActive="router-link-active"  class="brand">
+                <a [routerLink]="['Managements/Intro/Main']" routerLinkActive="router-link-active" class="brand">
                     <img class="light-image" src="assets/img/illustrations/dashboards/lifestyle/reading.svg" alt="" />
                 </a>
                 <div class="separator"></div>
@@ -25,32 +25,70 @@
                 </div>
             </div>
             <div class="right">
-                <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                    <mat-icon>grid_view</mat-icon>
-                </button>
-                <mat-menu #menu="matMenu">
-                    <button mat-menu-item [routerLink]="['Managements/Profile/Main']">
-                        <mat-icon>manage_accounts</mat-icon>
-                        <span>Perfil</span>
-                    </button>
-                    <button mat-menu-item (click)="signOut()">
-                        <mat-icon>exit_to_app</mat-icon>
-                        <span>Cerrar sesión</span>
-                    </button>
-                </mat-menu>
+                <div class="toolbar ml-auto">
+
+                    <div class="toolbar-link">
+                        <label class="dark-mode ml-auto">
+                            <input #inputTheme type="checkbox" checked (click)="setTheme()">
+                            <span></span>
+                        </label>
+                    </div>
+
+                    <a class="toolbar-link right-panel-trigger" (click)="openPanel()">
+                        <i data-feather="grid"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Content Wrapper -->
-    <div id="app-onboarding" class="view-wrapper is-webapp" data-page-title="Blank Template" data-naver-offset="214"
-        data-menu-item="#layouts-navbar-menu" data-mobile-item="#home-sidebar-menu-mobile">
+    <!--Activity panel-->
+    <div id="activity-panel" class="right-panel-wrapper is-activity" [class.is-active]="isOpenPanel">
+        <div class="panel-overlay"></div>
 
-        <div class="page-content-wrapper">
-            <div class="page-content is-relative">
+        <div class="right-panel">
+            <div class="right-panel-head">
+                <h3>Configuraciones</h3>
+                <a class="close-panel" (click)="openPanel()">
+                    <i data-feather="chevron-right"></i>
+                </a>
+            </div>
+            <div class="tabs-wrapper is-triple-slider is-squared">
+
+                <div class="right-panel-body">
+                    <div id="team-side-tab" class="tab-content is-active">
+                        <!--Team Member-->
+                        <div class="team-card">
+                            <div class="meta">
+                                <span>Perfil</span>
+                            </div>
+                            <a class="link" [routerLink]="['Managements/Profile/Main']">
+                                <i data-feather="arrow-right"></i>
+                            </a>
+                        </div>
+
+                        <!--Team Member-->
+                        <div class="team-card">
+                            <div class="meta">
+                                <span>Cerrar sesión</span>
+                            </div>
+                            <a class="link" (click)="signOut()">
+                                <i data-feather="power"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Wrapper -->
+        <div id="app-onboarding" class="view-wrapper is-webapp">
+
+            <div class="page-content-wrapper">
+                <div class="page-content is-relative">
                     <router-outlet></router-outlet>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
-</div>

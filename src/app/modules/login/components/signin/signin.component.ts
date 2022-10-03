@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import * as feather from 'feather-icons';
@@ -10,12 +10,14 @@ import { AppConfigService, AuthenticationService } from '@services';
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss']
 })
-export class SigninComponent implements OnInit {
+export class SigninComponent implements OnInit, AfterViewInit {
 
   formLogin: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
     password: ['', [Validators.required]]
   });
+
+  @ViewChild('inputTheme') inputTheme!: ElementRef<HTMLInputElement>;
 
   constructor(
     private appConfigService: AppConfigService,
@@ -31,13 +33,33 @@ export class SigninComponent implements OnInit {
     });
   }
 
+  ngOnInit(): void {
+    feather.replace();
+  }
+
+  ngAfterViewInit(): void {
+    if (localStorage.getItem('darkMode')) {
+      const body = document.getElementsByTagName('body')[0];
+      this.inputTheme.nativeElement.checked = false;
+      body.classList.add('is-dark');
+    }
+  }
+
   login(): void {
     const { email, password } = this.formLogin.value;
     this.authenticationService.SignIn(email, password);
   }
 
-  ngOnInit(): void {
-    feather.replace();
+  setTheme(): void {
+    const body = document.getElementsByTagName('body')[0];
+
+    if (body.classList.contains('is-dark')) {
+      body.classList.remove('is-dark');
+      localStorage.removeItem('darkMode');
+    } else {
+      body.classList.add('is-dark');
+      localStorage.setItem('darkMode', JSON.stringify(true));
+    }
   }
 
 }

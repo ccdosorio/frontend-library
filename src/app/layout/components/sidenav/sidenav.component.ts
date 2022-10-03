@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 import * as feather from 'feather-icons';
 
@@ -11,9 +11,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent implements OnInit, AfterViewInit {
 
   navigation: Navigation[] = [];
+  @ViewChild('inputTheme') inputTheme!: ElementRef<HTMLInputElement>;
+  isOpenPanel: boolean = false;
 
   constructor(
     private _sidenavService: SidenavService,
@@ -22,14 +24,22 @@ export class SidenavComponent implements OnInit {
     private spinner: NgxSpinnerService
   ) { }
 
-  signOut(): void {
-    this.authenticationService.SignOut();
-  }
-
   ngOnInit(): void {
     feather.replace();
     this.getUserNavigation();
     this._sidenavService.change.subscribe(resp => this.getUserNavigation());
+  }
+
+  ngAfterViewInit(): void {
+    if (localStorage.getItem('darkMode')) {
+      const body = document.getElementsByTagName('body')[0];
+      this.inputTheme.nativeElement.checked = false;
+      body.classList.add('is-dark');
+    }
+  }
+
+  signOut(): void {
+    this.authenticationService.SignOut();
   }
 
   getUserNavigation(): void {
@@ -76,5 +86,21 @@ export class SidenavComponent implements OnInit {
       .subscribe((navigations) => {
         this.navigation = navigations;
       });
+  }
+
+  setTheme(): void {
+    const body = document.getElementsByTagName('body')[0];
+
+    if (body.classList.contains('is-dark')) {
+      body.classList.remove('is-dark');
+      localStorage.removeItem('darkMode');
+    } else {
+      body.classList.add('is-dark');
+      localStorage.setItem('darkMode', JSON.stringify(true));
+    }
+  }
+
+  openPanel(): void {
+    this.isOpenPanel = !this.isOpenPanel;
   }
 }
