@@ -27,7 +27,7 @@ export class SidenavComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     feather.replace();
     this.getUserNavigation();
-    this._sidenavService.change.subscribe(resp => this.getUserNavigation());
+    this._sidenavService.change.subscribe(_ => this.getUserNavigation());
   }
 
   ngAfterViewInit(): void {
@@ -42,26 +42,28 @@ export class SidenavComponent implements OnInit, AfterViewInit {
     this.authenticationService.SignOut();
   }
 
-  getUserNavigation(): void {
+  getUserNavigation(): void {    
     this.spinner.show();
     this.userService.getUser().subscribe({
       next: (resp) => {
         if (resp.authorities.length === 1) {
+          localStorage.setItem('rol', 'BASIC_USER_ROLE');
           this.navigationsAdmin();
         } else if (resp.authorities.length > 1) {
           resp.authorities.filter(item => {
             if (item.name === 'PROFESSOR_USER_ROLE') {
+              localStorage.setItem('rol', 'PROFESSOR_USER_ROLE');
               this.navigationsTeacher();
             }
             if (item.name === 'FAMILY_USER_ROLE') {
+              localStorage.setItem('rol', 'FAMILY_USER_ROLE');
               this.navigationsFamily();
             }
           });
         }
         this.spinner.hide();
       },
-      error: (error) => {
-        console.log(error);
+      error: _ => {
         this.spinner.hide();
       }
     });

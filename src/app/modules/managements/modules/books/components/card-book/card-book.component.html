@@ -1,12 +1,14 @@
 <!--Card-->
-<div class="onboarding-card card-book" *ngIf="book">
-  <app-img-book [img]="book.book.book_cover_m"></app-img-book>
-  <div class="onboarding-content">
-    <h3 class="dark-inverted">{{ book.book.title }}</h3>
-    <p><b>isbn10</b> {{ book.book.isbn10 }}</p>
-    <p><b>isbn13</b> {{ book.book.isbn13 }}</p>
-    <div class="button-wrap">
-      <a class="button h-button is-warning is-rounded" [routerLink]="['../PdfViewer', book.id ]" routerLinkActive="router-link-active" >Ver</a>
+<div class="onboarding-wrap-inner" *ngIf="book">
+  <div class="onboarding-card">
+    <app-img-book [img]="book.book.book_cover_m"></app-img-book>
+    <div class="onboarding-content">
+        <h3 class="dark-inverted">{{ book.book.title }}</h3>
+        <p><b>isbn10</b> {{ book.book.isbn10 }}</p>
+        <p><b>isbn13</b> {{ book.book.isbn13 }}</p>
+        <div class="button-wrap">
+            <a class="button h-button is-primary is-rounded is-elevated" [routerLink]="['../PdfViewer', book.id ]">Ver</a>
+        </div>
     </div>
   </div>
-</div> 
+</div>

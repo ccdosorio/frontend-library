@@ -1,5 +1,5 @@
 <div class="page-content-inner">
-    <h4>Agregar Libro</h4>
+    <h4 class="title-add-book">Agregar Libro</h4>
     <div class="form-body" [formGroup]="formClassroom">
         <div class="column is-12">
             <div class="field">
@@ -18,47 +18,49 @@
         *ngIf="!showEmptyMessage && listBooks.length === 0">70%</progress>
         
     <!-- Table -->
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z2"
-        *ngIf="!showEmptyMessage && listBooks.length > 0">
-
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-                </mat-checkbox>
-            </td>
-        </ng-container>
-
-        <!-- Id Column -->
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> Id. </th>
-            <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
-        </ng-container>
-
-        <!-- title Column -->
-        <ng-container matColumnDef="title">
-            <th mat-header-cell *matHeaderCellDef> Título </th>
-            <td mat-cell *matCellDef="let element"> {{ element.book.title }} </td>
-        </ng-container>
-
-        <!-- isbn10 Column -->
-        <ng-container matColumnDef="isbn10">
-            <th mat-header-cell *matHeaderCellDef> isbn10 </th>
-            <td mat-cell *matCellDef="let element"> {{ element.book.isbn10 }} </td>
-        </ng-container>
-
-        <!-- isbn13 Column -->
-        <ng-container matColumnDef="isbn13">
-            <th mat-header-cell *matHeaderCellDef> isbn13 </th>
-            <td mat-cell *matCellDef="let element"> {{ element.book.isbn13 }} </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
-        </tr>
-    </table>
+    <div class="table-wrapper">
+        <table mat-table [dataSource]="dataSource" class="table is-datatable is-hoverable table-is-bordered"
+            *ngIf="!showEmptyMessage && listBooks.length > 0">
+    
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox>
+                </td>
+            </ng-container>
+    
+            <!-- Id Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id. </th>
+                <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+            </ng-container>
+    
+            <!-- title Column -->
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef> Título </th>
+                <td mat-cell *matCellDef="let element"> {{ element.book.title }} </td>
+            </ng-container>
+    
+            <!-- isbn10 Column -->
+            <ng-container matColumnDef="isbn10">
+                <th mat-header-cell *matHeaderCellDef> isbn10 </th>
+                <td mat-cell *matCellDef="let element"> {{ element.book.isbn10 }} </td>
+            </ng-container>
+    
+            <!-- isbn13 Column -->
+            <ng-container matColumnDef="isbn13">
+                <th mat-header-cell *matHeaderCellDef> isbn13 </th>
+                <td mat-cell *matCellDef="let element"> {{ element.book.isbn13 }} </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+        </table>
+    </div>
 
     <app-placeholder-empty *ngIf="showEmptyMessage && listBooks.length === 0"></app-placeholder-empty>
 

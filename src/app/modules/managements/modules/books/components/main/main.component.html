@@ -1,7 +1,7 @@
 <div class="page-content-inner">
 
-  <!--Onboarding V1-->
-  <div class="onboarding-wrapper onboarding-v1">
+  <!--Onboarding V4-->
+  <div class="onboarding-wrapper onboarding-v4">
     <div class="title-wrap">
       <p>Libros</p>
       <h2 class="dark-inverted">¿Deseas crear un libro?</h2>
@@ -9,14 +9,13 @@
         <span>Nuevo Libro</span>
       </a>
     </div>
-
-    <div class="books--grid py-3">
+    <div class="onboarding-wrap books--grid py-3">
       <app-card-book [book]="book" *ngFor="let book of listBooks"></app-card-book>
     </div>
-  </div>
-      <!-- Placeholder Empty -->
-      <div class="table-wrapper" data-simplebar *ngIf="isData && listBooks.length === 0">
-        <app-placeholder-empty></app-placeholder-empty>
+    <!-- Placeholder Empty -->
+    <div class="table-wrapper" data-simplebar *ngIf="isData && listBooks.length === 0">
+      <app-placeholder-empty></app-placeholder-empty>
     </div>
+  </div>
 
 </div>

@@ -16,6 +16,8 @@ export class MainComponent implements OnInit {
 
   listClassrooms: Classroom[] = [];
   isData: boolean = false;
+  title: string = 'Clases';
+  rol: string = '';
 
   constructor(
     private appConfigService: AppConfigService,
@@ -49,6 +51,10 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.rol = localStorage.getItem('rol')! || 'Sin información';
+    if (this.rol == 'FAMILY_USER_ROLE') {
+      this.title = 'Salas';
+    }
     this.getData();
   }
 

@@ -21,17 +21,14 @@ export class DetailClassroomComponent implements OnInit {
   classroom: Classroom | undefined;
   showEmptyMessage: boolean = false;
   books: ClassroomBook[] = [];
+  titleValue: string = 'Estudiantes';
+  rol: string = '';
 
   tabs: any[] = [
     {
       tabIndex: 0,
       title: 'Libros',
       active: true,
-    },
-    {
-      tabIndex: 1,
-      title: 'Estudiantes',
-      active: false
     }
   ];
 
@@ -65,6 +62,16 @@ export class DetailClassroomComponent implements OnInit {
       } else {
         this.classroomId = 0;
       }
+    });
+    this.rol = localStorage.getItem('rol')! || 'Sin información';
+
+    if (this.rol == 'FAMILY_USER_ROLE') {
+      this.titleValue = 'Familiares';
+    }
+    this.tabs.push({
+      tabIndex: 1,
+      title: this.titleValue,
+      active: false
     });
   }
 

@@ -17,6 +17,8 @@ export class CreateClassroomComponent implements OnInit {
 
   loading = false;
   titleAction: string = '';
+  rol: string = '';
+  title: string = 'clase';
   classroomId: number | undefined;
 
   formClassroom: FormGroup = this.fb.group({
@@ -109,7 +111,11 @@ export class CreateClassroomComponent implements OnInit {
         this.titleAction = 'Crear';
         this.classroomId = 0;
       }
-    }); 
+    });
+    this.rol = localStorage.getItem('rol')! || 'Sin información';
+    if (this.rol == 'FAMILY_USER_ROLE') {
+      this.title = 'sala';
+    }
   }
 
 }

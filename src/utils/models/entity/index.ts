@@ -12,3 +12,5 @@ export * from './Authority';
 export * from './ClassroomBook';
 export * from './UserBook';
 export * from './UserInvitation';
+export * from './Question';
+export * from './BookMultipleChoiceQuestion';

@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { environment } from "../../../environments/environment";
-import { Book, BookISBN, ElasticSearch } from "@models";
+import { Book, BookISBN, ElasticSearch, Question } from "@models";
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,11 @@ export class BookService {
   // get user book
   getBookById(bookId: number): Observable<Book> {
     return this.http.get<Book>(environment.endpoint + 'user-books/' + bookId);
+  }
+
+  // get questions user book
+  getUserBookQuestions(bookId: number, page: number): Observable<Question> {
+    return this.http.get<Question>(environment.endpoint + 'user-books/' + bookId + '/questions-page/' + page);
   }
 
   // create books to user

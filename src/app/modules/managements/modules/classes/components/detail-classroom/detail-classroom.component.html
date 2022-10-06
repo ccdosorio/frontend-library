@@ -36,7 +36,8 @@
     </div>
     <div class="list-view-toolbar is-reversed">
         <div class="control">
-            <button class="button h-button is-info is-elevated" (click)="openDialogClassroomBook()">
+            <button [hidden]="!isTabBooks" class="button h-button is-info is-elevated"
+                (click)="openDialogClassroomBook()">
                 <span>Agregar</span>
             </button>
         </div>
@@ -44,7 +45,8 @@
         <div class="tabs-inner">
             <div class="tabs">
                 <ul>
-                    <li [class.is-active]="item.active" *ngFor="let item of tabs; index as i"><a (click)="changeTab(i)"><span>{{ item.title }}</span></a></li>
+                    <li [class.is-active]="item.active" *ngFor="let item of tabs; index as i"><a
+                            (click)="changeTab(i)"><span>{{ item.title }}</span></a></li>
                     <li class="tab-naver"></li>
                 </ul>
             </div>
@@ -67,13 +69,14 @@
 
             <!--Books Tab-->
             <div id="active-items-tab" class="tab-content" [class.is-active]="isTabBooks">
-                <app-list-classroom-books *ngIf="!showEmptyMessage && books.length > 0" [books]="books"></app-list-classroom-books>
+                <app-list-classroom-books *ngIf="!showEmptyMessage && books.length > 0" [books]="books">
+                </app-list-classroom-books>
                 <app-placeholder-empty *ngIf="showEmptyMessage && books.length === 0"></app-placeholder-empty>
             </div>
 
             <!--Students Tab-->
             <div id="inactive-items-tab" class="tab-content" [class.is-active]="isTabStudents">
-               <app-placeholder-empty></app-placeholder-empty>
+                <app-placeholder-empty></app-placeholder-empty>
             </div>
 
         </div>
