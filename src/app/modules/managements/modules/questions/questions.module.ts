@@ -7,6 +7,8 @@ import { CoreModule } from 'core/core.module';
 import { SharedModule } from '@shared';
 import { QuestionsBookComponent } from './components/questions-book/questions-book.component';
 
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 @NgModule({
   declarations: [
     MainComponent,
@@ -16,6 +18,7 @@ import { QuestionsBookComponent } from './components/questions-book/questions-bo
     CommonModule,
     QuestionsRouting,
     SharedModule,
+    PdfViewerModule,
     CoreModule
   ]
 })

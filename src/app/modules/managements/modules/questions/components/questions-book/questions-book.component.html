@@ -15,47 +15,60 @@
 
 <div class="page-content-inner">
 
-    <div class="flex-list-wrapper flex-list-v1">
-
-        <div class="flex-table">
-
-            <!--Table header-->
-            <div class="flex-table-header" data-filter-hide>
-                <span>Id</span>
-                <span>Pregunta</span>
-                <span>Opciones</span>
-                <span>Respuesta</span>
+    <div class="columns">
+        <div class="column is-6" *ngIf="isFile">
+            <div class="datatable-info center" fxLayout="row" fxLayoutAlign="center center">
+                <span class="title-add-book">{{ page }} / {{ totalPages }}</span>
             </div>
-
-            <div class="flex-list-inner" *ngIf="!showEmptyMessage && listQuestions.length > 0">
-                <!--Table item-->
-                <div class="flex-table-item" *ngFor="let item of listQuestions">
-                    <div class="flex-table-cell">
-                        <span class="light-text">{{ item.id }}</span>
-                    </div>
-                    <div class="flex-table-cell">
-                        <span class="light-text">{{ item.question_statement }}</span>
-                    </div>
-                    <div class="flex-table-cell">
-                        <span class="light-text">{{ item.options }}</span>
-                    </div>
-                    <div class="flex-table-cell">
-                        <span class="light-text">{{ item.answer }}</span>
-                    </div>
-                </div>
-            </div>
-
-            <app-placeholder-empty *ngIf="showEmptyMessage && listQuestions.length === 0"></app-placeholder-empty>
-
+            <pdf-viewer [src]="pdfSrc" [original-size]="true" [render-text]="true" [rotation]="0" [show-all]="false"
+                [fit-to-page]="true" [zoom]="1" [zoom-scale]="'page-width'" [stick-to-page]="true"
+                [external-link-target]="'blank'" [autoresize]="true" [show-borders]="false" class="pdf-viewer"
+                [page]="page" (after-load-complete)="afterLoadComplete($event)" class="pdf-viewer"></pdf-viewer>
         </div>
+        <div class="column is-6">
+            <div class="flex-list-wrapper flex-list-v1">
 
-        <!--Table Pagination-->
-        <nav class="flex-pagination pagination is-rounded" aria-label="pagination" data-filter-hide>
-            <ul class="pagination-list">
-                <li *ngFor="let item of tabs"><a class="pagination-link" [class.is-current]="item.current"
-                        (click)="changeTab(item.tabIndex)">{{ item.tabIndex }}</a></li>
-            </ul>
-        </nav>
+                <div class="flex-table">
+
+                    <!--Table header-->
+                    <div class="flex-table-header" data-filter-hide>
+                        <span>Id</span>
+                        <span>Pregunta</span>
+                        <span>Opciones</span>
+                        <span>Respuesta</span>
+                    </div>
+
+                    <div class="flex-list-inner" *ngIf="!showEmptyMessage && listQuestions.length > 0">
+                        <!--Table item-->
+                        <div class="flex-table-item" *ngFor="let item of listQuestions">
+                            <div class="flex-table-cell">
+                                <span class="light-text">{{ item.id }}</span>
+                            </div>
+                            <div class="flex-table-cell">
+                                <span class="light-text">{{ item.question_statement }}</span>
+                            </div>
+                            <div class="flex-table-cell">
+                                <span class="light-text">{{ item.options }}</span>
+                            </div>
+                            <div class="flex-table-cell">
+                                <span class="light-text">{{ item.answer }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <app-placeholder-empty *ngIf="showEmptyMessage && listQuestions.length === 0">
+                    </app-placeholder-empty>
+
+                </div>
+
+                <!--Table Pagination-->
+                <nav class="flex-pagination pagination is-rounded" aria-label="pagination" data-filter-hide>
+                    <ul class="pagination-list">
+                        <li *ngFor="let item of tabs"><a class="pagination-link" [class.is-current]="item.current"
+                                (click)="changeTab(item.tabIndex)">{{ item.tabIndex }}</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
-
 </div>

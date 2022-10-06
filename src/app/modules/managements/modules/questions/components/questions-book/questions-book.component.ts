@@ -17,8 +17,15 @@ export class QuestionsBookComponent implements OnInit {
   bookId: number = 0;
   PAGE_DEFAULT: number = 1;
   showEmptyMessage: boolean = false;
+  isFile: boolean = false;
   listQuestions: BookMultipleChoiceQuestion[] = [];
   titleBook: string = '';
+
+  // pdf
+  page: number = 1;
+  totalPages: number = 0;
+  isLoaded: boolean = false;
+  pdfSrc = '';
 
   // tabs paginator
   tabs: any[] = [];
@@ -44,6 +51,7 @@ export class QuestionsBookComponent implements OnInit {
         this.numberOfPages = Number(params['numberPages']);
         this.bookId = Number(params['id']);
         this.getPaginator();
+        this.loadPdf();
         this.getBook();
         this.getQuestions(this.PAGE_DEFAULT);
       }
@@ -93,9 +101,29 @@ export class QuestionsBookComponent implements OnInit {
     }
   }
 
+  loadPdf(): void {
+    this.spinner.show();
+    this.isFile = false;
+    this.bookService.viewPdfFile(this.bookId).subscribe({
+      next: (resp) => {
+        this.isFile = true;
+        var file = new Blob([resp], { type: 'application/pdf' });
+        var fileURL = URL.createObjectURL(file);
+        this.pdfSrc = fileURL;
+      },
+      error: _ => this.isFile = false
+    })
+  }
+
+  afterLoadComplete(pdfData: any) {
+    this.totalPages = pdfData.numPages;
+    this.isLoaded = true;
+  }
+
   changeTab(index: number) {
+    this.page = index;
     this.tabs = this.tabs.map((tab) => tab.tabIndex === index ? { ...tab, current: true } : { ...tab, current: false });
-    this.getQuestions(index)
+    this.getQuestions(index);
   }
 
 }
