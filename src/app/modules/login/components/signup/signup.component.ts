@@ -62,7 +62,9 @@ export class SignupComponent implements OnInit, AfterViewInit {
   }
 
   register(): void {
-    const { email, password, name } = this.formRegister.value;
+    const email = this.formRegister.get('email')?.value;
+    const name = this.formRegister.get('name')?.value;
+    const { password } = this.formRegister.value;    
     this.authenticationService.SignUp(email, password, name);
   }
 

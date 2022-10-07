@@ -1,6 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Classroom, Book, ClassroomBook } from '@models';
+import { Classroom, ClassromStudent, ClassroomBook } from '@models';
 
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -29,6 +29,11 @@ export class ClassroomService {
     return this.http.get<ClassroomBook[]>(environment.endpoint + 'classrooms/' + classroomId + '/books', {});
   }
 
+  // Obtener estudiantes de la clase
+  getClassroomStudents(classroomId: number): Observable<ClassromStudent[]> {
+    return this.http.get<ClassromStudent[]>(environment.endpoint + 'classrooms/' + classroomId + '/students', {});
+  }
+
   // Crear una clase
   create(bodeObject: any) {
     return this.http.post(environment.endpoint + 'classrooms', bodeObject, {});
@@ -44,11 +49,21 @@ export class ClassroomService {
     return this.http.post(environment.endpoint + 'classrooms/' + classromId, bodeObject, {});
   }
 
-  // upload excel invitations
+  // Descargar excel de invitaciones
   uploadFile(classroomId: number, file: File) {
     let body = new FormData();
     body.append('students', file);
-      
+
     return this.http.post(environment.endpoint + 'classrooms/' + classroomId + '/add-students', body, { responseType: 'blob' });
+  }
+
+  // Descargar template
+  downloadTemplate() {
+    return this.http.get(environment.endpoint + 'classrooms/students-file-template', { responseType: 'blob' });
+  }
+
+  // Invitar invitación a un familiar
+  sendInvitation(body: any, classromId: number) {
+    return this.http.post(environment.endpoint + 'classrooms/' + classromId + '/add-student', body, {});
   }
 }

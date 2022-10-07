@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Navigation } from '@models';
+import { Navigation, UserInfo } from '@models';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -14,6 +14,7 @@ import { AppConfigService, AuthenticationService, SidenavService, UserService } 
 export class MainComponent implements OnInit {
 
   navigation: Navigation[] = [];
+  user: UserInfo | undefined;
 
   constructor(
     private appConfigService: AppConfigService,
@@ -42,6 +43,7 @@ export class MainComponent implements OnInit {
     this.spinner.show();
     this.userService.getUser().subscribe({
       next: (resp) => {
+       this.user = resp;
         if (resp.authorities.length === 1) {
           this.navigationsAdmin();
         } else if (resp.authorities.length > 1) {

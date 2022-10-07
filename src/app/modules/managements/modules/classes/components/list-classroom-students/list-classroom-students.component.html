@@ -1,0 +1,24 @@
+<div class="tile-grid tile-grid-v1" *ngIf="students">
+    <!--Tile Grid v1-->
+    <div class="columns is-multiline">
+
+        <!--Grid item-->
+        <div class="column is-4" *ngFor="let item of students">
+            <div class="tile-grid-item">
+                <div class="tile-grid-item-inner">
+                    <div class="h-avatar is-medium">
+                        <img class="avatar" src="https://via.placeholder.com/150x150"
+                            data-demo-src="assets/img/avatars/photos/29.jpg" alt="" data-user-popover="25">
+                        <img class="badge" src="https://via.placeholder.com/150x150"
+                            data-demo-src="assets/img/icons/stacks/python.svg" alt="">
+                    </div>
+                    <div class="meta">
+                        <span class="dark-inverted">{{ item.user.name }}</span>
+                        <span>{{ item.user.email_address }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

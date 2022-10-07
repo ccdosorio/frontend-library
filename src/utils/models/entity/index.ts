@@ -14,3 +14,4 @@ export * from './UserBook';
 export * from './UserInvitation';
 export * from './Question';
 export * from './BookMultipleChoiceQuestion';
+export * from './ClassroomStudent';

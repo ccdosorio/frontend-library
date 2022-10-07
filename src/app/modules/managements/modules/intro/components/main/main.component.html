@@ -11,7 +11,7 @@
                     <div class="column is-6">
                         <div class="dashboard-card is-welcome">
                             <div class="welcome-title">
-                                <h3 class="dark-inverted" *ngIf="authenticationService.userData as user">Hola {{user.displayName}}</h3>
+                                <h3 class="dark-inverted" *ngIf="user">Hola {{user.name}}</h3>
                                 <p>Estamos felices de tenerte con nosotros.</p>
                             </div>
                             <div class="welcome-progress">

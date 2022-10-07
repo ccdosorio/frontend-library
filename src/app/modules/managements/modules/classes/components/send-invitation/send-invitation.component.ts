@@ -20,9 +20,11 @@ export class SendInvitationComponent implements OnInit {
 
   file: File | undefined;
   user: UserInfo | undefined;
+  templateUrl: string | undefined;
 
   isFamilyPlan: boolean = false;
   isTeacherPlan: boolean = false;
+  isTemplate: boolean = false;
 
   formInvite: FormGroup = this.fb.group({
     name: ['', Validators.required],
@@ -39,6 +41,7 @@ export class SendInvitationComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
+    this.downloadTemplate();
   }
 
   onFileChange(event: any) {
@@ -58,7 +61,7 @@ export class SendInvitationComponent implements OnInit {
         SweetAlertMessage('success', 'Exitoso', 'Archivo subido con éxito.');
         const blob = new Blob([resp], { type: 'application/vnd.ms.excel' });
         const fileXls = new File([blob], this.file!.name, { type: 'application/vnd.ms.excel' });
-        FileSaver.saveAs(fileXls);
+        FileSaver.saveAs(fileXls, 'Invitations Status.xlsx');
         this.data.action.dialog.closeAll();
         this.spinner.hide();
         this.file = undefined;
@@ -79,7 +82,6 @@ export class SendInvitationComponent implements OnInit {
             this.user!.authorities.filter(item => {
               if (item.name === 'PROFESSOR_USER_ROLE') {
                 this.isTeacherPlan = true;
-
               }
               if (item.name === 'FAMILY_USER_ROLE') {
                 this.isFamilyPlan = true;
@@ -90,8 +92,32 @@ export class SendInvitationComponent implements OnInit {
       });
   }
 
-  sendInvite(): void {
+  downloadTemplate(): void {
+    this.classroomService.downloadTemplate().subscribe({
+      next: (resp) => {
+        this.isTemplate = true;
+        var file = new Blob([resp], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;' });
+        var fileURL = URL.createObjectURL(file);
+        this.templateUrl = fileURL;
+      },
+      error: _ => this.isTemplate = false
+    });
+  }
 
+  download(): void {
+    FileSaver.saveAs(this.templateUrl, 'Template Students');
+  }
+
+  sendInvite(): void {
+    this.classroomService.sendInvitation(this.formInvite.value, this.data.data.id).subscribe({
+      next: _ => {
+        SweetAlertMessage('success', 'Exitoso', 'Invitación enviada con éxito.');
+        this.data.action.dialogReference.close();
+      },
+      error: (error) => {
+        SweetAlertMessage('error', 'Error', error.error.message);
+      }
+    });
   }
 
 }

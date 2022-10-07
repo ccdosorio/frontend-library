@@ -76,7 +76,8 @@
 
             <!--Students Tab-->
             <div id="inactive-items-tab" class="tab-content" [class.is-active]="isTabStudents">
-                <app-placeholder-empty></app-placeholder-empty>
+                <app-list-classroom-students *ngIf="!showEmptyMessageStudents && students.length > 0" [students]="students"></app-list-classroom-students>
+                <app-placeholder-empty *ngIf="showEmptyMessageStudents && students.length === 0"></app-placeholder-empty>
             </div>
 
         </div>

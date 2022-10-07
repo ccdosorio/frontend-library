@@ -11,6 +11,7 @@ import { SendInvitationComponent } from './components/send-invitation/send-invit
 import { DetailClassroomComponent } from './components/detail-classroom/detail-classroom.component';
 import { ListClassroomBooksComponent } from './components/list-classroom-books/list-classroom-books.component';
 import { CreateClassroomBookComponent } from './components/create-classroom-book/create-classroom-book.component';
+import { ListClassroomStudentsComponent } from './components/list-classroom-students/list-classroom-students.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { CreateClassroomBookComponent } from './components/create-classroom-book
     SendInvitationComponent,
     DetailClassroomComponent,
     ListClassroomBooksComponent,
-    CreateClassroomBookComponent
+    CreateClassroomBookComponent,
+    ListClassroomStudentsComponent
   ],
   imports: [
     CommonModule,

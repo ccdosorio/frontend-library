@@ -4,9 +4,10 @@
         <div class="error-wrapper">
             <div class="error-inner has-text-centered">
                 <img class="light-image" src="assets/img/illustrations/placeholders/launch.svg" alt="" />
+                <img class="dark-image" src="assets/img/illustrations/placeholders/launch-dark.svg" alt="" />
                 <h3 class="dark-inverted">Gracias por registrarte</h3>
                 <p *ngIf="authenticationService.userData as user">Hemos enviado un correo electrónico de confirmación a
-                    <strong>{{user.email}}</strong>.</p>
+                    <strong class="title-add-book">{{user.email}}</strong>.</p>
                 <p>Por favor revise su correo electrónico y haga clic en el enlace para verificar su dirección de
                     correo electrónico.</p>
                 <br>

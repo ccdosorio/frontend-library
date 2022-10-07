@@ -6,7 +6,7 @@ import * as feather from 'feather-icons';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { AppConfigService, ClassroomService } from '@services';
-import { Classroom, ClassroomBook } from '@models';
+import { Classroom, ClassroomBook, ClassromStudent } from '@models';
 import { SendInvitationComponent } from '../send-invitation/send-invitation.component';
 import { CreateClassroomBookComponent } from '../create-classroom-book/create-classroom-book.component';
 
@@ -20,7 +20,9 @@ export class DetailClassroomComponent implements OnInit {
   classroomId: number | undefined;
   classroom: Classroom | undefined;
   showEmptyMessage: boolean = false;
+  showEmptyMessageStudents: boolean = false;
   books: ClassroomBook[] = [];
+  students: ClassromStudent[] = [];
   titleValue: string = 'Estudiantes';
   rol: string = '';
 
@@ -59,6 +61,7 @@ export class DetailClassroomComponent implements OnInit {
       if (Object.keys(params).length > 0) {
         this.classroomId = Number(params['id']);
         this.getClassroom(Number(params['id']));
+        this.getClassroomStudents(Number(params['id']));
       } else {
         this.classroomId = 0;
       }
@@ -101,6 +104,19 @@ export class DetailClassroomComponent implements OnInit {
           this.showEmptyMessage = false;
           this.spinner.hide();
         }
+      });
+  }
+
+  getClassroomStudents(classroomId: number): void {
+    this.classroomService.getClassroomStudents(classroomId)
+      .subscribe({
+        next: (resp) => {
+          if (resp.length === 0) {
+            this.showEmptyMessageStudents = true;
+          }
+          this.students = resp;
+        },
+        error: _ => this.showEmptyMessageStudents = false
       });
   }
 

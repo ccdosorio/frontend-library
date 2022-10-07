@@ -65,8 +65,9 @@
 </div>
 
 <!-- Button -->
-<div class="d-flex justify-content-center">
+<div class="buttons d-flex justify-content-center">
     <a type="button" class="button h-button is-info is-raised" (click)="upload()" *ngIf="isTeacherPlan">Subir</a>
+    <button type="button" class="button h-button is-success is-raised" (click)="download()" *ngIf="isTeacherPlan" [disabled]="!isTemplate">Descargar plantilla</button>
     <button *ngIf="isFamilyPlan" class="button h-button is-info is-raised" [disabled]="formInvite.invalid"
         (click)="sendInvite()">
         Enviar
