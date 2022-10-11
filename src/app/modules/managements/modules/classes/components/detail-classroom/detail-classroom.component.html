@@ -57,19 +57,9 @@
         <!--List-->
         <div class="list-view list-view-v4">
 
-            <!--List Empty Search Placeholder -->
-            <div class="page-placeholder custom-text-filter-placeholder is-hidden">
-                <div class="placeholder-content">
-                    <img class="light-image" src="assets/img/illustrations/placeholders/search-3.svg" alt="" />
-                    <h3>We couldn't find any matching results.</h3>
-                    <p class="is-larger">Too bad. Looks like we couldn't find any matching results for the
-                        search terms you've entered. Please try different search terms or criteria.</p>
-                </div>
-            </div>
-
             <!--Books Tab-->
             <div id="active-items-tab" class="tab-content" [class.is-active]="isTabBooks">
-                <app-list-classroom-books *ngIf="!showEmptyMessage && books.length > 0" [books]="books">
+                <app-list-classroom-books *ngIf="!showEmptyMessage && books.length > 0" [books]="books" [classroomId]="classroomId">
                 </app-list-classroom-books>
                 <app-placeholder-empty *ngIf="showEmptyMessage && books.length === 0"></app-placeholder-empty>
             </div>

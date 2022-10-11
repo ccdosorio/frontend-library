@@ -24,7 +24,10 @@
             </div>
             <div class="meta-right">
                 <div class="buttons">
-                    <a class="button h-button is-warning is-outlined is-raised"[routerLink]="['/Managements/Books/PdfViewer', item.user_book.id]">Ver</a>
+                    <a class="button h-button is-warning is-outlined is-raised"
+                        [routerLink]="['../../PdfViewerClassroom', classroomId, item.id]">
+                        Ver
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Classroom, ClassromStudent, ClassroomBook } from '@models';
 
@@ -55,6 +55,13 @@ export class ClassroomService {
     body.append('students', file);
 
     return this.http.post(environment.endpoint + 'classrooms/' + classroomId + '/add-students', body, { responseType: 'blob' });
+  }
+
+  // view file pdf
+  viewPdfFileClassroom(bookId: number, classroomId: number) {
+    let headers = new HttpHeaders()
+      .set('Accept', 'application/pdf');
+    return this.http.get(environment.endpoint + 'classrooms/' + classroomId + '/students/books/' + bookId, { headers, responseType: 'blob' });
   }
 
   // Descargar template

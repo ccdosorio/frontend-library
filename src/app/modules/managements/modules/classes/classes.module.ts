@@ -12,6 +12,9 @@ import { DetailClassroomComponent } from './components/detail-classroom/detail-c
 import { ListClassroomBooksComponent } from './components/list-classroom-books/list-classroom-books.component';
 import { CreateClassroomBookComponent } from './components/create-classroom-book/create-classroom-book.component';
 import { ListClassroomStudentsComponent } from './components/list-classroom-students/list-classroom-students.component';
+import { PdfViewerClassroomComponent } from './components/pdf-viewer-classroom/pdf-viewer-classroom.component';
+
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -22,13 +25,15 @@ import { ListClassroomStudentsComponent } from './components/list-classroom-stud
     DetailClassroomComponent,
     ListClassroomBooksComponent,
     CreateClassroomBookComponent,
-    ListClassroomStudentsComponent
+    ListClassroomStudentsComponent,
+    PdfViewerClassroomComponent
   ],
   imports: [
     CommonModule,
     ClassesRouting,
     CoreModule,
-    SharedModule
+    SharedModule,
+    PdfViewerModule
   ]
 })
 export class ClassesModule { }

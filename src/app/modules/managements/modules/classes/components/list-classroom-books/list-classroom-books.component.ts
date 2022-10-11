@@ -9,6 +9,7 @@ import { ClassroomBook } from '@models';
 export class ListClassroomBooksComponent implements OnInit {
 
   @Input() books: ClassroomBook[] = [];
+  @Input() classroomId: number | undefined;
 
   constructor() { }
 
