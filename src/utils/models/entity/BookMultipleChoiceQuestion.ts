@@ -3,7 +3,7 @@ export interface BookMultipleChoiceQuestion {
     position:           number;
     answer:             string;
     context:            string;
-    options:            string;
+    options:            string[];
     question_statement: string;
     created_at:         Date;
     updated_at:         Date;

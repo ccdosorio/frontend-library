@@ -19,7 +19,7 @@
                 </span>
                 <span>Anterior</span>
             </button>
-            <button class="button h-button is-warning" (click)="nextPage()" [disabled]="page === totalPages">
+            <button class="button h-button is-warning" (click)="getQuestions()" [disabled]="page === totalPages">
                 <span class="icon">
                     <i class="fas fa-arrow-right"></i>
                 </span>
@@ -47,4 +47,42 @@
         <app-placeholder-empty *ngIf="!isFile"></app-placeholder-empty>
     </div>
 
+</div>
+
+<!-- Modal Questions   -->
+
+<div class="modal h-modal" [class.is-active]="isQuestions">
+    <div class="modal-background  h-modal-close"></div>
+    <div class="modal-content">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <h3>Resonde las siguientes preguntas</h3>
+                <button class="h-modal-close ml-auto">
+                    <i data-feather="x"></i>
+                </button>
+            </header>
+            <div class="modal-card-body">
+                <div class="inner-content">
+                    <div class="modal-form">
+                        <div class="columns is-multiline">
+                            <div class="column is-12" *ngFor="let item of listQuestions; let i = index">
+                                <div class="field">
+                                    <h3>{{ item.position }} - {{ item.question_statement }}</h3>
+                                    <div class="buttons">
+                                        <a class="button h-button" [class.is-warning]="toPaintOption(item.position, item.id, option)" *ngFor="let option of listQuestions[i].options"
+                                            (click)="generateAnswers(item, option)">
+                                            {{ option }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-card-foot is-end">
+                <a class="button h-button is-primary is-raised is-rounded" (click)="createAnswers()">Guardar</a>
+            </div>
+        </div>
+    </div>
 </div>

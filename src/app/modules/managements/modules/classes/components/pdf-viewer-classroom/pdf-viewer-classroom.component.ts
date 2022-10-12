@@ -3,7 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
-import { AppConfigService, ClassroomService } from '@services';
+import { AppConfigService, BookService, ClassroomService, UserService } from '@services';
+import { ClassroomBook, BookMultipleChoiceQuestion, UserInfo, CreateStudentBookAnswer } from '@models';
+import { SplitPipe } from '@pipes';
+import { SweetAlertMessage } from '@functions';
 
 @Component({
   selector: 'app-pdf-viewer-classroom',
@@ -13,20 +16,31 @@ import { AppConfigService, ClassroomService } from '@services';
 export class PdfViewerClassroomComponent implements OnInit {
 
   bookId: number = 0;
+  book: ClassroomBook | undefined;
   classroomId: number = 0;
   isFile: boolean = false;
-  pdfSrc = '';
+  user: UserInfo | undefined;
 
   // pdf
   page: number = 1;
   totalPages: number = 0;
   isLoaded: boolean = false;
+  pdfSrc = '';
+
+  // questions
+  listQuestions: BookMultipleChoiceQuestion[] = [];
+  isQuestions: boolean = false;
+
+  // answers
+  studentAnswers: CreateStudentBookAnswer[] = [];
 
   constructor(
     private appConfigService: AppConfigService,
     private route: ActivatedRoute,
     private classroomService: ClassroomService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private userService: UserService,
+    private bookService: BookService
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -42,6 +56,7 @@ export class PdfViewerClassroomComponent implements OnInit {
       this.bookId = params['bookId'];
       this.classroomId = params['classroomId'];
       this.loadPdf();
+      this.getUser();
     });
   }
 
@@ -54,9 +69,7 @@ export class PdfViewerClassroomComponent implements OnInit {
         var file = new Blob([resp], { type: 'application/pdf' });
         var fileURL = URL.createObjectURL(file);
         this.pdfSrc = fileURL;
-        console.log(this.pdfSrc);
-
-        //this.getBook();
+        this.getBook();
         this.spinner.hide();
       },
       error: () => {
@@ -66,17 +79,94 @@ export class PdfViewerClassroomComponent implements OnInit {
     })
   }
 
-  afterLoadComplete(pdfData: any) {
+  getBook(): void {
+    this.classroomService.getBookByClassroom(this.classroomId, this.bookId).subscribe({
+      next: (resp) => this.book = resp
+    });
+  }
+
+  getUser(): void {
+    this.userService.getUser()
+      .subscribe({
+        next: resp => this.user = resp
+      });
+  }
+
+  getQuestions(): void {
+    const splitPipe = new SplitPipe();
+    this.listQuestions = [];
+    this.spinner.show();
+    this.bookService.getUserBookQuestions(this.book!.user_book.id, this.page)
+      .subscribe({
+        next: (resp) => {
+          if (resp.book_multiple_choice_questions.length > 0) {
+            this.isQuestions = true;
+            this.listQuestions = resp.book_multiple_choice_questions;
+            this.listQuestions.map((item, i) => {
+              return this.listQuestions[i].options = splitPipe.transform(item.options);
+            })
+          }
+          this.spinner.hide();
+        },
+        error: _ => {
+          this.listQuestions = [];
+          this.isQuestions = false;
+          this.page++;
+          this.spinner.hide();
+        }
+      });
+  }
+
+  createAnswers(): void {    
+    if (this.studentAnswers.length - 1 !== this.listQuestions.length) {
+      SweetAlertMessage('error', 'Error', 'Por favor responde todas las preguntas para continuar.');
+      return;
+    }
+    console.log(this.studentAnswers);
+    this.isQuestions = false;
+    this.page++;
+    
+    // this.classroomService.createStudentBookAnswer(this.classroomId, this.user!.id, this.bookId)
+    //   .subscribe({
+    //     next: resp => {
+    //       console.log(resp);
+    //     },
+    //     error: error => {
+    //       console.log(error);
+
+    //     }
+    //   });
+  }
+
+  afterLoadComplete(pdfData: any): void {
     this.totalPages = pdfData.numPages;
     this.isLoaded = true;
   }
 
-  nextPage() {
-    this.page++;
+  prevPage(): void {
+    this.page--;
   }
 
-  prevPage() {
-    this.page--;
+  generateAnswers(question: BookMultipleChoiceQuestion, answer: string): void {
+    this.studentAnswers[question.position] = {
+      answer: answer,
+      book_multiple_choice_question_id: question.id
+    };
+  }
+
+  toPaintOption(position: number, questionId: number, option: string): boolean {
+    if (this.studentAnswers.length > 0) {
+      if (this.studentAnswers[position] !== undefined &&
+        this.studentAnswers[position].answer === option &&
+        this.studentAnswers[position].book_multiple_choice_question_id === questionId
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
   }
 
 }

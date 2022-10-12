@@ -29,6 +29,11 @@ export class ClassroomService {
     return this.http.get<ClassroomBook[]>(environment.endpoint + 'classrooms/' + classroomId + '/books', {});
   }
 
+  // Obtener libros de la clase
+  getBookByClassroom(classroomId: number, bookId: number): Observable<ClassroomBook> {
+    return this.http.get<ClassroomBook>(environment.endpoint + 'classrooms/' + classroomId + '/books/' + bookId, {});
+  }
+
   // Obtener estudiantes de la clase
   getClassroomStudents(classroomId: number): Observable<ClassromStudent[]> {
     return this.http.get<ClassromStudent[]>(environment.endpoint + 'classrooms/' + classroomId + '/students', {});
@@ -72,5 +77,10 @@ export class ClassroomService {
   // Invitar invitación a un familiar
   sendInvitation(body: any, classromId: number) {
     return this.http.post(environment.endpoint + 'classrooms/' + classromId + '/add-student', body, {});
+  }
+
+  // Crear la respuesta del libro
+  createStudentBookAnswer(classroomId: number, userId: number, bookId: number) {
+    return this.http.post(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/answers', {}, {});
   }
 }

@@ -64,7 +64,7 @@ export class QuestionsBookComponent implements OnInit {
     this.spinner.show();
     this.bookService.getUserBookQuestions(this.bookId, page)
       .subscribe({
-        next: (resp) => {
+        next: (resp) => {          
           if (resp.book_multiple_choice_questions.length === 0) {
             this.showEmptyMessage = true;
           }

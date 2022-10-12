@@ -68,16 +68,16 @@ export class PdfViewerComponent implements OnInit {
     });
   }
 
-  afterLoadComplete(pdfData: any) {
+  afterLoadComplete(pdfData: any): void {
     this.totalPages = pdfData.numPages;
     this.isLoaded = true;
   }
 
-  nextPage() {
+  nextPage(): void {
     this.page++;
   }
 
-  prevPage() {
+  prevPage(): void {
     this.page--;
   }
 

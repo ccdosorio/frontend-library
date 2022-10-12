@@ -32,7 +32,6 @@
 
                     <!--Table header-->
                     <div class="flex-table-header" data-filter-hide>
-                        <span>Id</span>
                         <span>Pregunta</span>
                         <span>Opciones</span>
                         <span>Respuesta</span>
@@ -41,9 +40,6 @@
                     <div class="flex-list-inner" *ngIf="!showEmptyMessage && listQuestions.length > 0">
                         <!--Table item-->
                         <div class="flex-table-item" *ngFor="let item of listQuestions">
-                            <div class="flex-table-cell">
-                                <span class="light-text">{{ item.id }}</span>
-                            </div>
                             <div class="flex-table-cell">
                                 <span class="light-text">{{ item.question_statement }}</span>
                             </div>
@@ -64,8 +60,12 @@
                 <!--Table Pagination-->
                 <nav class="flex-pagination pagination is-rounded" aria-label="pagination" data-filter-hide>
                     <ul class="pagination-list">
-                        <li *ngFor="let item of tabs"><a class="pagination-link" [class.is-current]="item.current"
-                                (click)="changeTab(item.tabIndex)">{{ item.tabIndex }}</a></li>
+                        <li *ngFor="let item of tabs">
+                            <a class="pagination-link" [class.is-current]="item.current"
+                                (click)="changeTab(item.tabIndex)">
+                                {{ item.tabIndex }}
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

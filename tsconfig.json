@@ -29,7 +29,8 @@
       "@navigations": ["app/navigations"],
       "@functions": ["utils/functions"],
       "@security": ["core/security"],
-      "@helpers": ["utils/helpers"]
+      "@helpers": ["utils/helpers"],
+      "@pipes": ["utils/pipes"]
     }
   },
   "angularCompilerOptions": {

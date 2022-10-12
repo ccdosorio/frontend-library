@@ -35,6 +35,11 @@ export class BookService {
     return this.http.get<Question>(environment.endpoint + 'user-books/' + bookId + '/questions-page/' + page);
   }
 
+  // get user book
+  getBook(bookId: number): Observable<BookISBN> {
+    return this.http.get<BookISBN>(environment.endpoint + 'books/' + bookId);
+  }
+
   // create books to user
   createUserBook(body: any): Observable<Book> {
     return this.http.post<Book>(environment.endpoint + 'user-books', body, {});

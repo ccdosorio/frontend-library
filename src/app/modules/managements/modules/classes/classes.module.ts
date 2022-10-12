@@ -15,6 +15,7 @@ import { ListClassroomStudentsComponent } from './components/list-classroom-stud
 import { PdfViewerClassroomComponent } from './components/pdf-viewer-classroom/pdf-viewer-classroom.component';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SplitPipe } from '@pipes';
 
 @NgModule({
   declarations: [
@@ -26,14 +27,15 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ListClassroomBooksComponent,
     CreateClassroomBookComponent,
     ListClassroomStudentsComponent,
-    PdfViewerClassroomComponent
+    PdfViewerClassroomComponent,
+    SplitPipe
   ],
   imports: [
     CommonModule,
     ClassesRouting,
     CoreModule,
     SharedModule,
-    PdfViewerModule
+    PdfViewerModule,
   ]
 })
 export class ClassesModule { }
