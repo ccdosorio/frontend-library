@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
 import { AppConfigService, BookService, ClassroomService, UserService } from '@services';
-import { ClassroomBook, BookMultipleChoiceQuestion, UserInfo, CreateStudentBookAnswer } from '@models';
+import { ClassroomBook, BookMultipleChoiceQuestion, UserInfo, CreateStudentBookAnswer, Answer } from '@models';
 import { SplitPipe } from '@pipes';
 import { SweetAlertMessage } from '@functions';
 
@@ -33,10 +33,13 @@ export class PdfViewerClassroomComponent implements OnInit {
 
   // answers
   studentAnswers: CreateStudentBookAnswer[] = [];
+  studentResults: Answer[] = [];
+  isResults: boolean = false;
 
   constructor(
     private appConfigService: AppConfigService,
     private route: ActivatedRoute,
+    private router: Router,
     private classroomService: ClassroomService,
     private spinner: NgxSpinnerService,
     private userService: UserService,
@@ -117,25 +120,32 @@ export class PdfViewerClassroomComponent implements OnInit {
       });
   }
 
-  createAnswers(): void {    
-    if (this.studentAnswers.length - 1 !== this.listQuestions.length) {
+  createAnswers(): void {
+    this.studentAnswers.shift();
+    if (this.studentAnswers.length !== this.listQuestions.length) {
       SweetAlertMessage('error', 'Error', 'Por favor responde todas las preguntas para continuar.');
       return;
     }
-    console.log(this.studentAnswers);
-    this.isQuestions = false;
-    this.page++;
-    
-    // this.classroomService.createStudentBookAnswer(this.classroomId, this.user!.id, this.bookId)
-    //   .subscribe({
-    //     next: resp => {
-    //       console.log(resp);
-    //     },
-    //     error: error => {
-    //       console.log(error);
-
-    //     }
-    //   });
+    this.classroomService.createStudentBookAnswer(this.classroomId, this.user!.id, this.book!.user_book.book.id, this.studentAnswers)
+      .subscribe({
+        next: resp => {
+          this.isQuestions = false;
+          this.studentResults = resp;
+          this.isResults = true;
+          // reset
+          this.listQuestions = [];
+          this.studentAnswers = [];
+          if (this.page !== this.totalPages) {
+            this.page++;
+          } else {
+            this.router.navigate(['/Managements/Classrooms/Detail/', this.classroomId]);
+          }
+        },
+        error: error => {
+          SweetAlertMessage('error', 'Error', error.error.message);
+          this.isQuestions = false;
+        }
+      });
   }
 
   afterLoadComplete(pdfData: any): void {
@@ -167,6 +177,11 @@ export class PdfViewerClassroomComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  closeModalResults(): void {
+    this.isResults = false;
+    this.studentResults = [];
   }
 
 }

@@ -15,3 +15,4 @@ export * from './UserInvitation';
 export * from './Question';
 export * from './BookMultipleChoiceQuestion';
 export * from './ClassroomStudent';
+export * from './Answer';

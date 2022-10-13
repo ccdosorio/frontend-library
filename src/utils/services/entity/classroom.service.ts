@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Classroom, ClassromStudent, ClassroomBook } from '@models';
 
-import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
+
+import { Classroom, ClassromStudent, ClassroomBook, CreateStudentBookAnswer, Answer } from '@models';
+import { environment } from 'environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +81,7 @@ export class ClassroomService {
   }
 
   // Crear la respuesta del libro
-  createStudentBookAnswer(classroomId: number, userId: number, bookId: number) {
-    return this.http.post(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/answers', {}, {});
+  createStudentBookAnswer(classroomId: number, userId: number, bookId: number, body: CreateStudentBookAnswer[]): Observable<Answer[]> {
+    return this.http.post<Answer[]>(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/answers', { answers: body }, {});
   }
 }
