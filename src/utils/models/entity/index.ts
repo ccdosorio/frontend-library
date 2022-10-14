@@ -17,3 +17,4 @@ export * from './BookMultipleChoiceQuestion';
 export * from './ClassroomStudent';
 export * from './Answer';
 export * from './UserProfile';
+export * from './StudentClassroom';

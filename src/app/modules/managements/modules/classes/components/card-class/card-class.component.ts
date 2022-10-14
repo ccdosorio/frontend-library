@@ -9,6 +9,7 @@ import { Classroom } from '@models';
 export class CardClassComponent implements OnInit {
 
   @Input() classroom: Classroom | undefined;
+  @Input() isAssignment: boolean = false;
 
   constructor() { }
 

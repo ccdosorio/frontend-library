@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Classroom, ClassromStudent, ClassroomBook, CreateStudentBookAnswer, Answer } from '@models';
+import { Classroom, ClassromStudent, ClassroomBook, CreateStudentBookAnswer, Answer, StudentClassroom } from '@models';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -43,6 +43,11 @@ export class ClassroomService {
   // Obtener el cuántas clases hay registradas
   getCountClassroom() {
     return this.http.get(environment.endpoint + 'counting/classrooms');
+  }
+
+  // Obtener las clases del estudiante (asignaciones)
+  getStudentClassroom(): Observable<StudentClassroom[]> {
+    return this.http.get<StudentClassroom[]>(environment.endpoint + 'students/classrooms');
   }
 
   // Crear una clase

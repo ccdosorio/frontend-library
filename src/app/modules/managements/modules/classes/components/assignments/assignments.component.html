@@ -1,1 +1,27 @@
-<p>assignments works!</p>
+<div class="page-content-inner">
+
+    <div class="projects-toolbar">
+
+        <!--Onboarding-->
+        <div class="standard-onboarding">
+            <div class="title-wrap">
+                <p></p>
+                <h2>Asignaciones</h2>
+            </div>
+        </div>
+    </div>
+
+    <!--List-->
+    <div class="list-view list-view-v3">
+        <!--Item-->
+        <div id="active-items-tab" class="tab-content is-active">
+            <div class="list-view-inner" *ngFor="let classroom of listClassrooms">
+                <app-card-class [classroom]="classroom.classroom" [isAssignment]="true"></app-card-class>
+            </div>
+        </div>
+    </div>
+    <!-- Placeholder Empty -->
+    <div class="table-wrapper" data-simplebar *ngIf="isData && listClassrooms.length === 0">
+        <app-placeholder-empty></app-placeholder-empty>
+    </div>
+</div>

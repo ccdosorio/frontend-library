@@ -11,7 +11,7 @@
             </span>
         </div>
         <div class="meta-right">
-            <div class="buttons">
+            <div class="buttons" [hidden]="isAssignment">
                 <a class="button h-button is-info is-outlined is-raised"
                     [routerLink]="['../Detail', classroom.id]">Ver</a>
                 <a class="button h-button is-info is-outlined is-raised"

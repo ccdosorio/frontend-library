@@ -19,7 +19,7 @@
         <!--Item-->
         <div id="active-items-tab" class="tab-content is-active">
             <div class="list-view-inner" *ngFor="let classroom of listClassrooms">
-                <app-card-class [classroom]="classroom"></app-card-class>
+                <app-card-class [classroom]="classroom" [isAssignment]="false"></app-card-class>
             </div>
         </div>
     </div>
