@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { Routes, RouterModule } from '@angular/router';
+import { AssignmentsComponent } from './components/assignments/assignments.component';
 
 import { CreateClassroomComponent } from './components/create-classroom/create-classroom.component';
 import { DetailClassroomComponent } from './components/detail-classroom/detail-classroom.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
     { path: 'Edit/:id', component: CreateClassroomComponent },
     { path: 'Detail/:id', component: DetailClassroomComponent },
     { path: 'PdfViewerClassroom/:classroomId/:bookId', component: PdfViewerClassroomComponent },
+    { path: 'Assignments', component: AssignmentsComponent },
     { path: '**', redirectTo: '/NotFound/Main' }
 ];
 
