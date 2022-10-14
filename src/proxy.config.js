@@ -4,7 +4,8 @@ const PROXY_CONFIG = [
             '/users',
             '/classrooms',
             '/books',
-            '/user-books'
+            '/user-books',
+            '/counting'
         ],
         target: 'https://library-galileo-project.herokuapp.com/v1/',
         secure: false,
