@@ -23,6 +23,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "ng2-pdf-viewer",
+              "pdfjs-dist/build/pdf",
+              "pdfjs-dist/web/pdf_viewer"
+            ],
             "outputPath": "dist/frontend-library",
             "index": "src/index.html",
             "main": "src/main.ts",
