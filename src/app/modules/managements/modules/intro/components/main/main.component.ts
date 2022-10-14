@@ -4,7 +4,7 @@ import { Navigation, UserInfo } from '@models';
 
 import { NgxSpinnerService } from 'ngx-spinner';
 
-import { AppConfigService, AuthenticationService, SidenavService, UserService } from '@services';
+import { AppConfigService, AuthenticationService, BookService, ClassroomService, UserService } from '@services';
 
 @Component({
   selector: 'app-main',
@@ -15,14 +15,21 @@ export class MainComponent implements OnInit {
 
   navigation: Navigation[] = [];
   user: UserInfo | undefined;
+  countClassrooms: number = 0;
+  countBooks: number = 0;
+  countUsers: number = 0;
+  countStudents: number = 0;
+  countProfessors: number = 0;
+  countFamily: number = 0;
 
   constructor(
     private appConfigService: AppConfigService,
-    private _sidenavService: SidenavService,
     public authenticationService: AuthenticationService,
     private router: Router,
     private spinner: NgxSpinnerService,
     private userService: UserService,
+    private classroomService: ClassroomService,
+    private bookService: BookService
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -43,47 +50,66 @@ export class MainComponent implements OnInit {
     this.spinner.show();
     this.userService.getUser().subscribe({
       next: (resp) => {
-       this.user = resp;
-        if (resp.authorities.length === 1) {
-          this.navigationsAdmin();
-        } else if (resp.authorities.length > 1) {
-          resp.authorities.filter(item => {
-            if (item.name === 'PROFESSOR_USER_ROLE') {
-              this.navigationsTeacher();
-            }
-            if (item.name === 'FAMILY_USER_ROLE') {
-              this.navigationsFamily();
-            }
-          });
-        }
-        this.spinner.hide();
+        this.user = resp;
       },
       error: (error) => {
         console.log(error);
         this.spinner.hide();
       }
     });
+    this.countClassroom();
+    this.countBook();
+    this.countUser();
+    this.countStudent();
+    this.countTeachers();
+    this.countFamilyMembers();
   }
 
-  navigationsAdmin(): void {
-    this._sidenavService.getConfigAdmin
-      .subscribe((navigations) => {
-        this.navigation = navigations;
-      });
+  countClassroom(): void {
+    this.classroomService.getCountClassroom().subscribe({
+      next: (resp: any) => {
+        this.countClassrooms = resp['count'];
+      }
+    });
   }
 
-  navigationsTeacher(): void {
-    this._sidenavService.getConfigTeacher
-      .subscribe((navigations) => {
-        this.navigation = navigations;
-      });
+  countBook(): void {
+    this.bookService.getCountBooks().subscribe({
+      next: (resp: any) => {
+        this.countBooks = resp['count'];
+      }
+    });
   }
 
-  navigationsFamily(): void {
-    this._sidenavService.getConfigFamily
-      .subscribe((navigations) => {
-        this.navigation = navigations;
-      });
+  countUser(): void {
+    this.userService.getCountUsers().subscribe({
+      next: (resp: any) => {
+        this.countUsers = resp['count'];
+      }
+    });
   }
 
+  countStudent(): void {
+    this.userService.getCountStudents().subscribe({
+      next: (resp: any) => {
+        this.countStudents = resp['count'];
+      }
+    });
+  }
+
+  countTeachers(): void {
+    this.userService.getCountTeachers().subscribe({
+      next: (resp: any) => {
+        this.countProfessors = resp['count'];
+      }
+    });
+  }
+
+  countFamilyMembers(): void {
+    this.userService.getCountFamily().subscribe({
+      next: (resp: any) => {
+        this.countFamily = resp['count'];
+      }
+    });
+  }
 }
