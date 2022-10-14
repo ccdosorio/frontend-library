@@ -7,11 +7,11 @@ import { AppRouting } from './app.routing';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ADMIN_NAVIGATION, APP_CONFIG, FAMILY_NAVIGATION, TEACHER_NAVIGATION } from "@services";
+import { ADMIN_FAMILY_NAVIGATION, ADMIN_NAVIGATION, APP_CONFIG, FAMILY_NAVIGATION, STUDENT_NAVIGATION, TEACHER_NAVIGATION } from "@services";
 import { appConfig } from "./config";
 import { LayoutModule } from './layout/layout.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { AdminNavigation, TeacherNavigation, FamilyNavigation } from './navigations';
+import { AdminNavigation, TeacherNavigation, FamilyNavigation, StudentNavigation, AdminFamilyNavigation } from './navigations';
 import { environment } from '../environments/environment';
 import { AuthenticationService } from '@services';
 
@@ -47,6 +47,8 @@ import { JwtInterceptor } from '@security';
     { provide: ADMIN_NAVIGATION, useValue: AdminNavigation },
     { provide: TEACHER_NAVIGATION, useValue: TeacherNavigation },
     { provide: FAMILY_NAVIGATION, useValue: FamilyNavigation },
+    { provide: STUDENT_NAVIGATION, useValue: StudentNavigation },
+    { provide: ADMIN_FAMILY_NAVIGATION, useValue: AdminFamilyNavigation },
     { provide: AuthenticationService, useClass: AuthenticationService },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
