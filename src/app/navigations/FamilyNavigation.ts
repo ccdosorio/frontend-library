@@ -10,6 +10,11 @@ export const FamilyNavigation: any[] = [
         route: 'Managements/Classrooms/Main'
     },
     {
+        displayName: 'Preguntas',
+        iconName: 'help',
+        route: 'Managements/Questions/Main'
+    },
+    {
         displayName: 'Buscar libro',
         iconName: 'help',
         route: 'Managements/Books/Search'
