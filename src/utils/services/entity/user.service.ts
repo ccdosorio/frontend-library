@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserInfo, UserInvitation } from '@models';
+import { UserInfo, UserInvitation, UserProfile } from '@models';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 
@@ -25,6 +25,30 @@ export class UserService {
     return this.http.get<UserInvitation>(environment.endpoint + 'users/invitations/' + uuid, { headers });
   }
 
+  // Obtener el rol del usuario
+  getUserProfile(): Observable<UserProfile> {
+    return this.http.get<UserProfile>(environment.endpoint + 'users/profile');
+  }
+
+  // Obtener el cuántos usuarios hay registrados
+  getCountUsers() {
+    return this.http.get(environment.endpoint + 'counting/users');
+  }
+
+  // Obtener el cuántos estudiantes hay registrados
+  getCountStudents() {
+    return this.http.get(environment.endpoint + 'counting/students');
+  }
+
+  // Obtener el cuántos estudiantes hay registrados
+  getCountTeachers() {
+    return this.http.get(environment.endpoint + 'counting/professors');
+  }
+
+  // Obtener el cuántos estudiantes hay registrados
+  getCountFamily() {
+    return this.http.get(environment.endpoint + 'counting/family-members');
+  }
 
   // Crear un usuario
   create(bodeObject: any) {

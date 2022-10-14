@@ -15,50 +15,56 @@ export class BookService {
     private http: HttpClient
   ) { }
 
-  // get books user
+  // gObtener los libros
   getBooks(): Observable<Book[]> {
     return this.http.get<Book[]>(environment.endpoint + 'user-books');
   }
 
-  // get book by isbn
+  // Obtener libro por isbn
   getByISBN(isbn: number): Observable<BookISBN> {
     return this.http.get<BookISBN>(environment.endpoint + 'books/isbn/' + isbn);
   }
 
-  // get user book
+  // Obtener libro del usuario por id
   getBookById(bookId: number): Observable<Book> {
     return this.http.get<Book>(environment.endpoint + 'user-books/' + bookId);
   }
 
-  // get questions user book
+  // Obtener las preguntas del libro por página
   getUserBookQuestions(bookId: number, page: number): Observable<Question> {
     return this.http.get<Question>(environment.endpoint + 'user-books/' + bookId + '/questions-page/' + page);
   }
 
-  // get user book
+  // Obtener un libro por su id
   getBook(bookId: number): Observable<BookISBN> {
     return this.http.get<BookISBN>(environment.endpoint + 'books/' + bookId);
   }
 
-  // create books to user
+  // Obtener el cuántos lirbos hay registrados
+  getCountBooks() {
+    return this.http.get(environment.endpoint + 'counting/books');
+  }
+
+  // crear libros del usuario
   createUserBook(body: any): Observable<Book> {
     return this.http.post<Book>(environment.endpoint + 'user-books', body, {});
   }
 
-  // upload pdf book
+  // subir un libro (pdf)
   uploadFile(bookId: number, file: File) {
     let body = new FormData();
     body.append('book', file);
     return this.http.post(environment.endpoint + 'user-books/' + bookId + '/upload-book', body);
   }
 
-  // view file pdf
+  // ver el pdf
   viewPdfFile(bookId: number) {
     let headers = new HttpHeaders();
     headers = headers.set('Accept', 'application/pdf');
     return this.http.get(environment.endpoint + 'user-books/' + bookId, { headers: headers, responseType: 'blob' });
   }
 
+  // Buscar recomendaciones con ElasticSearch
   searchElastic(payload: any): Observable<ElasticSearch> {
     const params = new HttpParams()
       .set('title', payload.title)

@@ -40,6 +40,11 @@ export class ClassroomService {
     return this.http.get<ClassromStudent[]>(environment.endpoint + 'classrooms/' + classroomId + '/students', {});
   }
 
+  // Obtener el cuántas clases hay registradas
+  getCountClassroom() {
+    return this.http.get(environment.endpoint + 'counting/classrooms');
+  }
+
   // Crear una clase
   create(bodeObject: any) {
     return this.http.post(environment.endpoint + 'classrooms', bodeObject, {});
