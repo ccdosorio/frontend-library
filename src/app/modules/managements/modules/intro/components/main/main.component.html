@@ -22,7 +22,8 @@
                                 </div>
                             </div>
                             <div class="button-wrap">
-                                <button class="button h-button is-info is-fullwidth is-big is-raised" [routerLink]="['../../Books/Search']" >
+                                <button class="button h-button is-info is-fullwidth is-big is-raised"
+                                    [routerLink]="['../../Books/Search']">
                                     Buscar recomendación
                                 </button>
                             </div>
@@ -39,7 +40,7 @@
                                                 <i data-feather="clock"></i>
                                             </div>
                                             <div class="flex-meta">
-                                                <span>100</span>
+                                                <span>{{ countBooks }}</span>
                                                 <span>Libros</span>
                                             </div>
                                         </div>
@@ -52,7 +53,7 @@
                                                 <i data-feather="radio"></i>
                                             </div>
                                             <div class="flex-meta">
-                                                <span>20</span>
+                                                <span>{{ countUsers }}</span>
                                                 <span>Usuarios</span>
                                             </div>
                                         </div>
@@ -65,7 +66,7 @@
                                                 <i data-feather="user-check"></i>
                                             </div>
                                             <div class="flex-meta">
-                                                <span>49</span>
+                                                <span>{{ countClassrooms }}</span>
                                                 <span>Clases</span>
                                             </div>
                                         </div>
@@ -78,8 +79,34 @@
                                                 <i data-feather="frown"></i>
                                             </div>
                                             <div class="flex-meta">
-                                                <span>100</span>
-                                                <span>Comentarios</span>
+                                                <span>{{ countStudents }}</span>
+                                                <span>Estudiantes</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="dashboard-card">
+                                        <div class="media-flex-center">
+                                            <div class="h-icon is-red is-rounded">
+                                                <i data-feather="frown"></i>
+                                            </div>
+                                            <div class="flex-meta">
+                                                <span>{{ countProfessors }}</span>
+                                                <span>Profesores</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="dashboard-card">
+                                        <div class="media-flex-center">
+                                            <div class="h-icon is-yellow is-rounded">
+                                                <i data-feather="frown"></i>
+                                            </div>
+                                            <div class="flex-meta">
+                                                <span>{{ countFamily }}</span>
+                                                <span>Familiares</span>
                                             </div>
                                         </div>
                                     </div>
