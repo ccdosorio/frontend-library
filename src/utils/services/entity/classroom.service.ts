@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Classroom, ClassromStudent, ClassroomBook, CreateStudentBookAnswer, Answer, StudentClassroom } from '@models';
+import { Classroom, ClassromStudent, ClassroomBook, CreateStudentBookAnswer, Answer, StudentClassroom, BookProgress, BookPage } from '@models';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -48,6 +48,21 @@ export class ClassroomService {
   // Obtener las clases del estudiante (asignaciones)
   getStudentClassroom(): Observable<StudentClassroom[]> {
     return this.http.get<StudentClassroom[]>(environment.endpoint + 'students/classrooms');
+  }
+
+  // Obtener la página del libro
+  getStudentBookPage(classroomId: number, userId: number, bookId: number): Observable<BookPage> {
+    return this.http.get<BookPage>(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/page');
+  }
+
+  // Obtener progreso de la lectura
+  getStudentBookProgressRate(classroomId: number, userId: number, bookId: number): Observable<BookProgress> {
+    return this.http.get<BookProgress>(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/book-progress-rate');
+  }
+
+  // Actualizar la página del alumno
+  updateStudentBookPage(classroomId: number, userId: number, bookId: number, body: any): Observable<BookPage> {
+    return this.http.post<BookPage>(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/page', body, {});
   }
 
   // Crear una clase

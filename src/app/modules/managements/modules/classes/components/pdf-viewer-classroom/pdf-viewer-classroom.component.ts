@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { NgxSpinnerService } from 'ngx-spinner';
+import * as feather from 'feather-icons';
 
 import { AppConfigService, BookService, ClassroomService, UserService } from '@services';
 import { ClassroomBook, BookMultipleChoiceQuestion, UserInfo, CreateStudentBookAnswer, Answer } from '@models';
@@ -20,6 +21,7 @@ export class PdfViewerClassroomComponent implements OnInit {
   classroomId: number = 0;
   isFile: boolean = false;
   user: UserInfo | undefined;
+  progress: number = 0;
 
   // pdf
   page: number = 1;
@@ -55,11 +57,13 @@ export class PdfViewerClassroomComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    feather.replace();
     this.route.params.subscribe((params) => {
       this.bookId = params['bookId'];
       this.classroomId = params['classroomId'];
-      this.loadPdf();
       this.getUser();
+      this.getBook();
+      this.loadPdf();
     });
   }
 
@@ -91,7 +95,11 @@ export class PdfViewerClassroomComponent implements OnInit {
   getUser(): void {
     this.userService.getUser()
       .subscribe({
-        next: resp => this.user = resp
+        next: resp => {
+          this.user = resp;
+          this.getPage();
+          this.getProgress();
+        }
       });
   }
 
@@ -120,7 +128,46 @@ export class PdfViewerClassroomComponent implements OnInit {
       });
   }
 
-  createAnswers(): void {
+  getPage(): void {
+    this.classroomService.getStudentBookPage(this.classroomId, this.user!.id, this.bookId)
+      .subscribe({
+        next: resp => {
+          console.log('----- Respuesta -----');
+          console.log(resp);
+          this.page = resp.book_page;
+        },
+        error: error => {
+          console.log('----- Error -----');
+          console.log(error);
+        }
+      });
+  }
+
+  getProgress(): void {
+    this.classroomService.getStudentBookProgressRate(this.classroomId, this.user!.id, this.bookId)
+      .subscribe({
+        next: resp => this.progress = resp.book_progress_rate
+      });
+  }
+
+  updatePage(): void {
+    const PAYLOAD = {
+      book_page: this.page
+    };
+    this.classroomService.updateStudentBookPage(this.classroomId, this.user!.id, this.bookId, PAYLOAD)
+      .subscribe({
+        next: resp => {
+          console.log('Update page');
+          
+          console.log(resp);
+          if (this.page === this.totalPages) {
+            this.router.navigate(['/Managements/Classrooms/Detail/', this.classroomId]);
+          }
+        }
+      });
+  }
+
+  saveAnswers(): void {
     this.studentAnswers.shift();
     if (this.studentAnswers.length !== this.listQuestions.length) {
       SweetAlertMessage('error', 'Error', 'Por favor responde todas las preguntas para continuar.');
@@ -135,11 +182,8 @@ export class PdfViewerClassroomComponent implements OnInit {
           // reset
           this.listQuestions = [];
           this.studentAnswers = [];
-          if (this.page !== this.totalPages) {
-            this.page++;
-          } else {
-            this.router.navigate(['/Managements/Classrooms/Detail/', this.classroomId]);
-          }
+          this.page++;
+          this.updatePage();
         },
         error: error => {
           SweetAlertMessage('error', 'Error', error.error.message);

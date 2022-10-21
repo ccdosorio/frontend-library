@@ -1,124 +1,98 @@
 <div class="page-content-wrapper py-3">
+    <!-- container-fluid -->
+    <div class="page-content is-relative">
 
-    <div class="datatable-toolbar">
-        <div class="field has-addons">
-            <p class="control">
-                <button class="button h-button" [routerLink]="['../../../Detail', classroomId]">
-                    <span class="icon is-small">
-                        <i aria-hidden="true" class="fas fa-arrow-left"></i>
-                    </span>
-                    <span>Regresar</span>
-                </button>
-            </p>
-        </div>
+        <div class="page-content-inner project-details">
 
-        <div class="buttons d-flex justify-content-center" *ngIf="isLoaded">
-            <button class="button h-button is-warning" (click)="prevPage()" [disabled]="page === 1">
-                <span class="icon">
-                    <i class="fas fa-arrow-left"></i>
-                </span>
-                <span>Anterior</span>
-            </button>
-            <button class="button h-button is-warning" (click)="getQuestions()">
-                <span class="icon">
-                    <i class="fas fa-arrow-right"></i>
-                </span>
-                <span>{{ page === totalPages ? 'Finalizar' : 'Siguiente'}}</span>
-            </button>
-            <div id="paging-first-datatable" class="pagination datatable-pagination">
-                <div class="datatable-info">
-                    <span>{{ page }} / {{ totalPages }}</span>
-                </div>
-            </div>
-        </div>
+            <div class="tabs-wrapper  is-triple-slider">
+
+                <div id="project-tab" class="tab-content is-active">
+                    <div class="columns project-details-inner">
+                        <div class="column is-8">
+
+                            <div class="datatable-toolbar">
+                                <div class="field has-addons">
+                                    <p class="control">
+                                        <button class="button h-button" [routerLink]="['../../../Detail', classroomId]">
+                                            <span class="icon is-small">
+                                                <i aria-hidden="true" class="fas fa-arrow-left"></i>
+                                            </span>
+                                            <span>Regresar</span>
+                                        </button>
+                                    </p>
+                                </div>
+
+                                <div class="buttons d-flex justify-content-center" *ngIf="isLoaded">
+                                    <button class="button h-button is-warning" (click)="prevPage()"
+                                        [disabled]="page === 1">
+                                        <span class="icon">
+                                            <i class="fas fa-arrow-left"></i>
+                                        </span>
+                                        <span>Anterior</span>
+                                    </button>
+                                    <button class="button h-button is-warning" (click)="getQuestions()">
+                                        <span class="icon">
+                                            <i class="fas fa-arrow-right"></i>
+                                        </span>
+                                        <span>{{ page === totalPages ? 'Finalizar' : 'Siguiente'}}</span>
+                                    </button>
+                                    <div id="paging-first-datatable" class="pagination datatable-pagination">
+                                        <div class="datatable-info">
+                                            <span>{{ page }} / {{ totalPages }}</span>
+                                        </div>
+                                    </div>
+                                </div>
 
 
-        <div class="buttons"></div>
-    </div>
+                                <div class="buttons"></div>
+                            </div>
+                            <progress class="progress is-primary is-tiny" value="{{ progress }}" max="100"></progress>
+                            <div class="page-content-inner">
+                                <div class="d-flex justify-content-center" *ngIf="isFile">
+                                    <pdf-viewer [src]="pdfSrc" [original-size]="true" [render-text]="true"
+                                        [rotation]="0" [show-all]="false" [fit-to-page]="true" [zoom]="1"
+                                        [zoom-scale]="'page-width'" [stick-to-page]="true"
+                                        [external-link-target]="'blank'" [autoresize]="true" [show-borders]="false"
+                                        class="pdf-viewer" [page]="page"
+                                        (after-load-complete)="afterLoadComplete($event)" class="pdf-viewer">
+                                    </pdf-viewer>
+                                </div>
+                                <!-- Empty Message -->
+                                <app-placeholder-empty *ngIf="!isFile"></app-placeholder-empty>
+                            </div>
+                        </div>
 
-    <div class="page-content-inner">
-        <div class="d-flex justify-content-center" *ngIf="isFile">
-            <pdf-viewer [src]="pdfSrc" [original-size]="true" [render-text]="true" [rotation]="0" [show-all]="false"
-                [fit-to-page]="true" [zoom]="1" [zoom-scale]="'page-width'" [stick-to-page]="true"
-                [external-link-target]="'blank'" [autoresize]="true" [show-borders]="false" class="pdf-viewer"
-                [page]="page" (after-load-complete)="afterLoadComplete($event)" class="pdf-viewer"></pdf-viewer>
-        </div>
-        <!-- Empty Message -->
-        <app-placeholder-empty *ngIf="!isFile"></app-placeholder-empty>
-    </div>
+                        <div class="column is-4">
+                            <div class="side-card">
+                                <h4>Comentarios</h4>
 
-</div>
-
-<!-- Modal Questions   -->
-
-<div class="modal h-modal" [class.is-active]="isQuestions">
-    <div class="modal-background  h-modal-close"></div>
-    <div class="modal-content">
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <h3>Resonde las siguientes preguntas</h3>
-            </header>
-            <div class="modal-card-body">
-                <div class="inner-content">
-                    <div class="modal-form">
-                        <div class="columns is-multiline">
-                            <div class="column is-12" *ngFor="let item of listQuestions; let i = index">
+                                <div class="media-flex-center">
+                                    <div class="flex-meta">
+                                        <span>Usuario 1</span>
+                                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi officia atque, a in ratione quibusdam, aliquid nulla sint, iste fuga adipisci reprehenderit saepe rerum soluta suscipit architecto et modi veniam.</span>
+                                    </div>
+                                </div>
+                                <div class="media-flex-center">
+                                    <div class="flex-meta">
+                                        <span>Usuario 2</span>
+                                        <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque porro eum adipisci tempore, autem aliquid esse sapiente quas explicabo mollitia perferendis, recusandae reiciendis officiis, numquam aperiam minus eos aspernatur eaque.</span>
+                                    </div>
+                                </div>
+                                <div class="media-flex-center">
+                                    <div class="flex-meta">
+                                        <span>Usuario 3</span>
+                                        <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque, nobis fuga reprehenderit sit voluptatem officiis quidem ab, similique ipsum, repellendus eaque quas cupiditate voluptates saepe omnis id labore tenetur impedit.</span>
+                                    </div>
+                                </div>
                                 <div class="field">
-                                    <h3>{{ item.position }} - {{ item.question_statement }}</h3>
-                                    <div class="buttons">
-                                        <a class="button h-button"
-                                            [class.is-warning]="toPaintOption(item.position, item.id, option)"
-                                            *ngFor="let option of listQuestions[i].options"
-                                            (click)="generateAnswers(item, option)">
-                                            {{ option }}
-                                        </a>
+                                    <div class="control">
+                                        <textarea class="textarea" rows="4" placeholder="Escribe tu comentario..."></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-card-foot is-end">
-                <a class="button h-button is-primary is-raised is-rounded" (click)="createAnswers()">Guardar</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Answers -->
-<div id="demo-right-actions-modal" class="modal h-modal is-large" [class.is-active]="isResults">
-    <div class="modal-background  h-modal-close"></div>
-    <div class="modal-content">
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <h3>Resultados obtenidos</h3>
-            </header>
-            <div class="modal-card-body">
-                <div class="inner-content">
-                    <div class="modal-form">
-                        <div class="columns is-multiline">
-                            <div class="column is-12" *ngFor="let item of studentResults">
-                                <div class="field">
-                                    <h3>{{ item.book_multiple_choice_question.position }} - {{
-                                        item.book_multiple_choice_question.question_statement }}</h3>
-                                    <p>Respuesta: {{ item.answer }}</p>
-                                    <div class="buttons" fxLayout="row" fxLayoutAlign="center center">
-                                        <a class="button h-button is-danger" *ngIf="item.status === 'INCORRECT'">
-                                            {{ item.status | titlecase }}
-                                        </a>
-                                        <a class="button h-button is-success" *ngIf="item.status === 'CORRECT'">
-                                            {{ item.status | titlecase }}
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-card-foot is-end">
-                <a class="button h-button is-primary is-raised is-rounded" (click)="closeModalResults()">Continuar</a>
             </div>
         </div>
     </div>
