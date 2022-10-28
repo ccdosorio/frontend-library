@@ -63,12 +63,14 @@ export class PdfViewerClassroomComponent implements OnInit {
       this.classroomId = params['classroomId'];
       this.getUser();
       this.getBook();
-      this.loadPdf();
+      setTimeout(() => {
+        this.loadPdf();
+      }, 500);
     });
   }
 
   loadPdf(): void {
-    this.spinner.show();
+    //this.spinner.show();
     this.isFile = false;
     this.classroomService.viewPdfFileClassroom(this.bookId, this.classroomId).subscribe({
       next: (resp) => {
@@ -76,7 +78,7 @@ export class PdfViewerClassroomComponent implements OnInit {
         var file = new Blob([resp], { type: 'application/pdf' });
         var fileURL = URL.createObjectURL(file);
         this.pdfSrc = fileURL;
-        this.getBook();
+        //this.getBook();
         this.spinner.hide();
       },
       error: () => {
@@ -88,17 +90,20 @@ export class PdfViewerClassroomComponent implements OnInit {
 
   getBook(): void {
     this.classroomService.getBookByClassroom(this.classroomId, this.bookId).subscribe({
-      next: (resp) => this.book = resp
+      next: (resp) => {
+        this.book = resp;
+        this.getPage();
+        this.getProgress();
+      }
     });
   }
 
   getUser(): void {
+    this.spinner.show();
     this.userService.getUser()
       .subscribe({
         next: resp => {
           this.user = resp;
-          this.getPage();
-          this.getProgress();
         }
       });
   }
@@ -129,22 +134,14 @@ export class PdfViewerClassroomComponent implements OnInit {
   }
 
   getPage(): void {
-    this.classroomService.getStudentBookPage(this.classroomId, this.user!.id, this.bookId)
+    this.classroomService.getStudentBookPage(this.classroomId, this.user!.id, this.book!.user_book.book.id)
       .subscribe({
-        next: resp => {
-          console.log('----- Respuesta -----');
-          console.log(resp);
-          this.page = resp.book_page;
-        },
-        error: error => {
-          console.log('----- Error -----');
-          console.log(error);
-        }
+        next: resp => this.page = resp.page_progress
       });
   }
 
   getProgress(): void {
-    this.classroomService.getStudentBookProgressRate(this.classroomId, this.user!.id, this.bookId)
+    this.classroomService.getStudentBookProgressRate(this.classroomId, this.user!.id, this.book!.user_book.book.id)
       .subscribe({
         next: resp => this.progress = resp.book_progress_rate
       });
@@ -154,12 +151,10 @@ export class PdfViewerClassroomComponent implements OnInit {
     const PAYLOAD = {
       book_page: this.page
     };
-    this.classroomService.updateStudentBookPage(this.classroomId, this.user!.id, this.bookId, PAYLOAD)
+    this.classroomService.updateStudentBookPage(this.classroomId, this.user!.id, this.book!.user_book.book.id, PAYLOAD)
       .subscribe({
-        next: resp => {
-          console.log('Update page');
-          
-          console.log(resp);
+        next: _ => {
+          this.getProgress();
           if (this.page === this.totalPages) {
             this.router.navigate(['/Managements/Classrooms/Detail/', this.classroomId]);
           }

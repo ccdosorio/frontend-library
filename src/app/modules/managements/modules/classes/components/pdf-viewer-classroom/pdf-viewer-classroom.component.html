@@ -69,30 +69,113 @@
                                 <div class="media-flex-center">
                                     <div class="flex-meta">
                                         <span>Usuario 1</span>
-                                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi officia atque, a in ratione quibusdam, aliquid nulla sint, iste fuga adipisci reprehenderit saepe rerum soluta suscipit architecto et modi veniam.</span>
+                                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi officia
+                                            atque, a in ratione quibusdam, aliquid nulla sint, iste fuga adipisci
+                                            reprehenderit saepe rerum soluta suscipit architecto et modi veniam.</span>
                                     </div>
                                 </div>
                                 <div class="media-flex-center">
                                     <div class="flex-meta">
                                         <span>Usuario 2</span>
-                                        <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque porro eum adipisci tempore, autem aliquid esse sapiente quas explicabo mollitia perferendis, recusandae reiciendis officiis, numquam aperiam minus eos aspernatur eaque.</span>
+                                        <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque porro eum
+                                            adipisci tempore, autem aliquid esse sapiente quas explicabo mollitia
+                                            perferendis, recusandae reiciendis officiis, numquam aperiam minus eos
+                                            aspernatur eaque.</span>
                                     </div>
                                 </div>
                                 <div class="media-flex-center">
                                     <div class="flex-meta">
                                         <span>Usuario 3</span>
-                                        <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque, nobis fuga reprehenderit sit voluptatem officiis quidem ab, similique ipsum, repellendus eaque quas cupiditate voluptates saepe omnis id labore tenetur impedit.</span>
+                                        <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque, nobis
+                                            fuga reprehenderit sit voluptatem officiis quidem ab, similique ipsum,
+                                            repellendus eaque quas cupiditate voluptates saepe omnis id labore tenetur
+                                            impedit.</span>
                                     </div>
                                 </div>
                                 <div class="field">
                                     <div class="control">
-                                        <textarea class="textarea" rows="4" placeholder="Escribe tu comentario..."></textarea>
+                                        <textarea class="textarea" rows="4"
+                                            placeholder="Escribe tu comentario..."></textarea>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Questions   -->
+
+<div class="modal h-modal" [class.is-active]="isQuestions">
+    <div class="modal-background  h-modal-close"></div>
+    <div class="modal-content">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <h3>Resonde las siguientes preguntas</h3>
+            </header>
+            <div class="modal-card-body">
+                <div class="inner-content">
+                    <div class="modal-form">
+                        <div class="columns is-multiline">
+                            <div class="column is-12" *ngFor="let item of listQuestions; let i = index">
+                                <div class="field">
+                                    <h3>{{ item.position }} - {{ item.question_statement }}</h3>
+                                    <div class="buttons">
+                                        <a class="button h-button"
+                                            [class.is-warning]="toPaintOption(item.position, item.id, option)"
+                                            *ngFor="let option of listQuestions[i].options"
+                                            (click)="generateAnswers(item, option)">
+                                            {{ option }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-card-foot is-end">
+                <a class="button h-button is-primary is-raised is-rounded" (click)="saveAnswers()">Guardar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Answers -->
+<div id="demo-right-actions-modal" class="modal h-modal is-large" [class.is-active]="isResults">
+    <div class="modal-background  h-modal-close"></div>
+    <div class="modal-content">
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <h3>Resultados obtenidos</h3>
+            </header>
+            <div class="modal-card-body">
+                <div class="inner-content">
+                    <div class="modal-form">
+                        <div class="columns is-multiline">
+                            <div class="column is-12" *ngFor="let item of studentResults">
+                                <div class="field">
+                                    <h3>{{ item.book_multiple_choice_question.position }} - {{
+                                        item.book_multiple_choice_question.question_statement }}</h3>
+                                    <p>Respuesta: {{ item.answer }}</p>
+                                    <div class="buttons" fxLayout="row" fxLayoutAlign="center center">
+                                        <a class="button h-button is-danger" *ngIf="item.status === 'INCORRECT'">
+                                            {{ item.status | titlecase }}
+                                        </a>
+                                        <a class="button h-button is-success" *ngIf="item.status === 'CORRECT'">
+                                            {{ item.status | titlecase }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-card-foot is-end">
+                <a class="button h-button is-primary is-raised is-rounded" (click)="closeModalResults()">Continuar</a>
             </div>
         </div>
     </div>

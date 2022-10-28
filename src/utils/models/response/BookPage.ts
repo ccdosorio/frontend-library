@@ -1,3 +1,11 @@
+import { UserInfo } from "../entity";
+
 export interface BookPage {
-    book_page: number;
+    id:            number;
+    user:          UserInfo;
+    page_progress: number;
+    created_at:    Date;
+    updated_at:    Date;
+    created_by:    string;
+    updated_by:    string;
 }
