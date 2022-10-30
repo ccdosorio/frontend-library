@@ -70,6 +70,11 @@ export class ClassroomService {
     return this.http.get<Answer[]>(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/answers');
   }
 
+  // Obtener la nota del alumno
+  getStudentBookAnswersRate(classroomId: number, userId: number, bookId: number): Observable<any> {
+    return this.http.get<any>(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/answer-rate');
+  }
+
   // Actualizar la página del alumno
   updateStudentBookPage(classroomId: number, userId: number, bookId: number, body: any): Observable<BookPage> {
     return this.http.post<BookPage>(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/page', body, {});

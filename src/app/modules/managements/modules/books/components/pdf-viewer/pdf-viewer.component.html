@@ -50,7 +50,7 @@
             </button>
         </div>
     </div>
-    
+    <progress class="progress is-primary is-tiny" value="{{ progress }}" max="100"></progress>
     <div class="page-content-inner">
         <div class="d-flex justify-content-center" *ngIf="isFile">
             <pdf-viewer [src]="pdfSrc" [original-size]="true" [render-text]="true" [rotation]="0" [show-all]="false"

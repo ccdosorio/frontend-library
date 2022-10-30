@@ -4,7 +4,8 @@ export interface Book {
   id:              number;
   book:            BookISBN;
   book_file:       null | string;
-  page_progress:   number;
+  page_progress:   number | null;
+  book_progress:   number | null;
   rating:          number;
   number_of_pages: number;
   created_at:      Date;

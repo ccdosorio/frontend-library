@@ -27,7 +27,7 @@
                         <img class="avatar" src="https://via.placeholder.com/150x150" alt="">
                     </div>
                     <h3 class="dark-inverted">{{ item.student_name | splitSpace }}</h3>
-                    <p>Nota: {{ item.answer_rate }}</p>
+                    <p>Nota: <b>{{ item.answer_rate }} / 100</b></p>
                     <div class="button-wrap has-text-centered">
                         <a class="button h-button is-primary is-raised" [routerLink]="['../../Answers', classroomId, item.student_id, bookId]">Ver respuestas</a>
                     </div>

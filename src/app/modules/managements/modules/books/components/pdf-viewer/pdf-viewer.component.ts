@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 
@@ -22,6 +22,7 @@ export class PdfViewerComponent implements OnInit {
   bookId: number = 0;
   isFile: boolean = false;
   book: Book | undefined;
+  progress: number = 0;
 
   // pdf
   page: number = 1;
@@ -33,7 +34,8 @@ export class PdfViewerComponent implements OnInit {
     private bookService: BookService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private router: Router
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -47,6 +49,7 @@ export class PdfViewerComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.bookId = params['bookId'];
+      this.getBook();
       this.loadPdf();
     });
   }
@@ -60,7 +63,6 @@ export class PdfViewerComponent implements OnInit {
         var file = new Blob([resp], { type: 'application/pdf' });
         var fileURL = URL.createObjectURL(file);
         this.pdfSrc = fileURL;
-        this.getBook();
         this.spinner.hide();
       },
       error: () => {
@@ -72,7 +74,13 @@ export class PdfViewerComponent implements OnInit {
 
   getBook(): void {
     this.bookService.getBookById(this.bookId).subscribe({
-      next: (resp) => this.book = resp
+      next: (resp) => {
+        this.book = resp;
+        if (resp.book_progress !== null && resp.page_progress !== null) {
+          this.page = resp.page_progress;
+          this.progress = resp.book_progress;
+        }
+      }
     });
   }
 
@@ -83,6 +91,7 @@ export class PdfViewerComponent implements OnInit {
 
   nextPage(): void {
     this.page++;
+    this.updatePage();
   }
 
   prevPage(): void {
@@ -106,10 +115,10 @@ export class PdfViewerComponent implements OnInit {
     };
     this.bookService.updateBookPage(this.bookId, PAYLOAD)
       .subscribe({
-        next: _ => {
-          //this.getProgress();
+        next: (resp) => {
+          this.progress = resp.book_progress
           if (this.page === this.totalPages) {
-            //this.router.navigate(['/Managements/Classrooms/Detail/', this.classroomId]);
+            this.router.navigate(['/Managements/Books/Main']);
           }
         }
       });

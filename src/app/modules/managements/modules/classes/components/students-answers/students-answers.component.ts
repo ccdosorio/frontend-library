@@ -19,10 +19,11 @@ export class StudentsAnswersComponent implements OnInit {
   classroomId: number = 0;
   bookId: number = 0;
   studentId: number = 0;
+  answerRate: number = 0;
   showEmptyMessage: boolean = false;
   listAnswers: Answer[] = [];
 
-  displayedColumns: string[] = ['id', 'answer', 'status'];
+  displayedColumns: string[] = ['id', 'question_statement', 'answer', 'status'];
   dataSource = new MatTableDataSource<Answer>([]);
 
   @ViewChild(MatPaginator) paginator: any = MatPaginator;
@@ -49,9 +50,17 @@ export class StudentsAnswersComponent implements OnInit {
         this.classroomId = Number(params['classroomId']);
         this.bookId = Number(params['bookId']);
         this.studentId = Number(params['userId']);
+        this.getAnswersRate();
         this.getAnswers();
       }
     });
+  }
+
+  getAnswersRate(): void {
+    this.classroomService.getStudentBookAnswersRate(this.classroomId, this.studentId, this.bookId)
+      .subscribe({
+        next: (resp) => this.answerRate = resp['answer_rate']
+      });
   }
 
   getAnswers(): void {
@@ -72,7 +81,7 @@ export class StudentsAnswersComponent implements OnInit {
           this.showEmptyMessage = true;
           this.spinner.hide();
         }
-      })
+      });
   }
 
 }
