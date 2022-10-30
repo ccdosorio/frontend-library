@@ -59891,7 +59891,7 @@ body.is-dark .lifestyle-dashboard.lifestyle-dashboard-v5 .media-feed .feed-group
     align-items: center;
     padding: 10px;
     border-radius: 16px;
-    background: #e9e9fd;
+    background: #039be5;
     font-family: "Roboto", sans-serif
 }
 
@@ -60433,8 +60433,60 @@ body.is-dark .food-delivery-dashboard .right .cart-widget .cart-button .total sp
     color: #a2a5b9
 }
 
+/* Paginador */
+
 body.is-dark .food-delivery-dashboard .right .cart-widget .cart-button .total span:nth-child(2) {
     color: #aaaab3
+}
+
+body.is-dark .mat-paginator {
+    background: #2f2f33;
+}
+
+body.is-dark .mat-menu-panel {
+    background: #2f2f33;
+}
+
+body.is-dark .mat-select-panel {
+    background: #2f2f33;
+}
+
+body.is-dark .mat-dialog-container {
+    background: #2f2f33;
+}
+
+body.is-dark .mat-option-text {
+    color: #a2a5b9 !important
+}
+
+body.is-dark .mat-paginator .mat-paginator-container .mat-paginator-range-label {
+    color: #a2a5b0;
+}
+
+body.is-dark .mat-paginator .mat-paginator-container .mat-paginator-page-size-label {
+    color: #a2a5b0;
+}
+
+body.is-dark .mat-paginator .mat-paginator-container .mat-paginator-icon {
+    color: #a2a5b0;
+}
+
+body.is-dark .mat-paginator .mat-paginator-container .mat-select-value {
+    color: #a2a5b0;
+}
+
+body.is-dark .mat-paginator .mat-paginator-container .mat-select-arrow-wrapper .mat-select-arrow {
+    color: #a2a5b0;
+}
+
+body.is-dark .mat-paginator .mat-paginator-container .mat-form-field .mat-form-field-wrapper .mat-form-field-underline {
+    color: #a2a5b0;
+}
+
+/* End paginador */
+
+body.is-dark .title-dark {
+    color: #a2a5b0;
 }
 
 @media only screen and (max-width: 767px) {

@@ -22,6 +22,8 @@ export class PdfViewerClassroomComponent implements OnInit {
   isFile: boolean = false;
   user: UserInfo | undefined;
   progress: number = 0;
+  isAsignment: boolean = false;
+  routeClassroom: string = '';
 
   // pdf
   page: number = 1;
@@ -63,6 +65,12 @@ export class PdfViewerClassroomComponent implements OnInit {
       this.classroomId = params['classroomId'];
       this.getUser();
       this.getBook();
+      if (this.route.snapshot.routeConfig?.path === 'PdfViewerAsignment/:classroomId/:bookId') {
+        this.isAsignment = true;
+        this.routeClassroom = '/Managements/Classrooms/Detail/Assignment';
+      } else {
+        this.routeClassroom = '/Managements/Classrooms/Detail';
+      }
       setTimeout(() => {
         this.loadPdf();
       }, 500);

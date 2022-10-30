@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { environment } from "../../../environments/environment";
-import { Book, BookISBN, ElasticSearch, Question } from "@models";
+import { Book, BookISBN, BookPage, ElasticSearch, Question } from "@models";
 
 @Injectable({
   providedIn: 'root'
@@ -55,6 +55,11 @@ export class BookService {
     let body = new FormData();
     body.append('book', file);
     return this.http.post(environment.endpoint + 'user-books/' + bookId + '/upload-book', body);
+  }
+
+  // Actualizar la página del libro
+  updateBookPage(bookId: number, body: any): Observable<any> {
+    return this.http.post<any>(environment.endpoint + 'user-books/' + bookId + '/page', body, {});
   }
 
   // ver el pdf

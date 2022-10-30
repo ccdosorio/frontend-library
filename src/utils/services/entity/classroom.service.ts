@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 
-import { Classroom, ClassromStudent, ClassroomBook, CreateStudentBookAnswer, Answer, StudentClassroom, BookProgress, BookPage } from '@models';
+import { Classroom, ClassromStudent, ClassroomBook, CreateStudentBookAnswer, Answer, StudentClassroom, BookProgress, BookPage, ClassroomBookStudent } from '@models';
 import { environment } from 'environments/environment';
 
 @Injectable({
@@ -58,6 +58,16 @@ export class ClassroomService {
   // Obtener progreso de la lectura
   getStudentBookProgressRate(classroomId: number, userId: number, bookId: number): Observable<BookProgress> {
     return this.http.get<BookProgress>(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/book-progress-rate');
+  }
+
+  // Obtener los alumnos del libro
+  getClassroomBookStudents(classroomId: number, bookId: number): Observable<ClassroomBookStudent[]> {
+    return this.http.get<ClassroomBookStudent[]>(environment.endpoint + 'classrooms/' + classroomId + '/books/' + bookId + '/students');
+  }
+
+  // Obtener las respuestas del alumno
+  getStudentBookAnswers(classroomId: number, userId: number, bookId: number): Observable<Answer[]> {
+    return this.http.get<Answer[]>(environment.endpoint + 'classrooms/' + classroomId + '/students/' + userId + '/books/' + bookId + '/answers');
   }
 
   // Actualizar la página del alumno

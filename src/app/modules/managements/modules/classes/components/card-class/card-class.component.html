@@ -11,11 +11,15 @@
             </span>
         </div>
         <div class="meta-right">
-            <div class="buttons" [hidden]="isAssignment">
+            <div class="buttons" *ngIf="!isAssignment">
                 <a class="button h-button is-info is-outlined is-raised"
                     [routerLink]="['../Detail', classroom.id]">Ver</a>
                 <a class="button h-button is-info is-outlined is-raised"
                     [routerLink]="['../Edit', classroom.id]">Editar</a>
+            </div>
+            <div class="buttons" *ngIf="isAssignment">
+                <a class="button h-button is-info is-outlined is-raised"
+                    [routerLink]="['/Managements/Classrooms/Detail/Assignment', classroom.id]">Ver</a>
             </div>
         </div>
     </div>

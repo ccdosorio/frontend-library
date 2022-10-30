@@ -1,0 +1,38 @@
+h3,
+p {
+    font-family: 'Press Start 2P', cursive !important;
+}
+
+// tablets
+@media screen and (min-width: 40em) and (max-width: 63.9em) {
+    .game-content {
+        width: 100% !important;
+    }
+}
+
+.card-game:hover {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.content-game {
+    background: #42c4de;
+    animation: games 14s infinite;
+}
+
+@keyframes games {
+    25% {
+        background: #41c4de;
+    }
+
+    50% {
+        background: #8cc73f;
+    }
+
+    75% {
+        background: #f3d333;
+    }
+
+    100% {
+        background: #f78e56;
+    }
+}

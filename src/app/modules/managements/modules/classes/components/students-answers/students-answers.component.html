@@ -1,0 +1,50 @@
+<div class="datatable-toolbar">
+
+    <div class="buttons">
+        <a class="button h-button is-primary is-elevated" [routerLink]="['/Managements/Classrooms/Students', classroomId, bookId]">
+            <span class="icon">
+                <i aria-hidden="true" class="fas fa-arrow-left"></i>
+            </span>
+            <span>Regresar</span>
+        </a>
+    </div>
+</div>
+
+<div class="page-content-inner">
+
+    <!-- Datatable -->
+    <div class="table-wrapper">
+        <table mat-table [dataSource]="dataSource" class="table is-datatable is-hoverable table-is-bordered">
+
+            <!-- Id Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+            </ng-container>
+
+            <!-- Answer Column -->
+            <ng-container matColumnDef="answer">
+                <th mat-header-cell *matHeaderCellDef> Respuesta </th>
+                <td mat-cell *matCellDef="let element"> {{ element.answer }} </td>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element">
+                    <span class="tag is-success" *ngIf="element.status === 'CORRECT'">CORRECTO</span>
+                    <span class="tag is-danger" *ngIf="element.status === 'INCORRECT'">INCORRECTO</span>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+            </tr>
+        </table>
+        <app-placeholder-empty *ngIf="showEmptyMessage && listAnswers.length === 0"></app-placeholder-empty>
+
+    </div>
+    <!-- Paginator -->
+    <mat-paginator [pageSizeOptions]="[10,20,30]" showFirstLastButtons></mat-paginator>
+
+</div>

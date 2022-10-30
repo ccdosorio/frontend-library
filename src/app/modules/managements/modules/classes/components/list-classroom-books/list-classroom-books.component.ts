@@ -10,6 +10,7 @@ export class ListClassroomBooksComponent implements OnInit {
 
   @Input() books: ClassroomBook[] = [];
   @Input() classroomId: number | undefined;
+  @Input() isAssignment: boolean = false;
 
   constructor() { }
 

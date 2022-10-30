@@ -1,6 +1,6 @@
 export const TeacherNavigation: any[] = [
     {
-        displayName: 'Sección de Libros',
+        displayName: 'Libros',
         iconName: 'menu_book',
         route: 'Managements/Books/Main'
     },
@@ -19,4 +19,9 @@ export const TeacherNavigation: any[] = [
         iconName: 'help',
         route: 'Managements/Books/Search'
     },
+    {
+        displayName: 'Juegos',
+        iconName: 'sports_esports',
+        route: 'Managements/Games/Main'
+    }
 ];

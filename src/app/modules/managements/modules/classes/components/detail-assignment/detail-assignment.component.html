@@ -1,0 +1,35 @@
+<div class="page-content-inner animate__animated animate__fadeIn" *ngIf="classroom">
+    <!--Personal Dashboard V2-->
+    <div class="personal-dashboard personal-dashboard-v2">
+
+        <div class="columns is-multiline">
+
+            <div class="column is-12">
+                <div class="dashboard-header">
+                    <div class="h-avatar is-xl">
+                        <img class="avatar" src="assets/img/icons/hexagons/yellow.svg" alt="">
+                    </div>
+                    <div class="user-meta is-dark-bordered-12">
+                        <h3 class="title is-4 is-narrow is-bold">{{ classroom.name }}</h3>
+                        <p class="light-text">{{ classroom.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="page-content-inner animate__animated animate__fadeIn">
+    <!--List Books -->
+    <div class="list-view list-view-v4">
+        <h2 class="title-dark">Libros</h2>
+        <!--Books Tab-->
+        <div id="active-items-tab" class="tab-content is-active">
+            <app-list-classroom-books *ngIf="!showEmptyMessage && books.length > 0" [books]="books"
+                [classroomId]="classroomId" [isAssignment]="true">
+            </app-list-classroom-books>
+            <app-placeholder-empty *ngIf="showEmptyMessage && books.length === 0"></app-placeholder-empty>
+        </div>
+
+    </div>
+</div>

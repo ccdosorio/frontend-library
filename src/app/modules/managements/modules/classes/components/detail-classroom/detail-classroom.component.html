@@ -59,7 +59,7 @@
 
             <!--Books Tab-->
             <div id="active-items-tab" class="tab-content" [class.is-active]="isTabBooks">
-                <app-list-classroom-books *ngIf="!showEmptyMessage && books.length > 0" [books]="books" [classroomId]="classroomId">
+                <app-list-classroom-books *ngIf="!showEmptyMessage && books.length > 0" [books]="books" [classroomId]="classroomId" [isAssignment]="false">
                 </app-list-classroom-books>
                 <app-placeholder-empty *ngIf="showEmptyMessage && books.length === 0"></app-placeholder-empty>
             </div>

@@ -1,0 +1,38 @@
+<div class="user-grid-toolbar">
+
+    <div class="buttons">
+        <a class="button h-button is-warning is-raised"
+            [routerLink]="['//Managements/Classrooms/Detail/', classroomId]">
+            <span class="icon">
+                <i aria-hidden="true" class="fas fa-arrow-left"></i>
+            </span>
+            <span>Regresar</span>
+        </a>
+    </div>
+</div>
+
+<div class="page-content-inner is-webapp">
+
+    <div class="user-grid user-grid-v4">
+
+        <!--List Empty Search Placeholder -->
+        <app-placeholder-empty *ngIf="showEmptyMessage && listStudents.length === 0"></app-placeholder-empty>
+
+        <div class="columns is-multiline">
+
+            <!--Grid item-->
+            <div class="column is-3" *ngFor="let item of listStudents">
+                <div class="grid-item">
+                    <div class="h-avatar is-big">
+                        <img class="avatar" src="https://via.placeholder.com/150x150" alt="">
+                    </div>
+                    <h3 class="dark-inverted">{{ item.student_name | splitSpace }}</h3>
+                    <p>Nota: {{ item.answer_rate }}</p>
+                    <div class="button-wrap has-text-centered">
+                        <a class="button h-button is-primary is-raised" [routerLink]="['../../Answers', classroomId, item.student_id, bookId]">Ver respuestas</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

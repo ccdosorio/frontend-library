@@ -18,3 +18,4 @@ export * from './ClassroomStudent';
 export * from './Answer';
 export * from './UserProfile';
 export * from './StudentClassroom';
+export * from './ClassroomBookStudent';

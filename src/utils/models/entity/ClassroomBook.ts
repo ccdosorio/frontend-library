@@ -6,6 +6,7 @@ export interface ClassroomBook {
     status:      string;
     description: string;
     rating:      number;
+    book_progress:      number;
     created_at:  Date;
     updated_at:  Date;
     created_by:  string;

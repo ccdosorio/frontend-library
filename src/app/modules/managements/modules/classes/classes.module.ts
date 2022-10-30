@@ -15,8 +15,11 @@ import { ListClassroomStudentsComponent } from './components/list-classroom-stud
 import { PdfViewerClassroomComponent } from './components/pdf-viewer-classroom/pdf-viewer-classroom.component';
 
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { SplitPipe } from '@pipes';
+import { SplitPipe, SplitSpacePipe } from '@pipes';
 import { AssignmentsComponent } from './components/assignments/assignments.component';
+import { ListClassroomBookStudentsComponent } from './components/list-classroom-book-students/list-classroom-book-students.component';
+import { StudentsAnswersComponent } from './components/students-answers/students-answers.component';
+import { DetailAssignmentComponent } from './components/detail-assignment/detail-assignment.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,11 @@ import { AssignmentsComponent } from './components/assignments/assignments.compo
     ListClassroomStudentsComponent,
     PdfViewerClassroomComponent,
     SplitPipe,
-    AssignmentsComponent
+    SplitSpacePipe,
+    AssignmentsComponent,
+    ListClassroomBookStudentsComponent,
+    StudentsAnswersComponent,
+    DetailAssignmentComponent
   ],
   imports: [
     CommonModule,

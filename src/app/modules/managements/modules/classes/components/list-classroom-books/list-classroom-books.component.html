@@ -17,19 +17,26 @@
                     <i aria-hidden="true" class="fas fa-circle icon-separator"></i>
                     <i data-feather="clock"></i>
                     <span data-filter-match>isbn10: {{ item.user_book.book.isbn10 }}</span>
-                    <i aria-hidden="true" class="fas fa-circle icon-separator"></i>
-                    <i data-feather="paperclip"></i>
-                    <span data-filter-match>isbn13: {{ item.user_book.book.isbn13 }}</span>
                 </span>
             </div>
             <div class="meta-right">
                 <div class="buttons">
-                    <a class="button h-button is-warning is-outlined is-raised"
-                        [routerLink]="['../../PdfViewerClassroom', classroomId, item.id]">
+                    <a class="button h-button is-warning is-outlined is-raised" *ngIf="!isAssignment"
+                        [routerLink]="['../../Students', classroomId, item.user_book.book.id]">
+                        Notas
+                    </a>
+                    <a class="button h-button is-primary is-outlined is-raised" *ngIf="!isAssignment"
+                        [routerLink]="['/Managements/Classrooms/PdfViewerClassroom', classroomId, item.id]">
+                        Ver
+                    </a>
+                    <a class="button h-button is-primary is-outlined is-raised" *ngIf="isAssignment"
+                        [routerLink]="['/Managements/Classrooms/PdfViewerAsignment', classroomId, item.id]">
                         Ver
                     </a>
                 </div>
             </div>
         </div>
+        <br>
+        <progress class="progress is-primary is-tiny" value="{{ item.book_progress }}" max="100"></progress>
     </div>
 </div>

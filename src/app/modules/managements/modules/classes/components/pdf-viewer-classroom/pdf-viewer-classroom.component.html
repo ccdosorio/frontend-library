@@ -13,7 +13,7 @@
                             <div class="datatable-toolbar">
                                 <div class="field has-addons">
                                     <p class="control">
-                                        <button class="button h-button" [routerLink]="['../../../Detail', classroomId]">
+                                        <button class="button h-button" [routerLink]="[routeClassroom, classroomId]">
                                             <span class="icon is-small">
                                                 <i aria-hidden="true" class="fas fa-arrow-left"></i>
                                             </span>
@@ -121,7 +121,7 @@
                         <div class="columns is-multiline">
                             <div class="column is-12" *ngFor="let item of listQuestions; let i = index">
                                 <div class="field">
-                                    <h3>{{ item.position }} - {{ item.question_statement }}</h3>
+                                    <h3 class="title-dark">{{ item.position }} - {{ item.question_statement }}</h3>
                                     <div class="buttons">
                                         <a class="button h-button"
                                             [class.is-warning]="toPaintOption(item.position, item.id, option)"
@@ -157,7 +157,7 @@
                         <div class="columns is-multiline">
                             <div class="column is-12" *ngFor="let item of studentResults">
                                 <div class="field">
-                                    <h3>{{ item.book_multiple_choice_question.position }} - {{
+                                    <h3 class="title-dark">{{ item.book_multiple_choice_question.position }} - {{
                                         item.book_multiple_choice_question.question_statement }}</h3>
                                     <p>Respuesta: {{ item.answer }}</p>
                                     <div class="buttons" fxLayout="row" fxLayoutAlign="center center">

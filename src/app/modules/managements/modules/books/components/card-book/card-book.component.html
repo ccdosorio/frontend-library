@@ -10,6 +10,6 @@
             <a class="button h-button is-primary is-rounded is-elevated" [routerLink]="['../PdfViewer', book.id ]">Ver</a>
         </div>
     </div>
-    <progress class="progress is-primary is-tiny" value="50" max="100"></progress>
+    <progress class="progress is-primary is-tiny" value="{{ book.page_progress }}" max="100"></progress>
   </div>
 </div>

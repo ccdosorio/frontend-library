@@ -18,5 +18,10 @@ export const FamilyNavigation: any[] = [
         displayName: 'Buscar libro',
         iconName: 'help',
         route: 'Managements/Books/Search'
+    },
+    {
+        displayName: 'Juegos',
+        iconName: 'sports_esports',
+        route: 'Managements/Games/Main'
     }
 ];

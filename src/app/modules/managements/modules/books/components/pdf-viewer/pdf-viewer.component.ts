@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 
 import { MatDialog } from '@angular/material/dialog';
 
+import { NgxSpinnerService } from 'ngx-spinner';
+
+import { Book } from '@models';
 import { AppConfigService, BookService } from '@services';
 import { UploadFileComponent } from '../upload-file/upload-file.component';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { Book } from '@models';
 
 const FileSaver = require('file-saver');
 
@@ -40,6 +41,13 @@ export class PdfViewerComponent implements OnInit {
         sidenav: { visible: false },
         toolbar: { visible: false }
       }
+    });
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.bookId = params['bookId'];
+      this.loadPdf();
     });
   }
 
@@ -92,11 +100,19 @@ export class PdfViewerComponent implements OnInit {
     FileSaver.saveAs(this.pdfSrc, this.book?.book.title);
   }
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.bookId = params['bookId'];
-      this.loadPdf();
-    });
+  updatePage(): void {
+    const PAYLOAD = {
+      book_page: this.page
+    };
+    this.bookService.updateBookPage(this.bookId, PAYLOAD)
+      .subscribe({
+        next: _ => {
+          //this.getProgress();
+          if (this.page === this.totalPages) {
+            //this.router.navigate(['/Managements/Classrooms/Detail/', this.classroomId]);
+          }
+        }
+      });
   }
 
 }
