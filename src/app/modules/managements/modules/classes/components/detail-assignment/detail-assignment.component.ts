@@ -44,7 +44,7 @@ export class DetailAssignmentComponent implements OnInit {
 
   getClassroom(): void {
     this.spinner.show();
-    this.classroomService.getById(this.classroomId)
+    this.classroomService.getClassroomInfo(this.classroomId)
       .subscribe({
         next: (resp) => {
           this.classroom = resp;
@@ -56,7 +56,7 @@ export class DetailAssignmentComponent implements OnInit {
 
   getBooks(classroomId: number): void {
     this.showEmptyMessage = false;
-    this.classroomService.getBooksByClassroom(classroomId)
+    this.classroomService.getClassroomBooks(classroomId)
       .subscribe({
         next: (resp) => {
           if (resp.length === 0) {
