@@ -3,3 +3,4 @@ export * from './AdminFamilyNavigation';
 export * from './TeacherNavigation';
 export * from './FamilyNavigation';
 export * from './StudentNavigation';
+export * from './BasicNavigation';

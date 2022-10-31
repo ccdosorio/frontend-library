@@ -9,7 +9,7 @@ const routes: Routes = [
   // Maintenances
   { path: 'Classrooms', loadChildren: () => import('./modules/classes/classes.module').then(m => m.ClassesModule), canActivate: [AuthGuard] },
   { path: 'Profile', loadChildren: () => import('./modules/profile/profile.module').then(m => m.ProfileModule), canActivate: [AuthGuard] },
-  { path: 'Books', loadChildren: () => import('./modules/books/books.module').then(m => m.BooksModule), canActivate: [AuthGuard] },
+  { path: 'Questions', loadChildren: () => import('./modules/questions/questions.module').then(m => m.QuestionsModule), canActivate: [AuthGuard] },
   { path: 'Books', loadChildren: () => import('./modules/books/books.module').then(m => m.BooksModule), canActivate: [AuthGuard] },
   { path: 'Games', loadChildren: () => import('./modules/games/games.module').then(m => m.GamesModule), canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/NotFound/Main' }

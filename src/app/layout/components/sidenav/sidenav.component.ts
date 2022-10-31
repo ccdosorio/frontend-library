@@ -85,13 +85,13 @@ export class SidenavComponent implements OnInit, AfterViewInit {
             this.navigationsTeacher();
           } else if (resp.is_child && resp.is_student && !resp.is_parent && resp.is_professor) {
             // menu 4: profesor, estudiante, hijo
-            this.navigationsAdmin();  
+            this.navigationsAdmin();
           } else if (!resp.is_child && resp.is_student && !resp.is_parent && resp.is_professor) {
             // menu 4: profesor, estudiante
-            this.navigationsAdmin();            
+            this.navigationsAdmin();
           } else if (resp.is_child && !resp.is_student && !resp.is_parent && resp.is_professor) {
             // menu 4: profesor, hijo
-            this.navigationsAdmin();  
+            this.navigationsAdmin();
           } else if (resp.is_child && resp.is_student && resp.is_parent && !resp.is_professor) {
             // menu 5: padre, hijo, estudiante
             this.navigationsAdminFamily();
@@ -101,6 +101,9 @@ export class SidenavComponent implements OnInit, AfterViewInit {
           } else if (!resp.is_child && !resp.is_student && resp.is_parent && !resp.is_professor) {
             // menu 5: padre, estudiante
             this.navigationsAdminFamily();
+          } else {
+            // menu 6: basic
+            this.navigationsBasic();
           }
           this.spinner.hide();
 
@@ -141,6 +144,13 @@ export class SidenavComponent implements OnInit, AfterViewInit {
 
   navigationsStudent(): void {
     this._sidenavService.getConfigStudent
+      .subscribe((navigations) => {
+        this.navigation = navigations;
+      });
+  }
+
+  navigationsBasic(): void {
+    this._sidenavService.getConfigBasic
       .subscribe((navigations) => {
         this.navigation = navigations;
       });

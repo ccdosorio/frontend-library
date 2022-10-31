@@ -8,6 +8,7 @@ export const TEACHER_NAVIGATION = new InjectionToken('appTeacherNavigation');
 export const FAMILY_NAVIGATION = new InjectionToken('appFamilyNavigation');
 export const STUDENT_NAVIGATION = new InjectionToken('appStudentNavigation');
 export const ADMIN_FAMILY_NAVIGATION = new InjectionToken('appAdminFamilyNavigation');
+export const BASIC_NAVIGATION = new InjectionToken('appBasicNavigation');
 
 const navigation: Navigation[] = [];
 
@@ -19,12 +20,14 @@ export class SidenavService {
   public navigationFamilySubject: BehaviorSubject<Navigation[]> = new BehaviorSubject(navigation);
   public navigationStudentSubject: BehaviorSubject<Navigation[]> = new BehaviorSubject(navigation);
   public navigationAdminFamilySubject: BehaviorSubject<Navigation[]> = new BehaviorSubject(navigation);
+  public navigationBasicSubject: BehaviorSubject<Navigation[]> = new BehaviorSubject(navigation);
 
   private navigationsAdmin: Navigation[];
   private navigationsTeacher: Navigation[];
   private navigationsFamily: Navigation[];
   private navigationsStudent: Navigation[];
   private navigationsAdminFamily: Navigation[];
+  private navigationsBasic: Navigation[];
 
   @Output() change: EventEmitter<boolean> = new EventEmitter();
 
@@ -33,18 +36,21 @@ export class SidenavService {
     @Inject(TEACHER_NAVIGATION) private teacherNavigation: Navigation[],
     @Inject(FAMILY_NAVIGATION) private familyNavigation: Navigation[],
     @Inject(STUDENT_NAVIGATION) private studentNavigation: Navigation[],
-    @Inject(ADMIN_FAMILY_NAVIGATION) private adminFamilyNavigation: Navigation[]
+    @Inject(ADMIN_FAMILY_NAVIGATION) private adminFamilyNavigation: Navigation[],
+    @Inject(BASIC_NAVIGATION) private adminBasicNavigation: Navigation[]
   ) {
     this.navigationsAdmin = adminNavigation;
     this.navigationsTeacher = teacherNavigation;
     this.navigationsFamily = familyNavigation;
     this.navigationsStudent = studentNavigation;
     this.navigationsAdminFamily = adminFamilyNavigation;
+    this.navigationsBasic = adminBasicNavigation;
     this._initAdmin();
     this._initTeacher();
     this._initFamily();
     this._initStudent();
     this._initAdminFamily();
+    this._initBasic();
   }
 
   get getConfigAdmin(): Observable<any> {
@@ -85,6 +91,14 @@ export class SidenavService {
 
   private _initAdminFamily(): void {
     this.navigationAdminFamilySubject = new BehaviorSubject<any[]>(this.navigationsAdminFamily);
+  }
+
+  get getConfigBasic(): Observable<any> {
+    return this.navigationBasicSubject.asObservable();
+  }
+
+  private _initBasic(): void {
+    this.navigationBasicSubject = new BehaviorSubject<any[]>(this.navigationsBasic);
   }
 
   navigations() {
