@@ -28738,7 +28738,6 @@ body.is-dark .media-flex .flex-meta a:hover {
     }
 }
 
-/*! _cards.scss | Huro | Css ninja 2020-2021 */
 .r-card,
 .onboarding-wrapper.onboarding-v2 .onboarding-wrap .onboarding-wrap-inner .onboarding-card,
 .onboarding-wrapper.onboarding-v4 .onboarding-wrap .onboarding-wrap-inner .onboarding-card,
@@ -58250,7 +58249,7 @@ body.is-dark .lifestyle-dashboard.lifestyle-dashboard-v1 .overview-card .heatmap
     align-items: center;
     padding: 10px;
     border-radius: 16px;
-    background: #039BE5;
+    background: #FFD66E;
     font-family: "Roboto", sans-serif;
     -webkit-box-shadow: 0 14px 26px -12px rgba(3, 155, 229, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(3, 155, 229, .2);
     box-shadow: 0 14px 26px -12px rgba(3, 155, 229, .42), 0 4px 23px 0px rgba(0, 0, 0, .12), 0 8px 10px -5px rgba(3, 155, 229, .2)
@@ -58533,7 +58532,7 @@ body.is-dark .lifestyle-dashboard.lifestyle-dashboard-v1 .overview-card .heatmap
 }
 
 body.is-dark .lifestyle-dashboard.lifestyle-dashboard-v4 .illustration-header-2 {
-    background: #232326;
+    background: #FFD66E;
     -webkit-box-shadow: none;
     box-shadow: none
 }
