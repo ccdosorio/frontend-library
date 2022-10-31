@@ -51,6 +51,7 @@ export class MainComponent implements OnInit {
     this.userService.getUser().subscribe({
       next: (resp) => {
         this.user = resp;
+        this.spinner.hide();
       },
       error: (error) => {
         console.log(error);
