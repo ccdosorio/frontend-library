@@ -25,6 +25,16 @@ export class ClassroomService {
     return this.http.get<Classroom>(environment.endpoint + 'classrooms/' + classroomId, {});
   }
 
+  // Obtener detalle de una clase como estudiante
+  getClassroomInfo(classroomId: number): Observable<Classroom> {
+    return this.http.get<Classroom>(environment.endpoint + 'classrooms/' + classroomId + '/students/classroom-info', {});
+  }
+
+  // Obtener los libros si soy alumnos
+  getClassroomBooks(classroomId: number): Observable<ClassroomBook[]> {
+    return this.http.get<ClassroomBook[]>(environment.endpoint + 'classrooms/' + classroomId + '/students/books', {});
+  }
+
   // Obtener libros de la clase
   getBooksByClassroom(classroomId: number): Observable<ClassroomBook[]> {
     return this.http.get<ClassroomBook[]>(environment.endpoint + 'classrooms/' + classroomId + '/books', {});
