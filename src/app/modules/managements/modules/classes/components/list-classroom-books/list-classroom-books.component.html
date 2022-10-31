@@ -37,6 +37,6 @@
             </div>
         </div>
         <br>
-        <progress class="progress is-primary is-tiny" value="{{ item.book_progress }}" max="100"></progress>
+        <progress class="progress is-primary is-tiny" value="{{ item.book_progress }}" max="100" *ngIf="!isTeacher"></progress>
     </div>
 </div>
