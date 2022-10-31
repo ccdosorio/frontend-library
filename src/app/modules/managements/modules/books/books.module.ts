@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MainComponent } from './components/main/main.component';
 import { CoreModule } from "../../../../../core/core.module";
 import { SharedModule } from "@shared";
+import { EmptyValuePipe } from '@pipes';
 import { BooksRouting } from "./books.routing";
 import { CardBookComponent } from './components/card-book/card-book.component';
 import { CreateBookComponent } from './components/create-book/create-book.component';
@@ -26,7 +27,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     SearchBookComponent,
     ItemSearchComponent,
     ModalBookComponent,
-    PdfViewerComponent
+    PdfViewerComponent,
+    EmptyValuePipe
   ],
   imports: [
     CommonModule,
