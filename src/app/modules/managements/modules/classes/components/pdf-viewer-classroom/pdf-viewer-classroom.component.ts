@@ -5,9 +5,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import * as feather from 'feather-icons';
 
 import { AppConfigService, BookService, ClassroomService, UserService } from '@services';
-import { ClassroomBook, BookMultipleChoiceQuestion, UserInfo, CreateStudentBookAnswer, Answer } from '@models';
+import { ClassroomBook, BookMultipleChoiceQuestion, UserInfo, CreateStudentBookAnswer, Answer, UserBookComment } from '@models';
 import { SplitPipe } from '@pipes';
 import { SweetAlertMessage } from '@functions';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-pdf-viewer-classroom',
@@ -40,6 +41,15 @@ export class PdfViewerClassroomComponent implements OnInit {
   studentResults: Answer[] = [];
   isResults: boolean = false;
 
+  // comments
+  comments: UserBookComment[] = [];
+  isComments: boolean = true;
+  loading: boolean = false;
+
+  formComment: FormGroup = this.fb.group({
+    comment: [null, [Validators.required, Validators.minLength(10)]]
+  });
+
   constructor(
     private appConfigService: AppConfigService,
     private route: ActivatedRoute,
@@ -47,7 +57,8 @@ export class PdfViewerClassroomComponent implements OnInit {
     private classroomService: ClassroomService,
     private spinner: NgxSpinnerService,
     private userService: UserService,
-    private bookService: BookService
+    private bookService: BookService,
+    private fb: FormBuilder
   ) {
     this.appConfigService.setConfig({
       layout: {
@@ -78,7 +89,6 @@ export class PdfViewerClassroomComponent implements OnInit {
   }
 
   loadPdf(): void {
-    //this.spinner.show();
     this.isFile = false;
     this.classroomService.viewPdfFileClassroom(this.bookId, this.classroomId).subscribe({
       next: (resp) => {
@@ -86,7 +96,6 @@ export class PdfViewerClassroomComponent implements OnInit {
         var file = new Blob([resp], { type: 'application/pdf' });
         var fileURL = URL.createObjectURL(file);
         this.pdfSrc = fileURL;
-        //this.getBook();
         this.spinner.hide();
       },
       error: () => {
@@ -144,7 +153,10 @@ export class PdfViewerClassroomComponent implements OnInit {
   getPage(): void {
     this.classroomService.getStudentBookPage(this.classroomId, this.user!.id, this.book!.user_book.book.id)
       .subscribe({
-        next: resp => this.page = resp.page_progress
+        next: resp => {
+          this.page = resp.page_progress;
+          this.getComments();
+        }
       });
   }
 
@@ -153,6 +165,35 @@ export class PdfViewerClassroomComponent implements OnInit {
       .subscribe({
         next: resp => this.progress = resp.book_progress_rate
       });
+  }
+
+  getComments(): void {
+    this.bookService.getUserBookComments(this.book!.user_book.id, this.page).subscribe({
+      next: resp => {
+        if (resp.length === 0) this.isComments = false;
+        this.comments = resp;
+      },
+      error: _ => this.isComments = false
+    })
+  }
+
+  saveComment(): void {
+    if (this.formComment.invalid) return;
+    this.loading = true;
+    const PAYLOAD = {
+      comment: this.formComment.get('comment')!.value.replace("\n", " ").trim()
+    }
+
+    this.bookService.createComment(this.book!.user_book.id, this.page, PAYLOAD).subscribe({
+      next: _ => {
+        this.formComment.get('comment')!.setValue(null);
+        this.getComments();
+        this.loading = false;
+      }, error: error => {
+        SweetAlertMessage('error', 'Error', error.error.message);
+        this.loading = false;
+      }
+    });
   }
 
   updatePage(): void {

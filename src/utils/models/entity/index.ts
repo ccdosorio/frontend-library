@@ -19,3 +19,4 @@ export * from './Answer';
 export * from './UserProfile';
 export * from './StudentClassroom';
 export * from './ClassroomBookStudent';
+export * from './UserBookComment';

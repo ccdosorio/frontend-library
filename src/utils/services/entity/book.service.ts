@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { environment } from "../../../environments/environment";
-import { Book, BookISBN, BookPage, ElasticSearch, Question } from "@models";
+import { Book, BookISBN, BookPage, ElasticSearch, Question, UserBookComment } from "@models";
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +35,11 @@ export class BookService {
     return this.http.get<Question>(environment.endpoint + 'user-books/' + bookId + '/questions-page/' + page);
   }
 
+  // Obtener los comentarios del libro
+  getUserBookComments(bookId: number, page: number): Observable<UserBookComment[]> {
+    return this.http.get<UserBookComment[]>(environment.endpoint + 'user-books/' + bookId + '/comments/' + page);
+  }
+
   // Obtener un libro por su id
   getBook(bookId: number): Observable<BookISBN> {
     return this.http.get<BookISBN>(environment.endpoint + 'books/' + bookId);
@@ -45,9 +50,15 @@ export class BookService {
     return this.http.get(environment.endpoint + 'counting/books');
   }
 
+
   // crear libros del usuario
   createUserBook(body: any): Observable<Book> {
     return this.http.post<Book>(environment.endpoint + 'user-books', body, {});
+  }
+
+  // Crear un comentario
+  createComment(bookId: number, page: number, body: any): Observable<UserBookComment> {
+    return this.http.post<UserBookComment>(environment.endpoint + 'user-books/' + bookId + '/comments/' + page, body, {});
   }
 
   // subir un libro (pdf)

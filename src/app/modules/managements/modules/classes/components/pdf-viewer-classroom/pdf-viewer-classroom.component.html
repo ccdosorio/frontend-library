@@ -65,38 +65,29 @@
                         <div class="column is-4">
                             <div class="side-card">
                                 <h4>Comentarios</h4>
-
-                                <div class="media-flex-center">
+                                <p *ngIf="!isComments && comments.length === 0">Sin comentarios</p>
+                                <div class="media-flex-center" *ngFor="let item of comments">
                                     <div class="flex-meta">
-                                        <span>Usuario 1</span>
-                                        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi officia
-                                            atque, a in ratione quibusdam, aliquid nulla sint, iste fuga adipisci
-                                            reprehenderit saepe rerum soluta suscipit architecto et modi veniam.</span>
+                                        <span>{{ item.user_name }}</span>
+                                        <span>{{ item.page_comment }}</span>
+                                        <p><b class="title-date">{{ item.created_at | date }}</b></p>
                                     </div>
                                 </div>
-                                <div class="media-flex-center">
-                                    <div class="flex-meta">
-                                        <span>Usuario 2</span>
-                                        <span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque porro eum
-                                            adipisci tempore, autem aliquid esse sapiente quas explicabo mollitia
-                                            perferendis, recusandae reiciendis officiis, numquam aperiam minus eos
-                                            aspernatur eaque.</span>
-                                    </div>
-                                </div>
-                                <div class="media-flex-center">
-                                    <div class="flex-meta">
-                                        <span>Usuario 3</span>
-                                        <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque, nobis
-                                            fuga reprehenderit sit voluptatem officiis quidem ab, similique ipsum,
-                                            repellendus eaque quas cupiditate voluptates saepe omnis id labore tenetur
-                                            impedit.</span>
-                                    </div>
-                                </div>
-                                <div class="field">
+                                <div class="field" [formGroup]="formComment">
                                     <div class="control">
-                                        <textarea class="textarea" rows="4"
+                                        <textarea class="textarea" rows="4" formControlName="comment"
                                             placeholder="Escribe tu comentario..."></textarea>
+                                        <mat-error class="animate__animated animate__fadeIn" *ngIf="formComment.get('comment')!.hasError('minlength')
+                                            && formComment.get('comment')!.touched">
+                                            El comentario debe contener por lo menos de 10 caracteres.
+                                        </mat-error>
                                     </div>
+                                </div>
+                                <div class="buttons" fxLayout="row" fxLayoutAlign="center center">
+                                    <button class="button h-button is-primary is-elevated" [class.is-loading]="loading"
+                                        (click)="saveComment()">
+                                        <span>Guardar</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
