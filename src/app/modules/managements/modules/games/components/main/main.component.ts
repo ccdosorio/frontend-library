@@ -11,7 +11,8 @@ export class MainComponent implements OnInit {
 
   constructor(
     private appConfigService: AppConfigService,
-  ) { 
+  ) {
+    
     this.appConfigService.setConfig({
       layout: {
         generic_container: { visible: true },

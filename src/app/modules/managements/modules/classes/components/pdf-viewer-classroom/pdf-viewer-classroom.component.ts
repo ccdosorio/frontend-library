@@ -23,7 +23,7 @@ export class PdfViewerClassroomComponent implements OnInit {
   isFile: boolean = false;
   user: UserInfo | undefined;
   progress: number = 0;
-  isAsignment: boolean = false;
+  isAssignment: boolean = false;
   routeClassroom: string = '';
 
   // pdf
@@ -77,7 +77,7 @@ export class PdfViewerClassroomComponent implements OnInit {
       this.getUser();
       this.getBook();
       if (this.route.snapshot.routeConfig?.path === 'PdfViewerAsignment/:classroomId/:bookId') {
-        this.isAsignment = true;
+        this.isAssignment = true;
         this.routeClassroom = '/Managements/Classrooms/Detail/Assignment';
       } else {
         this.routeClassroom = '/Managements/Classrooms/Detail';
@@ -93,9 +93,8 @@ export class PdfViewerClassroomComponent implements OnInit {
     this.classroomService.viewPdfFileClassroom(this.bookId, this.classroomId).subscribe({
       next: (resp) => {
         this.isFile = true;
-        var file = new Blob([resp], { type: 'application/pdf' });
-        var fileURL = URL.createObjectURL(file);
-        this.pdfSrc = fileURL;
+        const file = new Blob([resp], { type: 'application/pdf' });
+        this.pdfSrc = URL.createObjectURL(file);
         this.spinner.hide();
       },
       error: () => {
@@ -204,6 +203,7 @@ export class PdfViewerClassroomComponent implements OnInit {
       .subscribe({
         next: _ => {
           this.getProgress();
+          this.getComments();
           if (this.page === this.totalPages) {
             this.router.navigate(['/Managements/Classrooms/Detail/', this.classroomId]);
           }
@@ -243,6 +243,7 @@ export class PdfViewerClassroomComponent implements OnInit {
 
   prevPage(): void {
     this.page--;
+    this.updatePage();
   }
 
   generateAnswers(question: BookMultipleChoiceQuestion, answer: string): void {
